@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<meta name="author" content="James T. Thorson" />
+
+
+<title>Appendix C: Demonstration of selected features</title>
+
+<script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
+// be compatible with the behavior of Pandoc < 2.8).
+document.addEventListener('DOMContentLoaded', function(e) {
+  var hs = document.querySelectorAll("div.section[class*='level'] > :first-child");
+  var i, h, a;
+  for (i = 0; i < hs.length; i++) {
+    h = hs[i];
+    if (!/^h[1-6]$/i.test(h.tagName)) continue;  // it should be a header h1-h6
+    a = h.attributes;
+    while (a.length > 0) h.removeAttribute(a[0].name);
+  }
+});
+</script>
+
+<style type="text/css">
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+</style>
+
+
+
+<style type="text/css">
+code {
+white-space: pre;
+}
+.sourceCode {
+overflow: visible;
+}
+</style>
+<style type="text/css" data-origin="pandoc">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+{ counter-reset: source-line 0; }
+pre.numberSource code > span
+{ position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+{ content: counter(source-line);
+position: relative; left: -1em; text-align: right; vertical-align: baseline;
+border: none; display: inline-block;
+-webkit-touch-callout: none; -webkit-user-select: none;
+-khtml-user-select: none; -moz-user-select: none;
+-ms-user-select: none; user-select: none;
+padding: 0 4px; width: 4em;
+color: #aaaaaa;
+}
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa; padding-left: 4px; }
+div.sourceCode
+{ }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } 
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.at { color: #7d9029; } 
+code span.bn { color: #40a070; } 
+code span.bu { color: #008000; } 
+code span.cf { color: #007020; font-weight: bold; } 
+code span.ch { color: #4070a0; } 
+code span.cn { color: #880000; } 
+code span.co { color: #60a0b0; font-style: italic; } 
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.do { color: #ba2121; font-style: italic; } 
+code span.dt { color: #902000; } 
+code span.dv { color: #40a070; } 
+code span.er { color: #ff0000; font-weight: bold; } 
+code span.ex { } 
+code span.fl { color: #40a070; } 
+code span.fu { color: #06287e; } 
+code span.im { color: #008000; font-weight: bold; } 
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.kw { color: #007020; font-weight: bold; } 
+code span.op { color: #666666; } 
+code span.ot { color: #007020; } 
+code span.pp { color: #bc7a00; } 
+code span.sc { color: #4070a0; } 
+code span.ss { color: #bb6688; } 
+code span.st { color: #4070a0; } 
+code span.va { color: #19177c; } 
+code span.vs { color: #4070a0; } 
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } 
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    var j = 0;
+    while (j < rules.length) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") {
+        j++;
+        continue;
+      }
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') {
+        j++;
+        continue;
+      }
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; } 
+code > span.er { color: #a61717; background-color: #e3d2d2; } 
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">Appendix C: Demonstration of selected
+features</h1>
+<h4 class="author">James T. Thorson</h4>
+
+
+
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">library</span>(phylosem)</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="fu">message</span>(<span class="st">&quot;Must install ggplot2, phylopath, phylolm, ape&quot;</span>)</span></code></pre></div>
+<p><code>phylosem</code> is an R package for fitting phylogenetic
+structural equation models (PSEMs). We here highlight a few features in
+particular.</p>
+<div id="estimability-for-multiple-covariance-transformations" class="section level2">
+<h2>Estimability for multiple covariance transformations</h2>
+<p>By default, <code>phylosem</code> takes as input a phylogenetic tree
+and constructs a covariance under a Brownian motion evolutionary model.
+However, it also allows any combination of the following
+transformations:</p>
+<ul>
+<li>Ornstein-Uhlenbeck (OU);</li>
+<li>Pagel’s lambda;</li>
+<li>Pagel’s kappa;</li>
+</ul>
+<p>This then results in eight possible covariance models formed from
+including or excluding each transformation. We first show that these
+transformations are all simultaneously estimable for a reference data
+set.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a></span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a><span class="co"># Compare using Pagel&#39;s kappa</span></span>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a><span class="fu">library</span>(phylopath)</span>
+<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a><span class="co"># Run phylosem</span></span>
+<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a>model <span class="ot">=</span> <span class="st">&quot;</span></span>
+<span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a><span class="st">  DD -&gt; RS, p1</span></span>
+<span id="cb3-8"><a href="#cb3-8" tabindex="-1"></a><span class="st">  BM -&gt; LS, p2</span></span>
+<span id="cb3-9"><a href="#cb3-9" tabindex="-1"></a><span class="st">  BM -&gt; NL, p3</span></span>
+<span id="cb3-10"><a href="#cb3-10" tabindex="-1"></a><span class="st">  NL -&gt; DD, p4</span></span>
+<span id="cb3-11"><a href="#cb3-11" tabindex="-1"></a><span class="st">&quot;</span></span>
+<span id="cb3-12"><a href="#cb3-12" tabindex="-1"></a>psem <span class="ot">=</span> <span class="fu">phylosem</span>( <span class="at">sem =</span> model,</span>
+<span id="cb3-13"><a href="#cb3-13" tabindex="-1"></a>          <span class="at">data =</span> rhino[,<span class="fu">c</span>(<span class="st">&quot;BM&quot;</span>,<span class="st">&quot;NL&quot;</span>,<span class="st">&quot;DD&quot;</span>,<span class="st">&quot;RS&quot;</span>,<span class="st">&quot;LS&quot;</span>)],</span>
+<span id="cb3-14"><a href="#cb3-14" tabindex="-1"></a>          <span class="at">estimate_ou =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb3-15"><a href="#cb3-15" tabindex="-1"></a>          <span class="at">estimate_lambda =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb3-16"><a href="#cb3-16" tabindex="-1"></a>          <span class="at">estimate_kappa =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb3-17"><a href="#cb3-17" tabindex="-1"></a>          <span class="at">tree =</span> rhino_tree,</span>
+<span id="cb3-18"><a href="#cb3-18" tabindex="-1"></a>          <span class="at">getJointPrecision =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb3-19"><a href="#cb3-19" tabindex="-1"></a>          <span class="at">quiet =</span> <span class="cn">TRUE</span> )</span>
+<span id="cb3-20"><a href="#cb3-20" tabindex="-1"></a></span>
+<span id="cb3-21"><a href="#cb3-21" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb3-22"><a href="#cb3-22" tabindex="-1"></a>V <span class="ot">=</span> psem<span class="sc">$</span>opt<span class="sc">$</span>SD<span class="sc">$</span>cov.fixed</span>
+<span id="cb3-23"><a href="#cb3-23" tabindex="-1"></a>Rsub <span class="ot">=</span> <span class="fu">cov2cor</span>(V)[<span class="fu">c</span>(<span class="st">&#39;lnalpha&#39;</span>,<span class="st">&#39;logitlambda&#39;</span>,<span class="st">&#39;lnkappa&#39;</span>),<span class="fu">c</span>(<span class="st">&#39;lnalpha&#39;</span>,<span class="st">&#39;logitlambda&#39;</span>,<span class="st">&#39;lnkappa&#39;</span>)]</span>
+<span id="cb3-24"><a href="#cb3-24" tabindex="-1"></a></span>
+<span id="cb3-25"><a href="#cb3-25" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">c</span>(<span class="st">&quot;minimum_eigenvalue&quot;</span><span class="ot">=</span><span class="fu">min</span>(<span class="fu">eigen</span>(psem<span class="sc">$</span>opt<span class="sc">$</span>SD<span class="sc">$</span>jointPrecision)<span class="sc">$</span>values),</span>
+<span id="cb3-26"><a href="#cb3-26" tabindex="-1"></a>             <span class="st">&quot;maximum_eigenvalue&quot;</span><span class="ot">=</span><span class="fu">max</span>(<span class="fu">eigen</span>(psem<span class="sc">$</span>opt<span class="sc">$</span>SD<span class="sc">$</span>jointPrecision)<span class="sc">$</span>values)), <span class="at">digits=</span><span class="dv">3</span>)</span></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="left"></th>
+<th align="right">x</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">minimum_eigenvalue</td>
+<td align="right">0.035</td>
+</tr>
+<tr class="even">
+<td align="left">maximum_eigenvalue</td>
+<td align="right">43439.097</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(Rsub, <span class="at">digits=</span><span class="dv">3</span>)</span></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="left"></th>
+<th align="right">lnalpha</th>
+<th align="right">logitlambda</th>
+<th align="right">lnkappa</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">lnalpha</td>
+<td align="right">1.000</td>
+<td align="right">0.741</td>
+<td align="right">0.422</td>
+</tr>
+<tr class="even">
+<td align="left">logitlambda</td>
+<td align="right">0.741</td>
+<td align="right">1.000</td>
+<td align="right">0.183</td>
+</tr>
+<tr class="odd">
+<td align="left">lnkappa</td>
+<td align="right">0.422</td>
+<td align="right">0.183</td>
+<td align="right">1.000</td>
+</tr>
+</tbody>
+</table>
+<p>We see that the minimum eigenvalue for the precision matrix (which
+corresponds to the maximum eigenvalue of the covariance matrix) is
+greater than zero, such that the precision is invertible and the Hessian
+matrix is full rank. From this we can see that all parameters are
+estimable when applying all three transformations. We also see that
+transformation parameters are not perfectly correlated, although the
+logit-lambda and ln-alpha parameters have a correlation of approximately
+0.75.</p>
+<p>We can also extract the standard errors, calculated as the
+square-root of the diagonal elements of the covariance matrix. Plotting
+estimates plus or minus 1.96 times the standard errors gives an
+approximate 95% confidence interval:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a><span class="co"># Compile estimates and SEs</span></span>
+<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a>pdat <span class="ot">=</span> <span class="fu">data.frame</span>( <span class="st">&quot;Estimate&quot;</span> <span class="ot">=</span> psem<span class="sc">$</span>opt<span class="sc">$</span>SD<span class="sc">$</span>par.fixed[<span class="fu">c</span>(<span class="st">&#39;lnalpha&#39;</span>,<span class="st">&#39;logitlambda&#39;</span>,<span class="st">&#39;lnkappa&#39;</span>)],</span>
+<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a>              <span class="st">&quot;StdErr&quot;</span> <span class="ot">=</span> <span class="fu">sqrt</span>(<span class="fu">diag</span>(V)[<span class="fu">c</span>(<span class="st">&#39;lnalpha&#39;</span>,<span class="st">&#39;logitlambda&#39;</span>,<span class="st">&#39;lnkappa&#39;</span>)]) )</span>
+<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a>pdat <span class="ot">=</span> <span class="fu">cbind</span>( pdat, <span class="st">&quot;Param&quot;</span> <span class="ot">=</span> <span class="fu">rownames</span>(pdat))</span>
+<span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a></span>
+<span id="cb5-7"><a href="#cb5-7" tabindex="-1"></a><span class="fu">ggplot</span>(pdat, <span class="fu">aes</span>( <span class="at">x=</span>Param, <span class="at">y =</span> Estimate, <span class="at">ymin =</span> Estimate <span class="sc">-</span> <span class="fl">1.96</span><span class="sc">*</span>StdErr, <span class="at">ymax =</span> Estimate <span class="sc">+</span> <span class="fl">1.96</span><span class="sc">*</span>StdErr)) <span class="sc">+</span></span>
+<span id="cb5-8"><a href="#cb5-8" tabindex="-1"></a>  <span class="fu">geom_pointrange</span>(<span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="fl">0.6</span>)) <span class="sc">+</span></span>
+<span id="cb5-9"><a href="#cb5-9" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code></pre></div>
+<p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAYAAAAGACAMAAACTGUWNAAAA0lBMVEUAAAAAADoAAGYAOpAAZrYzMzM6AAA6ADo6AGY6kNtNTU1NTW5NTY5Nbo5NbqtNjqtNjshmAABmtv9uTU1uTW5uTY5ubk1ubqtuq6tuq+SOTU2OTW6OTY6Obk2Obm6ObquOjk2Ojm6Ojo6OyP+QOgCQkDqQtpCQ27aQ2/+rbk2rbm6rjk2rq26rq46ryKur5P+2ZgC2///Ijk3Ijm7I5KvI/8jI///bkDrb/7bb///kq27k////tmb/yI7/25D/29v/5Kv//7b//8j//9v//+T///+ZiLvSAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAIlUlEQVR4nO3dC38SVwJAcYxRG3TTJNq1UfsS2xp3tyR0V1bzaET4/l+p87iEGYTwCDOHO57/rxUZx7k3c5gZIGlpjYRq0RP42hkAZgCYAWAGgBkAtkoAY1XAADADwAwAMwDMADADwAwAMwDMADADwAwAMwDMADADwAywts3sDgOszQAwA8AMADMAzAAwA8AMADMAzAAwA8AMADMAzAAwA8AMADMAzAAwA8AMADMAzAAwA8AMADMAzAAwA8AMADMAzAAwA8AMADMAzAAwA8AMADMAzAAwA8AMADMAzAAwA8AMADMArJYA10/b7c5mR2yKVh0BBi+7o+tn3aXW/bq0MpvY0K1/enmQ/NIbHwIGmKgpQCo9CkajBwkD3Gi1NlVg4SaGJ8dLr/v1qC/A4MXN/jdAQV2noOunnckdA0zUFKC0/w1QUsvT0I/tlM+CZvKVMMwAMAPADAAzAMwAMAPADAAzAMwAMAPADAAzAMwAMAPADAAzAMwAMAPADAAzAMwAMAPADAAzAMwAMAPADAAzAMwAMAPADAAzAMwAMAPADAAzAMwAMAPADAAzAMwAMAPADAAzQCMYAGYAmAFgBoAZAGYAmAFgBoAZAGYAmAFgBoAZAGYAmAFgBoAZAGYAmAFgBoAZALZwp15/937pdbW6RTv1sv3EAFUq79R+q3XUv/9hsqD3+I/ojoBIphmUZnt6//+HR5/f7BaXhVNQRB9lGMk0g+JsPx0eJf+MLnbOCgvjuwZEMs3AALDSbPvpKejT4V5xmQGqVZ7tRfoBiaX9b4CKNfB1QCTTDKauAelN+RowZ90tFsk0AwPAJrPtjz8lurW7cN2tFsk0gxlHwFLrbrFIphk08N3QSKYZlGZ79TA7BXkNqFFxtp/f7H1+czT/RBTJVxbJNIPpa8Dp3uii+HbovHW3WCTTDKYD9Hd9Glqr8tvR2d7vewTUqDTb5CIwOm3de7vMutsrkmkGPg2FGQDm6wBY+XXAvHeBvlx3i0UyzcD3gmDlI8AAtSvNdu5LsBnrbq9Iphl4EYZNvRm39LpbLJJpBl6EYV6EYeVrwDdehOtWPgW1vAjXzfeCYAaA3cw2+9FoT0G18wiANe9HE1txTHOsaQHykyg9ixU07WdDIw7QiLcixo8heh7La9hFOPIA+VPRud8UiOHLim3/f/GDWf2ds77XgBpNXQPS78tH/Swo9qeh6X+jGnmAWKYZTH1H7OLe2/REtHjdLRbJNIPp7wnvjk7n/WxuLF9ZJNMMGvY0NBXJNAMDwIpvR4e3gbwI18kAMAPADAAzAMwAMAPACgFuviNmgBr5QgxmAJgBYAaAGQBmAJgBYAaAGQBmAJgBYAaAGQBmAJgBYAaALZjt4EV7/3zJdbdFJNMMbp/t8KQz+niw3LpbI5JpBrfPdvDqfeFDZCL5yiKZZnD7bK+fn48GL7sjP0mvMrfP9nJ/HGDxulsjkmkGyx4Bi9fdGpFMM2jgNSAui54FHcf3LCguDXwdEJcGvhKOiwFgBoAZAGYAmAFgNQaw3ywGgBkAZgCYAWAGgBkAZgCYAWAGgBkAZgCYAWAGgBkAZgCYAWAGgBkAZgCYAWAGgBkAZgCYAWAGgBkAZgCYAWAGgBkAZgCYAWAGgBkAZgCYAWAGgBkAZgCYAWAGgNUXoGWAWeoKkH9I4h020FQGgNUUYPw5oetvoakMAPMUBDMAzKehMF+IwQwAMwDMADADwAwAMwDMADADwAwAW7hXJp/hY4AqLNorl+0nBqjSgr3Se/yHR0Cllj0FbeCjDA0wi9cA2Py90mu3049wM0C1PAJgBoAZAOYrYZgBYAaAGQBmAJgBYAaAGQBmAJgBYAaAGQBmAJgBYAaAGQBmAJgBYAaAGQBmAJgBYAaA1RhAsxgAZgCYAWAGgBkAZgCYAWAGgBkAZgCYAWAGgBkAZgDYSgHu5sEd/36zxlknwB09cJwZDACPYwB4HC+sMAPADAAzAMwAsGoCFP4nQ9MLvvijjQwzfNfd2Fa/2PhkQf7PjJV7nfHvhiedGX8+nwEWb7y0LJoA18//1W4nc7l+mt4kCwav/t1+3E1+93Nh+aaGSQIMT/bP842GkcLNuiOle3rwIvv/1iY3//ixe/3d/5K7/00W51scvvtPu318mfybBHidjZGu+ENnpRGrC/D0eHS5fz542Q2Pm8GL/fPLJ1PLNzVMEqB3PAobDSONb9YcKf07vWzj2c3j7s0pKGxxeHKQ7OqDfMUkfli/3VlpxOoCpI+UfBaDV3mA7IFaXr6pYYbv/nmcL0s2GkYKN+uOlB2079Oo6U0+88kpKFmWbjv9N93f6Smo18lWzE9BS49YfYBeOzmMw+MmmWR5+aaGGZ58/9P5KGw0jBRu1h0pbDzd88/PpwJkWywG+PPma1t1xKoDpA/DyYE7OQLC8k0Nk2z4Y3IKyjcaRhrfrDnS/CMgbHHqCEge+uEIWGnEqgNkN8+62bQP0hNqefmmhkkvwiHus24YqTjgGiPNvwaELZYCHNys3+6sNGLlp6CP7fSJQfa4/CV/FlRcvqlh0h2R3OQbDSOFm3VHKj8L+jbLOzzJngXlWywFeJ0NNTzJhlplxPpeCWen5DpH2uiAm3z5UmKAxZLHdfb4roTvBcEMADMAzACwqAN8fpP9iM29t/RE7iDyAHvpTX/njJ7J+poQ4NPhET2T9TUlwNXD5Fy0N7r65tfWztn4zqPfkt/spfe2t1ATApzunGUHQT/d9bvhiMju3P8w6rfSX7b3JBV5gOwinOzdvz4kd68evb16mOz70p38l0dbe52OPMDeze8vsqdDYU8X7kx+2U4NCfDpMHkumj7o0z1dumOACk0CXCQn+tFFeNCX7higQoUA6WP+4ThA8Y4BKlS4BpwmJ/3fD4/yPV28YwDdygAwA8AMADMAzAAwA8AMADMAzACwvwFC9lc1m+3sowAAAABJRU5ErkJggg==" /><!-- --></p>
+<p>These confidence intervals suggest that parameter lnkappa overlaps
+with 0.0, suggesting that Pagel’s kappa overlaps with 1.0 and could be
+instead turned off and thereby fixed at that default value.</p>
+</div>
+<div id="scaling-of-runtime-with-increased-tree-size" class="section level2">
+<h2>Scaling of runtime with increased tree size</h2>
+<p>The package <code>phylolm</code> is expected to have a “linear
+runtime”, i.e., a proportional increase in runtime with increasing tree
+size. We therefore compare runtime for <code>phylosem</code> and
+<code>phylolm</code> using a simulated tree across three orders of
+magnitude (10, 100, 1000, or 10000 tips).</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="co"># Settings</span></span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a>Ntree_config <span class="ot">=</span> <span class="fu">c</span>( <span class="fl">1e1</span>, <span class="fl">1e2</span>, <span class="fl">1e3</span>, <span class="fl">1e4</span> )</span>
+<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a>Nreplicates <span class="ot">=</span> <span class="dv">5</span></span>
+<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a>sd_x <span class="ot">=</span> <span class="fl">0.3</span></span>
+<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a>sd_y <span class="ot">=</span> <span class="fl">0.3</span></span>
+<span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a>b0_x <span class="ot">=</span> <span class="dv">1</span></span>
+<span id="cb6-7"><a href="#cb6-7" tabindex="-1"></a>b0_y <span class="ot">=</span> <span class="dv">0</span></span>
+<span id="cb6-8"><a href="#cb6-8" tabindex="-1"></a>b_xy <span class="ot">=</span> <span class="dv">1</span></span>
+<span id="cb6-9"><a href="#cb6-9" tabindex="-1"></a></span>
+<span id="cb6-10"><a href="#cb6-10" tabindex="-1"></a><span class="co"># Simulate tree</span></span>
+<span id="cb6-11"><a href="#cb6-11" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb6-12"><a href="#cb6-12" tabindex="-1"></a>Time_rcz <span class="ot">=</span> <span class="fu">array</span>(<span class="cn">NA</span>, <span class="at">dim=</span><span class="fu">c</span>(Nreplicates,<span class="fu">length</span>(Ntree_config),<span class="dv">2</span>), <span class="at">dimnames=</span><span class="fu">list</span>(<span class="cn">NULL</span>,<span class="st">&quot;tree_size&quot;</span><span class="ot">=</span>Ntree_config,<span class="st">&quot;package&quot;</span><span class="ot">=</span><span class="fu">c</span>(<span class="st">&quot;phylolm&quot;</span>,<span class="st">&quot;phylosem&quot;</span>)) )</span>
+<span id="cb6-13"><a href="#cb6-13" tabindex="-1"></a></span>
+<span id="cb6-14"><a href="#cb6-14" tabindex="-1"></a><span class="cf">for</span>( rI <span class="cf">in</span> <span class="fu">seq_len</span>(Nreplicates) ){</span>
+<span id="cb6-15"><a href="#cb6-15" tabindex="-1"></a><span class="cf">for</span>( cI <span class="cf">in</span> <span class="fu">seq_along</span>(Ntree_config) ){</span>
+<span id="cb6-16"><a href="#cb6-16" tabindex="-1"></a></span>
+<span id="cb6-17"><a href="#cb6-17" tabindex="-1"></a>  <span class="co"># Simulate data</span></span>
+<span id="cb6-18"><a href="#cb6-18" tabindex="-1"></a>  tree <span class="ot">=</span> ape<span class="sc">::</span><span class="fu">rtree</span>(<span class="at">n=</span>Ntree_config[cI])</span>
+<span id="cb6-19"><a href="#cb6-19" tabindex="-1"></a>  x <span class="ot">=</span> b0_x <span class="sc">+</span> sd_x <span class="sc">*</span> phylolm<span class="sc">::</span><span class="fu">rTrait</span>(<span class="at">n =</span> <span class="dv">1</span>, <span class="at">phy=</span>tree)</span>
+<span id="cb6-20"><a href="#cb6-20" tabindex="-1"></a>  ybar <span class="ot">=</span> b0_y <span class="sc">+</span> b_xy<span class="sc">*</span>x</span>
+<span id="cb6-21"><a href="#cb6-21" tabindex="-1"></a>  y_normal <span class="ot">=</span> ybar <span class="sc">+</span> sd_y <span class="sc">*</span> phylolm<span class="sc">::</span><span class="fu">rTrait</span>(<span class="at">n =</span> <span class="dv">1</span>, <span class="at">phy=</span>tree)</span>
+<span id="cb6-22"><a href="#cb6-22" tabindex="-1"></a>  Data <span class="ot">=</span> <span class="fu">data.frame</span>(<span class="at">x=</span>x, <span class="at">y=</span>y_normal)[]</span>
+<span id="cb6-23"><a href="#cb6-23" tabindex="-1"></a></span>
+<span id="cb6-24"><a href="#cb6-24" tabindex="-1"></a>  <span class="co"># Run phylolm</span></span>
+<span id="cb6-25"><a href="#cb6-25" tabindex="-1"></a>  start_time <span class="ot">=</span> <span class="fu">Sys.time</span>()</span>
+<span id="cb6-26"><a href="#cb6-26" tabindex="-1"></a>  plm_bm <span class="ot">=</span> phylolm<span class="sc">::</span><span class="fu">phylolm</span>(y <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> x, <span class="at">data=</span>Data, <span class="at">phy=</span>tree, <span class="at">model=</span><span class="st">&quot;BM&quot;</span> )</span>
+<span id="cb6-27"><a href="#cb6-27" tabindex="-1"></a>  Time_rcz[rI,cI,<span class="st">&quot;phylolm&quot;</span>] <span class="ot">=</span> <span class="fu">Sys.time</span>() <span class="sc">-</span> start_time</span>
+<span id="cb6-28"><a href="#cb6-28" tabindex="-1"></a></span>
+<span id="cb6-29"><a href="#cb6-29" tabindex="-1"></a>  <span class="co"># Run phylosem</span></span>
+<span id="cb6-30"><a href="#cb6-30" tabindex="-1"></a>  start_time <span class="ot">=</span> <span class="fu">Sys.time</span>()</span>
+<span id="cb6-31"><a href="#cb6-31" tabindex="-1"></a>  psem_bm <span class="ot">=</span> <span class="fu">phylosem</span>( <span class="at">sem =</span> <span class="st">&quot;x -&gt; y, p&quot;</span>,</span>
+<span id="cb6-32"><a href="#cb6-32" tabindex="-1"></a>            <span class="at">data =</span> Data,</span>
+<span id="cb6-33"><a href="#cb6-33" tabindex="-1"></a>            <span class="at">tree =</span> tree,</span>
+<span id="cb6-34"><a href="#cb6-34" tabindex="-1"></a>            <span class="at">quiet =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb6-35"><a href="#cb6-35" tabindex="-1"></a>            <span class="at">newtonsteps =</span> <span class="dv">0</span>,</span>
+<span id="cb6-36"><a href="#cb6-36" tabindex="-1"></a>            <span class="at">getsd =</span> <span class="cn">FALSE</span> )</span>
+<span id="cb6-37"><a href="#cb6-37" tabindex="-1"></a>  Time_rcz[rI,cI,<span class="st">&quot;phylosem&quot;</span>] <span class="ot">=</span> <span class="fu">Sys.time</span>() <span class="sc">-</span> start_time</span>
+<span id="cb6-38"><a href="#cb6-38" tabindex="-1"></a>}}</span>
+<span id="cb6-39"><a href="#cb6-39" tabindex="-1"></a></span>
+<span id="cb6-40"><a href="#cb6-40" tabindex="-1"></a><span class="co"># Format</span></span>
+<span id="cb6-41"><a href="#cb6-41" tabindex="-1"></a>df <span class="ot">=</span> <span class="fu">apply</span>( Time_rcz, <span class="at">MARGIN=</span><span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>, <span class="at">FUN=</span>mean )</span>
+<span id="cb6-42"><a href="#cb6-42" tabindex="-1"></a>df <span class="ot">=</span> <span class="fu">cbind</span>( <span class="fu">expand.grid</span>(<span class="fu">dimnames</span>(df)), <span class="st">&quot;time_seconds&quot;</span><span class="ot">=</span><span class="fu">as.vector</span>(df) )</span>
+<span id="cb6-43"><a href="#cb6-43" tabindex="-1"></a></span>
+<span id="cb6-44"><a href="#cb6-44" tabindex="-1"></a><span class="co"># Plot</span></span>
+<span id="cb6-45"><a href="#cb6-45" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb6-46"><a href="#cb6-46" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>df, <span class="fu">aes</span>(<span class="at">x=</span>tree_size, <span class="at">y=</span>time_seconds, <span class="at">group=</span>package, <span class="at">color=</span>package)) <span class="sc">+</span></span>
+<span id="cb6-47"><a href="#cb6-47" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb6-48"><a href="#cb6-48" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">scale_y_log10</span>()</span></code></pre></div>
+<p><img src="data:image/png;base64,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" width="75%" /></p>
+<p>Results show that both packages have approximately linear runtime,
+but that <code>phylolm</code> is approximately 10-100 times faster for
+any given tree size.</p>
+</div>
+
+
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
