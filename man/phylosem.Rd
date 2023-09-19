@@ -137,7 +137,7 @@ plot( my_fitted_DAG )
 # Convert to phylo4d
 my_phylo4d = as_phylo4d(psem)
 
-# Convert to sem
+# Convert to sem and plot
 library(sem)
 my_sem = as_sem(psem)
 pathDiagram( model = my_sem,
@@ -145,23 +145,12 @@ pathDiagram( model = my_sem,
                   edge.labels = "values" )
 effects( my_sem )
 
-# Convert and plot using semPlot
-library(semPlot)
-myplot = semPlotModel( my_sem )
-semPaths( my_sem,
+# Plot using semPlot
+if( require(semPlot) ){
+  myplot = semPlotModel( my_sem )
+  semPaths( my_sem,
                    nodeLabels = myplot@Vars$name )
-
-# Convert and plot using phylosignal
-library(phylosignal)
-dotplot( my_phylo4d )
-gridplot( my_phylo4d )
-
-# Cluster based on phylogeny and traits
-gC = graphClust( my_phylo4d,
-                 lim.phylo = 5,
-                 lim.trait = 5,
-                 scale.lim = FALSE)
-plot(gC, which = "graph", ask = FALSE)
+}
 
 }
 \references{

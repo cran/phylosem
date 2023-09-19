@@ -1,4 +1,4 @@
-## ---- include = FALSE---------------------------------------------------------
+## ----include = FALSE----------------------------------------------------------
 have_packages = all(sapply( c("ggplot2","phylopath","phylolm","ape"), FUN=requireNamespace))
 knitr::opts_chunk$set(
   collapse = TRUE,
@@ -15,7 +15,7 @@ library(phylosem)
 ## ----package_warning, echo=TRUE, eval=!have_packages--------------------------
 #  message("Must install ggplot2, phylopath, phylolm, ape")
 
-## ---- eval=have_packages, echo=TRUE, message=FALSE, fig.width=6, fig.height=6----
+## ----eval=have_packages, echo=TRUE, message=FALSE, fig.width=6, fig.height=6----
 
 # Compare using Pagel's kappa
 library(phylopath)
@@ -44,7 +44,7 @@ knitr::kable(c("minimum_eigenvalue"=min(eigen(psem$opt$SD$jointPrecision)$values
              "maximum_eigenvalue"=max(eigen(psem$opt$SD$jointPrecision)$values)), digits=3)
 knitr::kable(Rsub, digits=3)
 
-## ---- eval=have_packages, echo=TRUE, message=FALSE, fig.width=4, fig.height=4----
+## ----eval=have_packages, echo=TRUE, message=FALSE, fig.width=4, fig.height=4----
 library(ggplot2)
 # Compile estimates and SEs
 pdat = data.frame( "Estimate" = psem$opt$SD$par.fixed[c('lnalpha','logitlambda','lnkappa')],
@@ -55,7 +55,7 @@ ggplot(pdat, aes( x=Param, y = Estimate, ymin = Estimate - 1.96*StdErr, ymax = E
   geom_pointrange(position = position_dodge(width = 0.6)) +
   theme_classic()
 
-## ---- eval=have_packages, echo=TRUE, message=FALSE, fig.width=6, fig.height=6, out.width = "75%"----
+## ----eval=have_packages, echo=TRUE, message=FALSE, fig.width=6, fig.height=6, out.width = "75%"----
 # Settings
 Ntree_config = c( 1e1, 1e2, 1e3, 1e4 )
 Nreplicates = 5

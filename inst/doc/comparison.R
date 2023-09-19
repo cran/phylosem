@@ -1,4 +1,4 @@
-## ---- include = FALSE---------------------------------------------------------
+## ----include = FALSE----------------------------------------------------------
 have_packages = all(sapply( c("ggplot2","phylolm","phylopath","Rphylopars","phyr","TreeTools"), FUN=requireNamespace))
 knitr::opts_chunk$set(
   collapse = TRUE,
@@ -15,7 +15,7 @@ library(phylosem)
 ## ----package_warning, echo=TRUE, eval=!have_packages--------------------------
 #  message("Must install ggplot2, phylopath, phylolm, ape")
 
-## ---- eval=have_packages, echo=TRUE, message=FALSE, fig.width=6, fig.height=6----
+## ----eval=have_packages, echo=TRUE, message=FALSE, fig.width=6, fig.height=6----
 # Settings
 Ntree = 100
 sd_x = 0.3
@@ -104,7 +104,7 @@ knitr::kable(summary(plm_kappa)$coefficients, digits=3)
 knitr::kable(c( "phylolm_kappa"=plm_kappa$optpar, 
                 "phylosem_kappa"=exp(psem_kappa$parhat$lnkappa) ), digits=3)
 
-## ---- eval=have_packages, echo=TRUE, message=FALSE, fig.width=6, fig.height=6, out.width = "75%"----
+## ----eval=have_packages, echo=TRUE, message=FALSE, fig.width=6, fig.height=6, out.width = "75%"----
 # Settings
 Ntree = 100
 sd_x = 0.3
@@ -146,7 +146,7 @@ pgsem = phylosem( sem = "x -> y, p",
           quiet = TRUE )
 knitr::kable(summary(pgsem)$coefficients, digits=3)
 
-## ---- echo=TRUE, message=FALSE, fig.width=6, fig.height=6, out.width = "75%", eval=FALSE----
+## ----echo=TRUE, message=FALSE, fig.width=6, fig.height=6, out.width = "75%", eval=FALSE----
 #  # Comare using Bayesian implementation in brms
 #  library(brms)
 #  Amat <- ape::vcv.phylo(tree)
@@ -179,12 +179,12 @@ knitr::kable(summary(pgsem)$coefficients, digits=3)
 #    theme(panel.grid.major.x = element_line(), panel.grid.minor.x = element_line())
 #  saveRDS( figure, file=file.path(R'(C:\Users\James.Thorson\Desktop\Git\phylosem\vignettes)',"brms.RDS") )
 
-## ---- eval=have_packages, message=FALSE, fig.width=6, fig.height=6, out.width = "75%", echo=FALSE----
+## ----eval=have_packages, message=FALSE, fig.width=6, fig.height=6, out.width = "75%", echo=FALSE----
 library(ggplot2)
 figure = readRDS( file.path(system.file("brms",package="phylosem"),"brms.RDS") )
 figure
 
-## ---- eval=have_packages, echo=TRUE, message=FALSE, fig.width=6, fig.height=6----
+## ----eval=have_packages, echo=TRUE, message=FALSE, fig.width=6, fig.height=6----
 # Settings
 Ntree = 100
 sd_x = 0.3
@@ -222,7 +222,7 @@ pgsem = phylosem( sem = "x -> y, p",
           quiet = TRUE )
 knitr::kable(summary(pgsem)$coefficients, digits=3)
 
-## ---- eval=have_packages, echo=TRUE, message=FALSE, fig.width=6, fig.height=6----
+## ----eval=have_packages, echo=TRUE, message=FALSE, fig.width=6, fig.height=6----
 library(phylopath)
 library(phylosem)
 
@@ -256,7 +256,7 @@ psem = phylosem( sem = model,
 Sys.time() - start_time
 plot( as_fitted_DAG(psem) )
 
-## ---- eval=have_packages, echo=TRUE, message=FALSE, fig.width=6, fig.height=6----
+## ----eval=have_packages, echo=TRUE, message=FALSE, fig.width=6, fig.height=6----
 library(sem)
 library(TreeTools)
 
@@ -313,15 +313,15 @@ psem = phylosem( data = Data,
           quiet = TRUE )
 Sys.time() - start_time
 
-## ---- eval=have_packages, echo=FALSE, results='asis'--------------------------
+## ----eval=have_packages, echo=FALSE, results='asis'---------------------------
 knitr::kable(coef(Sem, standardized=TRUE)[1:2], digits=3)
 knitr::kable(coef(psem, standardized=TRUE)[1:2,], digits=3)
 
-## ---- eval=have_packages, echo=FALSE, results='asis'--------------------------
+## ----eval=have_packages, echo=FALSE, results='asis'---------------------------
 knitr::kable(coef(Sem, standardized=FALSE), digits=3)
 knitr::kable(coef(psem, standardized=FALSE), digits=3)
 
-## ---- eval=have_packages, echo=TRUE, message=FALSE, fig.width=6, fig.height=6----
+## ----eval=have_packages, echo=TRUE, message=FALSE, fig.width=6, fig.height=6----
 library(Rphylopars)
 
 # Format data, within no values for species t1

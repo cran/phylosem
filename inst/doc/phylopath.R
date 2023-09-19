@@ -1,4 +1,4 @@
-## ---- include = FALSE---------------------------------------------------------
+## ----include = FALSE----------------------------------------------------------
 have_packages = all(sapply( c("phylopath"), FUN=requireNamespace))
 knitr::opts_chunk$set(
   collapse = TRUE,
@@ -48,7 +48,7 @@ models_ps <- lapply(
   \(x) paste(x, c('LS = b1_ * BM; NL = b2_ * BM; DD = b3_ * NL'), sep = '; ')
 )
 
-## ---- eval=have_packages, results=FALSE, message=FALSE------------------------
+## ----eval=have_packages, results=FALSE, message=FALSE-------------------------
 result_pp <- phylopath::phylo_path(
   models_pp, data = rhino_std, tree = rhino_tree, model = 'BM'
 )
@@ -68,11 +68,11 @@ sapply(result_ps, AIC) |> sort()
 best_pp <- phylopath::best(result_pp)
 best_ps <- phylosem::best(result_ps)
 
-## ---- eval=have_packages, fig.dim = c(6, 6), out.width = "50%"----------------
+## ----eval=have_packages, fig.dim = c(6, 6), out.width = "50%"-----------------
 plot(best_pp)
 plot(as_fitted_DAG(best_ps))
 
-## ---- eval=have_packages, results=FALSE, message=FALSE, fig.dim = c(6, 6), out.width = "50%"----
+## ----eval=have_packages, results=FALSE, message=FALSE, fig.dim = c(6, 6), out.width = "50%"----
 phylopath::est_DAG(
   models_pp$five, data = rhino_std, tree = rhino_tree, model = 'lambda'
 ) |> plot()
