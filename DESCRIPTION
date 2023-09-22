@@ -1,8 +1,8 @@
 Package: phylosem
 Type: Package
 Title: Phylogenetic Structural Equation Model
-Version: 1.0.1
-Date: 2023-09-18
+Version: 1.0.2
+Date: 2023-09-22
 Authors@R: 
     c(person(given = "James",
              family = "Thorson",
@@ -33,9 +33,9 @@ Encoding: UTF-8
 RoxygenNote: 7.2.3
 VignetteBuilder: knitr
 NeedsCompilation: yes
-Packaged: 2023-09-19 00:57:07 UTC; James.Thorson
+Packaged: 2023-09-22 21:19:22 UTC; James.Thorson
 Author: James Thorson [aut, cre] (<https://orcid.org/0000-0001-7415-1010>),
   Wouter van der Bijl [ctb] (<https://orcid.org/0000-0002-7366-1868>)
 Maintainer: James Thorson <James.Thorson@noaa.gov>
 Repository: CRAN
-Date/Publication: 2023-09-19 04:40:02 UTC
+Date/Publication: 2023-09-22 21:50:02 UTC

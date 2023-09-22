@@ -17,9 +17,10 @@ knitr::opts_chunk$set(
   comment = "#>",
   eval = have_packages  # https://r-pkgs.org/vignettes.html#sec-vignettes-eval-option
 )
-# use devtools::build_rmd("vignettes/comparison.Rmd") to test build
-# library(rmarkdown); setwd( R'(C:\Users\James.Thorson\Desktop\Git\phylosem\vignettes)' )
-# use render( "demonstration.Rmd", pdf_document()) to build PDF, and perhaps tinytex::latexmk() to install dependencies
+# Test build:
+#  devtools::build_rmd("vignettes/comparison.Rmd")
+# Render example
+#  library(rmarkdown); setwd( R'(C:\Users\James.Thorson\Desktop\Git\phylosem\vignettes)' ); render( "demonstration.Rmd", pdf_document())
 ```
 
 ```{r setup, echo=TRUE}
@@ -74,18 +75,33 @@ knitr::kable(Rsub, digits=3)
 
 We see that the minimum eigenvalue for the precision matrix (which corresponds to the maximum eigenvalue of the covariance matrix) is greater than zero, such that the precision is invertible and the Hessian matrix is full rank.  From this we can see that all parameters are estimable when applying all three transformations.  We also see that transformation parameters are not perfectly correlated, although the logit-lambda and ln-alpha parameters have a correlation of approximately 0.75.
 
-We can also extract the standard errors, calculated as the square-root of the diagonal elements of the covariance matrix.  Plotting estimates plus or minus 1.96 times the standard errors gives an approximate 95% confidence interval:
+We can also extract the standard errors, calculated as the square-root of the diagonal elements of the covariance matrix.  We extract the estimated values for `lnalpha`, `logitlambda`, and `lnkappa` and plot plot the 95% confidence interval as their estimates plus or minus 1.96 times their standard errors.  These values are all unbounded by construction.  However, we also convert these estimates, lower, and upper confidence-interval bounds to the conventional parameters `alpha`, `lambda`, and `kappa`, and plot those as well.  These derived quantities are bounded as expected for Ornstein-Uhlenbeck and Pagel parameters:
 
-```{r, eval=have_packages, echo=TRUE, message=FALSE, fig.width=4, fig.height=4}
+```{r, eval=have_packages, echo=TRUE, message=FALSE, fig.width=6, fig.height=4}
 library(ggplot2)
 # Compile estimates and SEs
 pdat = data.frame( "Estimate" = psem$opt$SD$par.fixed[c('lnalpha','logitlambda','lnkappa')],
               "StdErr" = sqrt(diag(V)[c('lnalpha','logitlambda','lnkappa')]) )
 pdat = cbind( pdat, "Param" = rownames(pdat))
 
-ggplot(pdat, aes( x=Param, y = Estimate, ymin = Estimate - 1.96*StdErr, ymax = Estimate + 1.96*StdErr)) +
+#
+pdat$lower = pdat$Estimate - 1.96*pdat$StdErr
+pdat$upper = pdat$Estimate + 1.96*pdat$StdErr
+pdat$type = "estimated"
+
+# Transform from log / logit-space to natural space
+pdat2 = pdat
+pdat2$Param = c("alpha", "lambda", "kappa")
+pdat2['lnalpha',c("Estimate","lower","upper")] = exp(pdat2['lnalpha',c("Estimate","lower","upper")])
+pdat2['lnkappa',c("Estimate","lower","upper")] = exp(pdat2['lnkappa',c("Estimate","lower","upper")])
+pdat2['logitlambda',c("Estimate","lower","upper")] = plogis(as.numeric(pdat2['logitlambda',c("Estimate","lower","upper")]))
+pdat2$type = "derived"
+
+# Plot
+ggplot( rbind(pdat,pdat2), aes( x=Param, y = Estimate, ymin = lower, ymax = upper)) +
   geom_pointrange(position = position_dodge(width = 0.6)) +
-  theme_classic()
+  theme_classic() +
+  facet_grid( rows=vars(type), scales="free" )
 ```
 
 These confidence intervals suggest that parameter lnkappa overlaps with 0.0, suggesting that Pagel's kappa overlaps with 1.0 and could be instead turned off and thereby fixed at that default value.

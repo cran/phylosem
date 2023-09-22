@@ -281,5 +281,8 @@ Type objective_function<Type>::operator() ()
   REPORT( x_vj );
   REPORT( yhat_ij );  // Testing for cAIC
   ADREPORT( Rho_jj );
+  ADREPORT( alpha );
+  ADREPORT( lambda );
+  ADREPORT( kappa );
   return jnll;
 }

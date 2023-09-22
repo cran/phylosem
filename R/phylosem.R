@@ -294,7 +294,8 @@ function( sem,
     map_list = list()
     # Start off map_list$x_vj, which has multiple constraints
     map_list$x_vj = array( 1:prod(dim(parameters_list$x_vj)), dim=dim(parameters_list$x_vj) )
-    map_list$x_vj[data_list$n_tip+1,] = ifelse(colSums(!is.na(data))==0, NA, 1:ncol(data))
+    # Turn off root for any variable with no measurements (i.e., latent-variables are defined with fixed mean)
+    map_list$x_vj[data_list$n_tip+1,] = ifelse( colSums(!is.na(data))==0, NA, map_list$x_vj[data_list$n_tip+1,] )
 
     # Settings
     map_list$lnsigma_j = 1:length(parameters_list$lnsigma_j)
