@@ -66,7 +66,9 @@ decrease the maximum gradient of the loglikelihood with respect to each fixed ef
 and therefore this option can be used to achieve an arbitrarily low final gradient
 given sufficient time for well-behaved models.  However, this option will also
 perform strangely or have unexpected consequences for poorly-behaved models, e.g.,
-when fixed effects are at upper or lower bounds.}
+when fixed effects are at upper or lower bounds. There is no need to increase the value
+of newtonsteps if the model appears to be converged (i.e., has low final_gradient and none of
+the standard errors are NA values)}
 
 \item{n}{sample sizes (if \code{n!=Inf} then \code{n} is used to calculate BIC and AICc)}
 

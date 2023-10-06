@@ -150,15 +150,11 @@ Type objective_function<Type>::operator() ()
   vector<Type> sigma_j( n_j );
   sigma_j = exp( lnsigma_j );
   matrix<Type> Vtmp( n_j, n_j );
-  vector<Type> xtmp_j( n_j );
+  matrix<Type> eps_vj( n_v, n_j );
+  eps_vj.setZero();
 
-  // Evolutionary inverse-covariance
+  // Assemble Evolutionarycovariance
   matrix<Type> V_jj( n_j, n_j );
-  // vector<Type> beta_z, matrix<int> RAM, vector<Type> RAMstart, int n_vars
-  //V_jj = V_sem( beta_z, RAM, RAMstart, n_j );
-
-  // Assemble covariance
-  // SEM
   matrix<Type> L_jj(n_j, n_j);
   matrix<Type> Rho_jj(n_j, n_j);
   matrix<Type> Gamma_jj(n_j, n_j);
@@ -194,9 +190,10 @@ Type objective_function<Type>::operator() ()
     var_v(vroot) = Type(1.0) / (2*alpha);
     // conditional probability
     Vtmp = V_jj * var_v(vroot);
-    //xtmp_j = x_vj.row(root).array() - xbar_j;
-    for(int j=0; j<n_j; j++) xtmp_j(j) = x_vj(vroot,j) - xbar_j(j);
-    jnll_v(vroot) = MVNORM(Vtmp)( xtmp_j );
+    for(int j=0; j<n_j; j++){
+      eps_vj(vroot,j) = x_vj(vroot,j) - xbar_j(j);
+    }
+    jnll_v(vroot) = MVNORM(Vtmp)( eps_vj.row(vroot) );
     // Optionally fix the root at the mean
   }else{
     rho_v(vroot) = NAN;
@@ -226,8 +223,10 @@ Type objective_function<Type>::operator() ()
       Vtmp = V_jj * var_v(vchild);
     }
     //xtmp_j = (x_vj.row(vchild).array()-xbar_j) - rho_v(vchild)*(x_vj.row(vparent).array()-xbar_j);
-    for(int j=0; j<n_j; j++) xtmp_j(j) = (x_vj(vchild,j)-xbar_j(j)) - rho_v(vchild)*(x_vj(vparent,j)-xbar_j(j));
-    jnll_v(vchild) = MVNORM(Vtmp)( xtmp_j );
+    for(int j=0; j<n_j; j++){
+      eps_vj(vchild,j) = (x_vj(vchild,j)-xbar_j(j)) - rho_v(vchild)*(x_vj(vparent,j)-xbar_j(j));
+    }
+    jnll_v(vchild) = MVNORM(Vtmp)( eps_vj.row(vchild) );
   }
   jnll += jnll_v.sum();
 
@@ -236,6 +235,9 @@ Type objective_function<Type>::operator() ()
   for(int j=0; j<n_j; j++){
     if( !R_IsNA(asDouble(y_ij(i,j))) ){
       // familycode = 0 :  don't include likelihood
+      if( familycode_j(j)==0 ){
+        yhat_ij(i,j) = x_vj(v_i(i),j);
+      }
       // familycode = 1 :  normal
       if( familycode_j(j)==1 ){
         yhat_ij(i,j) = x_vj(v_i(i),j);
@@ -280,6 +282,7 @@ Type objective_function<Type>::operator() ()
   REPORT( alpha );
   REPORT( x_vj );
   REPORT( yhat_ij );  // Testing for cAIC
+  REPORT( eps_vj );
   ADREPORT( Rho_jj );
   ADREPORT( alpha );
   ADREPORT( lambda );

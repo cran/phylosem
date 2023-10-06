@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<meta name="author" content="James T. Thorson" />
+
+
+<title>Phylogenetic comparative methods in fisheries science</title>
+
+<script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
+// be compatible with the behavior of Pandoc < 2.8).
+document.addEventListener('DOMContentLoaded', function(e) {
+  var hs = document.querySelectorAll("div.section[class*='level'] > :first-child");
+  var i, h, a;
+  for (i = 0; i < hs.length; i++) {
+    h = hs[i];
+    if (!/^h[1-6]$/i.test(h.tagName)) continue;  // it should be a header h1-h6
+    a = h.attributes;
+    while (a.length > 0) h.removeAttribute(a[0].name);
+  }
+});
+</script>
+
+<style type="text/css">
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+</style>
+
+
+
+<style type="text/css">
+code {
+white-space: pre;
+}
+.sourceCode {
+overflow: visible;
+}
+</style>
+<style type="text/css" data-origin="pandoc">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+{ counter-reset: source-line 0; }
+pre.numberSource code > span
+{ position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+{ content: counter(source-line);
+position: relative; left: -1em; text-align: right; vertical-align: baseline;
+border: none; display: inline-block;
+-webkit-touch-callout: none; -webkit-user-select: none;
+-khtml-user-select: none; -moz-user-select: none;
+-ms-user-select: none; user-select: none;
+padding: 0 4px; width: 4em;
+color: #aaaaaa;
+}
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa; padding-left: 4px; }
+div.sourceCode
+{ }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } 
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.at { color: #7d9029; } 
+code span.bn { color: #40a070; } 
+code span.bu { color: #008000; } 
+code span.cf { color: #007020; font-weight: bold; } 
+code span.ch { color: #4070a0; } 
+code span.cn { color: #880000; } 
+code span.co { color: #60a0b0; font-style: italic; } 
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.do { color: #ba2121; font-style: italic; } 
+code span.dt { color: #902000; } 
+code span.dv { color: #40a070; } 
+code span.er { color: #ff0000; font-weight: bold; } 
+code span.ex { } 
+code span.fl { color: #40a070; } 
+code span.fu { color: #06287e; } 
+code span.im { color: #008000; font-weight: bold; } 
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.kw { color: #007020; font-weight: bold; } 
+code span.op { color: #666666; } 
+code span.ot { color: #007020; } 
+code span.pp { color: #bc7a00; } 
+code span.sc { color: #4070a0; } 
+code span.ss { color: #bb6688; } 
+code span.st { color: #4070a0; } 
+code span.va { color: #19177c; } 
+code span.vs { color: #4070a0; } 
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } 
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    var j = 0;
+    while (j < rules.length) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") {
+        j++;
+        continue;
+      }
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') {
+        j++;
+        continue;
+      }
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; } 
+code > span.er { color: #a61717; background-color: #e3d2d2; } 
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">Phylogenetic comparative methods in
+fisheries science</h1>
+<h4 class="author">James T. Thorson</h4>
+
+
+
+<p>Phylogenetic comparative methods (PCM) are rarely in fisheries
+science, perhaps due to a lack of familiarity with methods and software
+among fisheries scientists. This underuse is surprising, given that
+fisheries science and management strongly depends on foundational
+results from comparative methods regarding fish productivity and
+life-history parameters, e.g., for defining proxies for biological
+reference points and informing hard-to-estimate demographic rates such
+as stock-recruit and natural mortality parameters.</p>
+<div id="preparing-the-then-et-al.-mortality-database" class="section level2">
+<h2>Preparing the Then et al. mortality database</h2>
+<p>To demonstrate the potential role for PCM in fisheries science, we
+re-analyze a foundational dataset compiled by <a href="https://www.vims.edu/research/departments/fisheries/programs/mort_db/index.php">Then
+et al.</a>. We specifically download the file “Mlifehist_ver1.0.csv” and
+then include a copy as a data object in package <em>phylosem</em> to
+simplify the following demonstration. This demonstration then provides
+basic syntax and output from PCM, showing the relationship between
+natural mortality rate, longevity, and growth parameters.</p>
+<p>To do so, we first load a phylogeny for fishes using package
+<em>fishtree</em>, which includes several versions of a phylogeny for
+fishes develoepd by <a href="https://doi.org/10.1038/s41586-018-0273-1">Rabosky et al.</a>. We
+then associate all trait data with a tip label from that phylogeny, and
+provide convenient names for the modeled variables.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="co"># Load packages</span></span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="fu">library</span>(phylosem)</span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="fu">library</span>(fishtree)</span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a><span class="co"># Download tree</span></span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a>out <span class="ot">=</span> <span class="fu">fishtree_complete_phylogeny</span>()</span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a>tree <span class="ot">=</span> out[[<span class="dv">1</span>]]</span>
+<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a><span class="co"># Load data object</span></span>
+<span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a><span class="fu">data</span>( Mlifehist_ver1_0 )</span>
+<span id="cb1-11"><a href="#cb1-11" tabindex="-1"></a>Data <span class="ot">=</span> Mlifehist_ver1_0</span>
+<span id="cb1-12"><a href="#cb1-12" tabindex="-1"></a></span>
+<span id="cb1-13"><a href="#cb1-13" tabindex="-1"></a><span class="co"># Reformat to match tree$tip.label</span></span>
+<span id="cb1-14"><a href="#cb1-14" tabindex="-1"></a>Data<span class="sc">$</span>Genus_species <span class="ot">=</span> <span class="fu">factor</span>( <span class="fu">paste0</span>(Data<span class="sc">$</span>Genus, <span class="st">&quot;_&quot;</span>, Data<span class="sc">$</span>Species) )</span>
+<span id="cb1-15"><a href="#cb1-15" tabindex="-1"></a></span>
+<span id="cb1-16"><a href="#cb1-16" tabindex="-1"></a><span class="co"># Drop duplicates ... not dealing with variation among stocks within species</span></span>
+<span id="cb1-17"><a href="#cb1-17" tabindex="-1"></a>Data <span class="ot">=</span> Data[<span class="fu">match</span>(<span class="fu">unique</span>(Data<span class="sc">$</span>Genus_species),Data<span class="sc">$</span>Genus_species), ]</span>
+<span id="cb1-18"><a href="#cb1-18" tabindex="-1"></a></span>
+<span id="cb1-19"><a href="#cb1-19" tabindex="-1"></a><span class="co"># log-transform to simplify later syuntax</span></span>
+<span id="cb1-20"><a href="#cb1-20" tabindex="-1"></a>Data <span class="ot">=</span> <span class="fu">cbind</span>( Data, <span class="st">&quot;logM&quot;</span> <span class="ot">=</span> <span class="fu">log</span>(Data[,<span class="st">&#39;M&#39;</span>]),</span>
+<span id="cb1-21"><a href="#cb1-21" tabindex="-1"></a>                    <span class="st">&quot;logK&quot;</span> <span class="ot">=</span> <span class="fu">log</span>(Data[,<span class="st">&#39;K&#39;</span>]),</span>
+<span id="cb1-22"><a href="#cb1-22" tabindex="-1"></a>                    <span class="st">&quot;logtmax&quot;</span> <span class="ot">=</span> <span class="fu">log</span>(Data[,<span class="st">&#39;tmax&#39;</span>]),</span>
+<span id="cb1-23"><a href="#cb1-23" tabindex="-1"></a>                    <span class="st">&quot;logLinf&quot;</span> <span class="ot">=</span> <span class="fu">log</span>(Data[,<span class="st">&#39;Linf&#39;</span>]) )</span>
+<span id="cb1-24"><a href="#cb1-24" tabindex="-1"></a></span>
+<span id="cb1-25"><a href="#cb1-25" tabindex="-1"></a><span class="co"># Identify species in both datasets</span></span>
+<span id="cb1-26"><a href="#cb1-26" tabindex="-1"></a>species_to_use <span class="ot">=</span> <span class="fu">intersect</span>( tree<span class="sc">$</span>tip.label, Data<span class="sc">$</span>Genus_species )</span>
+<span id="cb1-27"><a href="#cb1-27" tabindex="-1"></a>species_to_drop <span class="ot">=</span> <span class="fu">setdiff</span>( Data<span class="sc">$</span>Genus_species, tree<span class="sc">$</span>tip.label )</span>
+<span id="cb1-28"><a href="#cb1-28" tabindex="-1"></a></span>
+<span id="cb1-29"><a href="#cb1-29" tabindex="-1"></a><span class="co"># Drop tips not present in trait-data</span></span>
+<span id="cb1-30"><a href="#cb1-30" tabindex="-1"></a><span class="co"># Not strictly necessary, but helpful to simplify later plots</span></span>
+<span id="cb1-31"><a href="#cb1-31" tabindex="-1"></a>tree <span class="ot">=</span> ape<span class="sc">::</span><span class="fu">keep.tip</span>( tree, <span class="at">tip=</span>species_to_use )</span>
+<span id="cb1-32"><a href="#cb1-32" tabindex="-1"></a></span>
+<span id="cb1-33"><a href="#cb1-33" tabindex="-1"></a><span class="co"># Drop trait-data not in phylogeny</span></span>
+<span id="cb1-34"><a href="#cb1-34" tabindex="-1"></a><span class="co"># Necessary to define correlation among data</span></span>
+<span id="cb1-35"><a href="#cb1-35" tabindex="-1"></a>rows_to_use <span class="ot">=</span> <span class="fu">which</span>( Data<span class="sc">$</span>Genus_species <span class="sc">%in%</span> species_to_use )</span>
+<span id="cb1-36"><a href="#cb1-36" tabindex="-1"></a>Data <span class="ot">=</span> Data[rows_to_use,]</span>
+<span id="cb1-37"><a href="#cb1-37" tabindex="-1"></a></span>
+<span id="cb1-38"><a href="#cb1-38" tabindex="-1"></a><span class="co"># Only include modeled variables in trait-data passed to phylosem</span></span>
+<span id="cb1-39"><a href="#cb1-39" tabindex="-1"></a><span class="fu">rownames</span>(Data) <span class="ot">=</span> Data<span class="sc">$</span>Genus_species</span>
+<span id="cb1-40"><a href="#cb1-40" tabindex="-1"></a>Data <span class="ot">=</span> Data[,<span class="fu">c</span>(<span class="st">&#39;logM&#39;</span>,<span class="st">&#39;logK&#39;</span>,<span class="st">&#39;logtmax&#39;</span>,<span class="st">&#39;logLinf&#39;</span>)]</span></code></pre></div>
+</div>
+<div id="fitting-and-selecting-among-phylogenetic-structural-equation-models" class="section level2">
+<h2>Fitting and selecting among phylogenetic structural equation
+models</h2>
+<p>We then define a path diagram specifying a set of linkages among
+variables. In the following, we use a path diagram that ensures that
+mortality rate is statistically independent of growth, conditional upon
+a measurement for longevity. This specification ensures that, if
+longevity is available, then it is the sole information used to predict
+mortality rate. However, if longevity is not available, the model
+reverts to predicting mortality from growth parameters.</p>
+<p>We then fit this model using phylogenetic structural equation models.
+We specifically apply a grid-search across the eight models formed by
+any combination of modeled transformations of the phylogenetic tree. We
+then use marginal AIC to select a model, and list estimated path
+coefficients.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="co"># Specify SEM structure</span></span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a>sem_structure <span class="ot">=</span> <span class="st">&quot;</span></span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a><span class="st">  logK -&gt; logtmax, b1</span></span>
+<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a><span class="st">  logLinf -&gt; logtmax, b2</span></span>
+<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a><span class="st">  logtmax -&gt; logM, a</span></span>
+<span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a><span class="st">&quot;</span></span>
+<span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a></span>
+<span id="cb2-8"><a href="#cb2-8" tabindex="-1"></a><span class="co"># Grid-search model selection using AIC for transformations</span></span>
+<span id="cb2-9"><a href="#cb2-9" tabindex="-1"></a>Grid <span class="ot">=</span> <span class="fu">expand.grid</span>( <span class="st">&quot;OU&quot;</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="cn">FALSE</span>,<span class="cn">TRUE</span>),</span>
+<span id="cb2-10"><a href="#cb2-10" tabindex="-1"></a>                    <span class="st">&quot;lambda&quot;</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="cn">FALSE</span>,<span class="cn">TRUE</span>),</span>
+<span id="cb2-11"><a href="#cb2-11" tabindex="-1"></a>                    <span class="st">&quot;kappa&quot;</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="cn">FALSE</span>,<span class="cn">TRUE</span>) )</span>
+<span id="cb2-12"><a href="#cb2-12" tabindex="-1"></a>psem_grid <span class="ot">=</span> <span class="cn">NULL</span></span>
+<span id="cb2-13"><a href="#cb2-13" tabindex="-1"></a><span class="cf">for</span>( i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(Grid)){</span>
+<span id="cb2-14"><a href="#cb2-14" tabindex="-1"></a>  psem_grid[[i]] <span class="ot">=</span> <span class="fu">phylosem</span>( <span class="at">data=</span>Data,</span>
+<span id="cb2-15"><a href="#cb2-15" tabindex="-1"></a>                   <span class="at">tree =</span> tree,</span>
+<span id="cb2-16"><a href="#cb2-16" tabindex="-1"></a>                   <span class="at">sem =</span> sem_structure,</span>
+<span id="cb2-17"><a href="#cb2-17" tabindex="-1"></a>                   <span class="at">estimate_ou =</span> Grid[i,<span class="st">&#39;OU&#39;</span>],</span>
+<span id="cb2-18"><a href="#cb2-18" tabindex="-1"></a>                   <span class="at">estimate_lambda =</span> Grid[i,<span class="st">&#39;lambda&#39;</span>],</span>
+<span id="cb2-19"><a href="#cb2-19" tabindex="-1"></a>                   <span class="at">estimate_kappa =</span> Grid[i,<span class="st">&#39;kappa&#39;</span>],</span>
+<span id="cb2-20"><a href="#cb2-20" tabindex="-1"></a>                   <span class="at">quiet =</span> <span class="cn">TRUE</span> )</span>
+<span id="cb2-21"><a href="#cb2-21" tabindex="-1"></a>}</span>
+<span id="cb2-22"><a href="#cb2-22" tabindex="-1"></a></span>
+<span id="cb2-23"><a href="#cb2-23" tabindex="-1"></a><span class="co"># Extract AIC for each model and rank-order by parsimony</span></span>
+<span id="cb2-24"><a href="#cb2-24" tabindex="-1"></a>Grid<span class="sc">$</span>AIC <span class="ot">=</span> <span class="fu">sapply</span>( psem_grid, \(m) m<span class="sc">$</span>opt<span class="sc">$</span>AIC )</span>
+<span id="cb2-25"><a href="#cb2-25" tabindex="-1"></a>Grid <span class="ot">=</span> Grid[<span class="fu">order</span>(Grid<span class="sc">$</span>AIC,<span class="at">decreasing=</span><span class="cn">FALSE</span>),]</span>
+<span id="cb2-26"><a href="#cb2-26" tabindex="-1"></a></span>
+<span id="cb2-27"><a href="#cb2-27" tabindex="-1"></a><span class="co"># Select model with lowest AIC</span></span>
+<span id="cb2-28"><a href="#cb2-28" tabindex="-1"></a>psem_best <span class="ot">=</span> psem_grid[[<span class="fu">as.numeric</span>(<span class="fu">rownames</span>(Grid[<span class="dv">1</span>,]))]]</span></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="left">OU</th>
+<th align="left">lambda</th>
+<th align="left">kappa</th>
+<th align="right">AIC</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">FALSE</td>
+<td align="left">TRUE</td>
+<td align="left">TRUE</td>
+<td align="right">1552.940</td>
+</tr>
+<tr class="even">
+<td align="left">FALSE</td>
+<td align="left">TRUE</td>
+<td align="left">FALSE</td>
+<td align="right">1553.164</td>
+</tr>
+<tr class="odd">
+<td align="left">TRUE</td>
+<td align="left">TRUE</td>
+<td align="left">TRUE</td>
+<td align="right">1559.502</td>
+</tr>
+<tr class="even">
+<td align="left">TRUE</td>
+<td align="left">FALSE</td>
+<td align="left">TRUE</td>
+<td align="right">1561.424</td>
+</tr>
+<tr class="odd">
+<td align="left">TRUE</td>
+<td align="left">TRUE</td>
+<td align="left">FALSE</td>
+<td align="right">1563.372</td>
+</tr>
+<tr class="even">
+<td align="left">FALSE</td>
+<td align="left">FALSE</td>
+<td align="left">TRUE</td>
+<td align="right">1643.863</td>
+</tr>
+<tr class="odd">
+<td align="left">TRUE</td>
+<td align="left">FALSE</td>
+<td align="left">FALSE</td>
+<td align="right">1717.509</td>
+</tr>
+<tr class="even">
+<td align="left">FALSE</td>
+<td align="left">FALSE</td>
+<td align="left">FALSE</td>
+<td align="right">2358.137</td>
+</tr>
+</tbody>
+</table>
+<table>
+<colgroup>
+<col width="28%" />
+<col width="25%" />
+<col width="12%" />
+<col width="10%" />
+<col width="11%" />
+<col width="11%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">Path</th>
+<th align="left">VarName</th>
+<th align="right">Estimate</th>
+<th align="right">StdErr</th>
+<th align="right">t.value</th>
+<th align="right">p.value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">NA</td>
+<td align="left">Intercept_logM</td>
+<td align="right">1.668</td>
+<td align="right">0.318</td>
+<td align="right">5.250</td>
+<td align="right">0.000</td>
+</tr>
+<tr class="even">
+<td align="left">NA</td>
+<td align="left">Intercept_logK</td>
+<td align="right">-1.759</td>
+<td align="right">0.566</td>
+<td align="right">3.107</td>
+<td align="right">0.002</td>
+</tr>
+<tr class="odd">
+<td align="left">NA</td>
+<td align="left">Intercept_logtmax</td>
+<td align="right">-0.575</td>
+<td align="right">0.655</td>
+<td align="right">0.878</td>
+<td align="right">0.380</td>
+</tr>
+<tr class="even">
+<td align="left">NA</td>
+<td align="left">Intercept_logLinf</td>
+<td align="right">6.559</td>
+<td align="right">0.445</td>
+<td align="right">14.742</td>
+<td align="right">0.000</td>
+</tr>
+<tr class="odd">
+<td align="left">logK -&gt; logtmax</td>
+<td align="left">b1</td>
+<td align="right">-0.448</td>
+<td align="right">0.067</td>
+<td align="right">6.716</td>
+<td align="right">0.000</td>
+</tr>
+<tr class="even">
+<td align="left">logLinf -&gt; logtmax</td>
+<td align="left">b2</td>
+<td align="right">0.407</td>
+<td align="right">0.086</td>
+<td align="right">4.731</td>
+<td align="right">0.000</td>
+</tr>
+<tr class="odd">
+<td align="left">logtmax -&gt; logM</td>
+<td align="left">a</td>
+<td align="right">-1.022</td>
+<td align="right">0.037</td>
+<td align="right">27.732</td>
+<td align="right">0.000</td>
+</tr>
+<tr class="even">
+<td align="left">logM &lt;-&gt; logM</td>
+<td align="left">V[logM]</td>
+<td align="right">0.056</td>
+<td align="right">0.014</td>
+<td align="right">3.966</td>
+<td align="right">0.000</td>
+</tr>
+<tr class="odd">
+<td align="left">logK &lt;-&gt; logK</td>
+<td align="left">V[logK]</td>
+<td align="right">0.105</td>
+<td align="right">0.026</td>
+<td align="right">4.047</td>
+<td align="right">0.000</td>
+</tr>
+<tr class="even">
+<td align="left">logtmax &lt;-&gt; logtmax</td>
+<td align="left">V[logtmax]</td>
+<td align="right">0.078</td>
+<td align="right">0.019</td>
+<td align="right">4.029</td>
+<td align="right">0.000</td>
+</tr>
+<tr class="odd">
+<td align="left">logLinf &lt;-&gt; logLinf</td>
+<td align="left">V[logLinf]</td>
+<td align="right">0.082</td>
+<td align="right">0.020</td>
+<td align="right">4.122</td>
+<td align="right">0.000</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="visualizing-output" class="section level2">
+<h2>Visualizing output</h2>
+<p>Finally, we can convert output to formats from other packages, and
+use existing and third-party PCM packages to plot, query, and
+post-process output.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="co"># Plot path diagram</span></span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a>my_fitted_DAG <span class="ot">=</span> <span class="fu">as_fitted_DAG</span>(psem_best)</span>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a><span class="fu">plot</span>(my_fitted_DAG, <span class="at">type=</span><span class="st">&quot;color&quot;</span>)</span></code></pre></div>
+<p><img src="data:image/png;base64,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" /><!-- --></p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a></span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a><span class="co"># Total, direct, and indirect effects</span></span>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a>my_sem <span class="ot">=</span> <span class="fu">as_sem</span>(psem_best)</span>
+<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a><span class="fu">effects</span>(my_sem)</span>
+<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a><span class="co">#&gt;  Total Effects (column on row)</span></span>
+<span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a><span class="co">#&gt;               logK   logtmax    logLinf</span></span>
+<span id="cb4-8"><a href="#cb4-8" tabindex="-1"></a><span class="co">#&gt; logtmax -0.4480233  0.000000  0.4073488</span></span>
+<span id="cb4-9"><a href="#cb4-9" tabindex="-1"></a><span class="co">#&gt; logM     0.4579994 -1.022267 -0.4164192</span></span>
+<span id="cb4-10"><a href="#cb4-10" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb4-11"><a href="#cb4-11" tabindex="-1"></a><span class="co">#&gt;  Direct Effects</span></span>
+<span id="cb4-12"><a href="#cb4-12" tabindex="-1"></a><span class="co">#&gt;               logK   logtmax   logLinf</span></span>
+<span id="cb4-13"><a href="#cb4-13" tabindex="-1"></a><span class="co">#&gt; logtmax -0.4480233  0.000000 0.4073488</span></span>
+<span id="cb4-14"><a href="#cb4-14" tabindex="-1"></a><span class="co">#&gt; logM     0.0000000 -1.022267 0.0000000</span></span>
+<span id="cb4-15"><a href="#cb4-15" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb4-16"><a href="#cb4-16" tabindex="-1"></a><span class="co">#&gt;  Indirect Effects</span></span>
+<span id="cb4-17"><a href="#cb4-17" tabindex="-1"></a><span class="co">#&gt;              logK logtmax    logLinf</span></span>
+<span id="cb4-18"><a href="#cb4-18" tabindex="-1"></a><span class="co">#&gt; logtmax 0.0000000       0  0.0000000</span></span>
+<span id="cb4-19"><a href="#cb4-19" tabindex="-1"></a><span class="co">#&gt; logM    0.4579994       0 -0.4164192</span></span></code></pre></div>
+<p>We also show how to plot output using phylosignal, although it is
+currently unavailable on CRAN and therefore commented out:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="co"># Load for plotting,</span></span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a><span class="co"># requireNamespace(&quot;phylosignal&quot;,quietly=TRUE)</span></span>
+<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a><span class="co"># https://r-pkgs.org/vignettes.html#sec-vignettes-eval-option</span></span>
+<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a><span class="co">#library(phylosignal)</span></span>
+<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a></span>
+<span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a><span class="co"># Plot using phylobase</span></span>
+<span id="cb5-7"><a href="#cb5-7" tabindex="-1"></a><span class="co">#my_phylo4d = as_phylo4d( psem_best )</span></span>
+<span id="cb5-8"><a href="#cb5-8" tabindex="-1"></a><span class="co">#barplot(my_phylo4d)</span></span></code></pre></div>
+</div>
+<div id="sensitivity-to-using-taxonomic-tree" class="section level2">
+<h2>Sensitivity to using taxonomic tree</h2>
+<p>After analysis, we can also conduct sensivity analyses. Here, we show
+how to construct a taxonomic tree and use this in place of phylogenetic
+information. As before, this requires some code to reformat the data and
+then the statistical analysis is simple to specify. The estimated path
+coefficients are very similar to estimates when using phyogeny.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="fu">library</span>(ape)</span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a>Data <span class="ot">=</span> Mlifehist_ver1_0</span>
+<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a><span class="co"># Make taxonomic factors</span></span>
+<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a>Data<span class="sc">$</span>Genus_species <span class="ot">=</span> <span class="fu">factor</span>( <span class="fu">paste0</span>(Data<span class="sc">$</span>Genus, <span class="st">&quot;_&quot;</span>, Data<span class="sc">$</span>Species) )</span>
+<span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a>Data<span class="sc">$</span>Genus <span class="ot">=</span> <span class="fu">factor</span>( Data<span class="sc">$</span>Genus )</span>
+<span id="cb6-7"><a href="#cb6-7" tabindex="-1"></a>Data<span class="sc">$</span>Family <span class="ot">=</span> <span class="fu">factor</span>( Data<span class="sc">$</span>Family )</span>
+<span id="cb6-8"><a href="#cb6-8" tabindex="-1"></a>Data<span class="sc">$</span>Order <span class="ot">=</span> <span class="fu">factor</span>( Data<span class="sc">$</span>Order )</span>
+<span id="cb6-9"><a href="#cb6-9" tabindex="-1"></a></span>
+<span id="cb6-10"><a href="#cb6-10" tabindex="-1"></a><span class="co"># Make taxonomic tree</span></span>
+<span id="cb6-11"><a href="#cb6-11" tabindex="-1"></a>tree <span class="ot">=</span> ape<span class="sc">::</span><span class="fu">as.phylo</span>( <span class="sc">~</span>Order<span class="sc">/</span>Family<span class="sc">/</span>Genus<span class="sc">/</span>Genus_species, <span class="at">data=</span>Data, <span class="at">collapse=</span><span class="cn">FALSE</span>)</span>
+<span id="cb6-12"><a href="#cb6-12" tabindex="-1"></a>tree<span class="sc">$</span>edge.length <span class="ot">=</span> <span class="fu">rep</span>(<span class="dv">1</span>,<span class="fu">nrow</span>(tree<span class="sc">$</span>edge))</span>
+<span id="cb6-13"><a href="#cb6-13" tabindex="-1"></a>tree <span class="ot">=</span> <span class="fu">collapse.singles</span>(tree)</span>
+<span id="cb6-14"><a href="#cb6-14" tabindex="-1"></a>tmp <span class="ot">=</span> <span class="fu">root</span>(tree, <span class="at">node=</span>ape<span class="sc">::</span><span class="fu">Ntip</span>(tree)<span class="sc">+</span><span class="dv">1</span> )</span>
+<span id="cb6-15"><a href="#cb6-15" tabindex="-1"></a></span>
+<span id="cb6-16"><a href="#cb6-16" tabindex="-1"></a><span class="co"># Drop duplicates ... not dealing with variation among stocks within species</span></span>
+<span id="cb6-17"><a href="#cb6-17" tabindex="-1"></a>Data <span class="ot">=</span> Data[<span class="fu">match</span>(<span class="fu">unique</span>(Data<span class="sc">$</span>Genus_species),Data<span class="sc">$</span>Genus_species), ]</span>
+<span id="cb6-18"><a href="#cb6-18" tabindex="-1"></a></span>
+<span id="cb6-19"><a href="#cb6-19" tabindex="-1"></a><span class="co"># log-transform to simplify later syuntax</span></span>
+<span id="cb6-20"><a href="#cb6-20" tabindex="-1"></a>Data <span class="ot">=</span> <span class="fu">cbind</span>( Data, <span class="st">&quot;logM&quot;</span> <span class="ot">=</span> <span class="fu">log</span>(Data[,<span class="st">&#39;M&#39;</span>]),</span>
+<span id="cb6-21"><a href="#cb6-21" tabindex="-1"></a>                    <span class="st">&quot;logK&quot;</span> <span class="ot">=</span> <span class="fu">log</span>(Data[,<span class="st">&#39;K&#39;</span>]),</span>
+<span id="cb6-22"><a href="#cb6-22" tabindex="-1"></a>                    <span class="st">&quot;logtmax&quot;</span> <span class="ot">=</span> <span class="fu">log</span>(Data[,<span class="st">&#39;tmax&#39;</span>]),</span>
+<span id="cb6-23"><a href="#cb6-23" tabindex="-1"></a>                    <span class="st">&quot;logLinf&quot;</span> <span class="ot">=</span> <span class="fu">log</span>(Data[,<span class="st">&#39;Linf&#39;</span>]) )</span>
+<span id="cb6-24"><a href="#cb6-24" tabindex="-1"></a></span>
+<span id="cb6-25"><a href="#cb6-25" tabindex="-1"></a><span class="co"># Only include modeled variables in trait-data passed to phylosem</span></span>
+<span id="cb6-26"><a href="#cb6-26" tabindex="-1"></a><span class="fu">rownames</span>(Data) <span class="ot">=</span> Data<span class="sc">$</span>Genus_species</span>
+<span id="cb6-27"><a href="#cb6-27" tabindex="-1"></a>Data <span class="ot">=</span> Data[,<span class="fu">c</span>(<span class="st">&#39;logM&#39;</span>,<span class="st">&#39;logK&#39;</span>,<span class="st">&#39;logtmax&#39;</span>,<span class="st">&#39;logLinf&#39;</span>)]</span>
+<span id="cb6-28"><a href="#cb6-28" tabindex="-1"></a></span>
+<span id="cb6-29"><a href="#cb6-29" tabindex="-1"></a><span class="co"># Fit model</span></span>
+<span id="cb6-30"><a href="#cb6-30" tabindex="-1"></a>psem_taxon <span class="ot">=</span> <span class="fu">phylosem</span>( <span class="at">data=</span>Data,</span>
+<span id="cb6-31"><a href="#cb6-31" tabindex="-1"></a>                 <span class="at">tree =</span> tree,</span>
+<span id="cb6-32"><a href="#cb6-32" tabindex="-1"></a>                 <span class="at">sem =</span> sem_structure,</span>
+<span id="cb6-33"><a href="#cb6-33" tabindex="-1"></a>                 <span class="at">estimate_ou =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb6-34"><a href="#cb6-34" tabindex="-1"></a>                 <span class="at">quiet =</span> <span class="cn">TRUE</span> )</span>
+<span id="cb6-35"><a href="#cb6-35" tabindex="-1"></a></span>
+<span id="cb6-36"><a href="#cb6-36" tabindex="-1"></a><span class="co"># Plot path diagram</span></span>
+<span id="cb6-37"><a href="#cb6-37" tabindex="-1"></a>my_fitted_DAG <span class="ot">=</span> <span class="fu">as_fitted_DAG</span>(psem_taxon)</span>
+<span id="cb6-38"><a href="#cb6-38" tabindex="-1"></a><span class="fu">plot</span>(my_fitted_DAG, <span class="at">type=</span><span class="st">&quot;color&quot;</span>)</span></code></pre></div>
+<p><img src="data:image/png;base64,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" /><!-- --></p>
+</div>
+
+
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

@@ -72,9 +72,9 @@
 #' **Introducing the package, its features, and comparison with other software
 #' (to cite when using phylosem):**
 #'
-#' Thorson, J. T., & van der Bijl, W. (In revision). phylosem: A fast and simple
+#' Thorson, J. T., & van der Bijl, W. (In press). phylosem: A fast and simple
 #' R package for phylogenetic inference and trait imputation using phylogenetic
-#' structural equation models.
+#' structural equation models. Journal of Evolutionary Biology.
 #'
 #' *Statistical methods for phylogenetic structural equation models*
 #'
@@ -347,12 +347,12 @@ function( sem,
                         random = tmb_inputs$random,
                         DLL = "phylosem" )
   if(quiet==FALSE) list_parameters(obj)
-  results = list( data=data,
-                  SEM_model=SEM_model,
-                  obj=obj,
-                  call=match.call(),
-                  tree=tree,
-                  tmb_inputs=tmb_inputs )
+  results = list( "data" = data,
+                  "SEM_model" = SEM_model,
+                  "obj" = obj,
+                  "call" = match.call(),
+                  "tree" = tree,
+                  "tmb_inputs" = tmb_inputs )
 
   # Export stuff
   if( run_model==FALSE ){
@@ -421,19 +421,59 @@ coef.phylosem = function( object, standardized=FALSE, ... ){
   return( data.frame(Path=object$SEM_model[,1], Parameter=object$SEM_model[,2], Estimate=SEM_params ) )
 }
 
-#' Calculate AIC
+#' Extract Variance-Covariance Matrix
 #'
-#' @inheritParams TMBAIC
+#' extract the covariance of fixed effects, or both fixed and random effects.
 #'
-#' @title Calculate Akaike Information Criterion from marginal likelihood
-#'
-#' @param object Output from \code{\link{phylosem}}
-#' @param ... Not used
-#' @return Akaike Information Criterion
-#' @method AIC phylosem
+#' @param object output from \code{phylosem}
+#' @param which whether to extract the covariance among fixed effects, random effects, or both
+#' @param ... ignored, for method compatibility
+#' @importFrom stats vcov
+#' @method vcov phylosem
 #' @export
-AIC.phylosem = function( object, ..., k = 2 ){
-  return( TMBAIC(object$opt, ..., k=k) )
+vcov.phylosem <-
+function( object,
+          which = c("fixed", "random", "both"),
+          ...) {
+
+  which = match.arg(which)
+
+  if( which=="fixed" ){
+    V = object$opt$SD$cov.fixed
+    if(is.null(V)){
+      warning("Please re-run `phylosem` with `getsd=TRUE`, or confirm that the model is converged")
+    }
+  }
+  if( which=="random" ){
+    V = solve(object$obj$env$spHess(random=TRUE))
+  }
+  if( which=="both" ){
+    H = object$opt$SD$jointPrecision
+    if(is.null(H)){
+      warning("Please re-run `phylosem` with `getsd=TRUE` and `getJointPrecision=TRUE`, or confirm that the model is converged")
+      V = NULL
+    }else{
+      V = solve(H)
+    }
+  }
+
+  return( V )
+}
+
+# Extract the (marginal) log-likelihood of a phylosem model
+#
+# @return object of class \code{logLik} with attributes
+#   \item{val}{log-likelihood}
+#   \item{df}{number of parameters}
+#' @importFrom stats logLik
+#' @export
+logLik.phylosem <- function(object, ...) {
+  val = -1 * object$opt$objective
+  df = length( object$opt$par )
+  out = structure( val,
+             df = df,
+             class = "logLik")
+  return(out)
 }
 
 #' summarize phylosem
