@@ -1,3 +1,8 @@
+# phylosem 1.1.1
+* Re-adding `phylosignal` as SUGGESTS
+* Re-adding `phylosignal` to Fisheries vignette
+* adding arguemnt `what` to `as_phylo4d` to allow easy extraction of standard errors
+
 # phylosem 1.1.0
 
 * Adding new S3 generic functions: logLik and vcov

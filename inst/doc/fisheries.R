@@ -3,6 +3,8 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
 )
+# To isntall
+#    devtools::install_local( R'(C:\Users\James.Thorson\Desktop\Git\phylosem)', force=TRUE )
 # To test build:
 #   setwd( R'(C:\Users\James.Thorson\Desktop\Git\phylosem)' ); devtools::build_rmd("vignettes/fisheries.Rmd")
 # To build PDF: 
@@ -93,15 +95,14 @@ plot(my_fitted_DAG, type="color")
 my_sem = as_sem(psem_best)
 effects(my_sem)
 
-## ----eval=FALSE, echo=TRUE, message=FALSE, fig.width=6, fig.height=8----------
-#  # Load for plotting,
-#  # requireNamespace("phylosignal",quietly=TRUE)
-#  # https://r-pkgs.org/vignettes.html#sec-vignettes-eval-option
-#  #library(phylosignal)
-#  
-#  # Plot using phylobase
-#  #my_phylo4d = as_phylo4d( psem_best )
-#  #barplot(my_phylo4d)
+## ----eval=requireNamespace("phylosignal",quietly=TRUE), echo=TRUE, message=FALSE, fig.width=6, fig.height=8----
+# Load for plotting,
+# https://r-pkgs.org/vignettes.html#sec-vignettes-eval-option
+library(phylosignal)
+
+# Plot using phylobase
+my_phylo4d = as_phylo4d( psem_best )
+barplot(my_phylo4d)
 
 ## ----echo=TRUE, results='hide', message=FALSE, fig.width=4, fig.height=4------
 library(ape)

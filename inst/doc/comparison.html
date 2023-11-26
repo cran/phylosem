@@ -343,8 +343,7 @@ packages</h1>
 
 
 
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">library</span>(phylosem)</span>
-<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="co">#&gt; Loading required package: TMB</span></span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">library</span>(phylosem)</span></code></pre></div>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="fu">message</span>(<span class="st">&quot;Must install ggplot2, phylopath, phylolm, ape&quot;</span>)</span></code></pre></div>
 <p><code>phylosem</code> is an R package for fitting phylogenetic
 structural equation models (PSEMs). The package generalizes features in
@@ -416,7 +415,7 @@ are nearly identical for BM, OU, delta, and kappa models.</p>
 <span id="cb3-22"><a href="#cb3-22" tabindex="-1"></a>start_time <span class="ot">=</span> <span class="fu">Sys.time</span>()</span>
 <span id="cb3-23"><a href="#cb3-23" tabindex="-1"></a>plm_bm <span class="ot">=</span> phylolm<span class="sc">::</span><span class="fu">phylolm</span>(y <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> x, <span class="at">data=</span>Data, <span class="at">phy=</span>tree, <span class="at">model=</span><span class="st">&quot;BM&quot;</span> )</span>
 <span id="cb3-24"><a href="#cb3-24" tabindex="-1"></a><span class="fu">Sys.time</span>() <span class="sc">-</span> start_time</span>
-<span id="cb3-25"><a href="#cb3-25" tabindex="-1"></a><span class="co">#&gt; Time difference of 0.004616976 secs</span></span>
+<span id="cb3-25"><a href="#cb3-25" tabindex="-1"></a><span class="co">#&gt; Time difference of 0.004724026 secs</span></span>
 <span id="cb3-26"><a href="#cb3-26" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">summary</span>(plm_bm)<span class="sc">$</span>coefficients, <span class="at">digits=</span><span class="dv">3</span>)</span></code></pre></div>
 <table>
 <thead>
@@ -451,9 +450,22 @@ are nearly identical for BM, OU, delta, and kappa models.</p>
 <span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a>          <span class="at">data =</span> Data,</span>
 <span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a>          <span class="at">tree =</span> tree,</span>
 <span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a>          <span class="at">quiet =</span> <span class="cn">TRUE</span> )</span>
-<span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a><span class="fu">Sys.time</span>() <span class="sc">-</span> start_time</span>
-<span id="cb4-8"><a href="#cb4-8" tabindex="-1"></a><span class="co">#&gt; Time difference of 0.1506369 secs</span></span>
-<span id="cb4-9"><a href="#cb4-9" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">summary</span>(psem_bm)<span class="sc">$</span>coefficients, <span class="at">digits=</span><span class="dv">3</span>)</span></code></pre></div>
+<span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a><span class="co">#&gt; Constructing atomic set_dependent</span></span>
+<span id="cb4-8"><a href="#cb4-8" tabindex="-1"></a><span class="co">#&gt; Constructing atomic envir_lookup_by_name</span></span>
+<span id="cb4-9"><a href="#cb4-9" tabindex="-1"></a><span class="co">#&gt; Constructing atomic list_lookup_by_name</span></span>
+<span id="cb4-10"><a href="#cb4-10" tabindex="-1"></a><span class="co">#&gt; Constructing atomic sexp_to_vector</span></span>
+<span id="cb4-11"><a href="#cb4-11" tabindex="-1"></a><span class="co">#&gt; Constructing atomic matinv</span></span>
+<span id="cb4-12"><a href="#cb4-12" tabindex="-1"></a><span class="co">#&gt; Constructing atomic invpd</span></span>
+<span id="cb4-13"><a href="#cb4-13" tabindex="-1"></a><span class="co">#&gt; Constructing atomic set_dependent</span></span>
+<span id="cb4-14"><a href="#cb4-14" tabindex="-1"></a><span class="co">#&gt; Constructing atomic envir_lookup_by_name</span></span>
+<span id="cb4-15"><a href="#cb4-15" tabindex="-1"></a><span class="co">#&gt; Constructing atomic list_lookup_by_name</span></span>
+<span id="cb4-16"><a href="#cb4-16" tabindex="-1"></a><span class="co">#&gt; Constructing atomic sexp_to_vector</span></span>
+<span id="cb4-17"><a href="#cb4-17" tabindex="-1"></a><span class="co">#&gt; Constructing atomic matinv</span></span>
+<span id="cb4-18"><a href="#cb4-18" tabindex="-1"></a><span class="co">#&gt; Constructing atomic invpd</span></span>
+<span id="cb4-19"><a href="#cb4-19" tabindex="-1"></a><span class="co">#&gt; Constructing atomic matmul</span></span>
+<span id="cb4-20"><a href="#cb4-20" tabindex="-1"></a><span class="fu">Sys.time</span>() <span class="sc">-</span> start_time</span>
+<span id="cb4-21"><a href="#cb4-21" tabindex="-1"></a><span class="co">#&gt; Time difference of 0.1753399 secs</span></span>
+<span id="cb4-22"><a href="#cb4-22" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">summary</span>(psem_bm)<span class="sc">$</span>coefficients, <span class="at">digits=</span><span class="dv">3</span>)</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -513,7 +525,7 @@ are nearly identical for BM, OU, delta, and kappa models.</p>
 <span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a>start_time <span class="ot">=</span> <span class="fu">Sys.time</span>()</span>
 <span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a>plm_ou <span class="ot">=</span> phylolm<span class="sc">::</span><span class="fu">phylolm</span>(y <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> x, <span class="at">data=</span>Data, <span class="at">phy=</span>tree, <span class="at">model=</span><span class="st">&quot;OUrandomRoot&quot;</span> )</span>
 <span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a><span class="fu">Sys.time</span>() <span class="sc">-</span> start_time</span>
-<span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a><span class="co">#&gt; Time difference of 0.008867025 secs</span></span>
+<span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a><span class="co">#&gt; Time difference of 0.008201838 secs</span></span>
 <span id="cb5-7"><a href="#cb5-7" tabindex="-1"></a></span>
 <span id="cb5-8"><a href="#cb5-8" tabindex="-1"></a>start_time <span class="ot">=</span> <span class="fu">Sys.time</span>()</span>
 <span id="cb5-9"><a href="#cb5-9" tabindex="-1"></a>psem_ou <span class="ot">=</span> <span class="fu">phylosem</span>( <span class="at">sem =</span> <span class="st">&quot;x -&gt; y, p&quot;</span>,</span>
@@ -522,7 +534,7 @@ are nearly identical for BM, OU, delta, and kappa models.</p>
 <span id="cb5-12"><a href="#cb5-12" tabindex="-1"></a>          <span class="at">estimate_ou =</span> <span class="cn">TRUE</span>,</span>
 <span id="cb5-13"><a href="#cb5-13" tabindex="-1"></a>          <span class="at">quiet =</span> <span class="cn">TRUE</span> )</span>
 <span id="cb5-14"><a href="#cb5-14" tabindex="-1"></a><span class="fu">Sys.time</span>() <span class="sc">-</span> start_time</span>
-<span id="cb5-15"><a href="#cb5-15" tabindex="-1"></a><span class="co">#&gt; Time difference of 0.191745 secs</span></span>
+<span id="cb5-15"><a href="#cb5-15" tabindex="-1"></a><span class="co">#&gt; Time difference of 0.2399001 secs</span></span>
 <span id="cb5-16"><a href="#cb5-16" tabindex="-1"></a></span>
 <span id="cb5-17"><a href="#cb5-17" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">summary</span>(psem_ou)<span class="sc">$</span>coefficients, <span class="at">digits=</span><span class="dv">3</span>)</span></code></pre></div>
 <table>
@@ -632,7 +644,7 @@ are nearly identical for BM, OU, delta, and kappa models.</p>
 <span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a>start_time <span class="ot">=</span> <span class="fu">Sys.time</span>()</span>
 <span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a>plm_lambda <span class="ot">=</span> phylolm<span class="sc">::</span><span class="fu">phylolm</span>(y <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> x, <span class="at">data=</span>Data, <span class="at">phy=</span>tree, <span class="at">model=</span><span class="st">&quot;lambda&quot;</span> )</span>
 <span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a><span class="fu">Sys.time</span>() <span class="sc">-</span> start_time</span>
-<span id="cb8-6"><a href="#cb8-6" tabindex="-1"></a><span class="co">#&gt; Time difference of 0.1579139 secs</span></span>
+<span id="cb8-6"><a href="#cb8-6" tabindex="-1"></a><span class="co">#&gt; Time difference of 0.01378608 secs</span></span>
 <span id="cb8-7"><a href="#cb8-7" tabindex="-1"></a></span>
 <span id="cb8-8"><a href="#cb8-8" tabindex="-1"></a>start_time <span class="ot">=</span> <span class="fu">Sys.time</span>()</span>
 <span id="cb8-9"><a href="#cb8-9" tabindex="-1"></a>psem_lambda <span class="ot">=</span> <span class="fu">phylosem</span>( <span class="at">sem =</span> <span class="st">&quot;x -&gt; y, p&quot;</span>,</span>
@@ -641,7 +653,7 @@ are nearly identical for BM, OU, delta, and kappa models.</p>
 <span id="cb8-12"><a href="#cb8-12" tabindex="-1"></a>          <span class="at">estimate_lambda =</span> <span class="cn">TRUE</span>,</span>
 <span id="cb8-13"><a href="#cb8-13" tabindex="-1"></a>          <span class="at">quiet =</span> <span class="cn">TRUE</span> )</span>
 <span id="cb8-14"><a href="#cb8-14" tabindex="-1"></a><span class="fu">Sys.time</span>() <span class="sc">-</span> start_time</span>
-<span id="cb8-15"><a href="#cb8-15" tabindex="-1"></a><span class="co">#&gt; Time difference of 0.0991559 secs</span></span>
+<span id="cb8-15"><a href="#cb8-15" tabindex="-1"></a><span class="co">#&gt; Time difference of 0.173723 secs</span></span>
 <span id="cb8-16"><a href="#cb8-16" tabindex="-1"></a></span>
 <span id="cb8-17"><a href="#cb8-17" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">summary</span>(psem_lambda)<span class="sc">$</span>coefficients, <span class="at">digits=</span><span class="dv">3</span>)</span></code></pre></div>
 <table>
@@ -751,7 +763,7 @@ are nearly identical for BM, OU, delta, and kappa models.</p>
 <span id="cb11-3"><a href="#cb11-3" tabindex="-1"></a>start_time <span class="ot">=</span> <span class="fu">Sys.time</span>()</span>
 <span id="cb11-4"><a href="#cb11-4" tabindex="-1"></a>plm_kappa <span class="ot">=</span> phylolm<span class="sc">::</span><span class="fu">phylolm</span>(y <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> x, <span class="at">data=</span>Data, <span class="at">phy=</span>tree, <span class="at">model=</span><span class="st">&quot;kappa&quot;</span>, <span class="at">lower.bound =</span> <span class="dv">0</span>, <span class="at">upper.bound =</span> <span class="dv">3</span> )</span>
 <span id="cb11-5"><a href="#cb11-5" tabindex="-1"></a><span class="fu">Sys.time</span>() <span class="sc">-</span> start_time</span>
-<span id="cb11-6"><a href="#cb11-6" tabindex="-1"></a><span class="co">#&gt; Time difference of 0.004752874 secs</span></span>
+<span id="cb11-6"><a href="#cb11-6" tabindex="-1"></a><span class="co">#&gt; Time difference of 0.00476408 secs</span></span>
 <span id="cb11-7"><a href="#cb11-7" tabindex="-1"></a></span>
 <span id="cb11-8"><a href="#cb11-8" tabindex="-1"></a>start_time <span class="ot">=</span> <span class="fu">Sys.time</span>()</span>
 <span id="cb11-9"><a href="#cb11-9" tabindex="-1"></a>psem_kappa <span class="ot">=</span> <span class="fu">phylosem</span>( <span class="at">sem =</span> <span class="st">&quot;x -&gt; y, p&quot;</span>,</span>
@@ -760,7 +772,7 @@ are nearly identical for BM, OU, delta, and kappa models.</p>
 <span id="cb11-12"><a href="#cb11-12" tabindex="-1"></a>          <span class="at">estimate_kappa =</span> <span class="cn">TRUE</span>,</span>
 <span id="cb11-13"><a href="#cb11-13" tabindex="-1"></a>          <span class="at">quiet =</span> <span class="cn">TRUE</span> )</span>
 <span id="cb11-14"><a href="#cb11-14" tabindex="-1"></a><span class="fu">Sys.time</span>() <span class="sc">-</span> start_time</span>
-<span id="cb11-15"><a href="#cb11-15" tabindex="-1"></a><span class="co">#&gt; Time difference of 0.09192896 secs</span></span>
+<span id="cb11-15"><a href="#cb11-15" tabindex="-1"></a><span class="co">#&gt; Time difference of 0.177259 secs</span></span>
 <span id="cb11-16"><a href="#cb11-16" tabindex="-1"></a></span>
 <span id="cb11-17"><a href="#cb11-17" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">summary</span>(psem_kappa)<span class="sc">$</span>coefficients, <span class="at">digits=</span><span class="dv">3</span>)</span></code></pre></div>
 <table>
@@ -1049,7 +1061,6 @@ vignettes for <code>phylosem</code>:</p>
 <span id="cb17-29"><a href="#cb17-29" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
 <span id="cb17-30"><a href="#cb17-30" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.grid.major.x =</span> <span class="fu">element_line</span>(), <span class="at">panel.grid.minor.x =</span> <span class="fu">element_line</span>())</span>
 <span id="cb17-31"><a href="#cb17-31" tabindex="-1"></a><span class="fu">saveRDS</span>( figure, <span class="at">file=</span><span class="fu">file.path</span>(R<span class="st">&#39;(C:\Users\James.Thorson\Desktop\Git\phylosem</span><span class="sc">\v</span><span class="st">ignettes)&#39;</span>,<span class="st">&quot;brms.RDS&quot;</span>) )</span></code></pre></div>
-<pre><code>#&gt; Warning: package &#39;ggplot2&#39; was built under R version 4.3.1</code></pre>
 <p><img src="data:image/png;base64,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" width="75%" /></p>
 <p>In this instance (and in others we have explored), results from
 <code>phylolm::phyloglm</code> are generally different while those from
@@ -1063,57 +1074,57 @@ PGLM. We again compare <code>phylosem</code> against
 <code>phyr::pglmm_compare</code>, and do not explore threshold models
 which we expect to give different results due differences in assumptions
 about how latent variables affect measurements.</p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" tabindex="-1"></a><span class="co"># Settings</span></span>
-<span id="cb19-2"><a href="#cb19-2" tabindex="-1"></a>Ntree <span class="ot">=</span> <span class="dv">100</span></span>
-<span id="cb19-3"><a href="#cb19-3" tabindex="-1"></a>sd_x <span class="ot">=</span> <span class="fl">0.3</span></span>
-<span id="cb19-4"><a href="#cb19-4" tabindex="-1"></a>sd_y <span class="ot">=</span> <span class="fl">0.3</span></span>
-<span id="cb19-5"><a href="#cb19-5" tabindex="-1"></a>b0_x <span class="ot">=</span> <span class="dv">1</span></span>
-<span id="cb19-6"><a href="#cb19-6" tabindex="-1"></a>b0_y <span class="ot">=</span> <span class="dv">0</span></span>
-<span id="cb19-7"><a href="#cb19-7" tabindex="-1"></a>b_xy <span class="ot">=</span> <span class="dv">1</span></span>
-<span id="cb19-8"><a href="#cb19-8" tabindex="-1"></a></span>
-<span id="cb19-9"><a href="#cb19-9" tabindex="-1"></a><span class="co"># Simulate tree</span></span>
-<span id="cb19-10"><a href="#cb19-10" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
-<span id="cb19-11"><a href="#cb19-11" tabindex="-1"></a>tree <span class="ot">=</span> ape<span class="sc">::</span><span class="fu">rtree</span>(<span class="at">n=</span>Ntree)</span>
-<span id="cb19-12"><a href="#cb19-12" tabindex="-1"></a></span>
-<span id="cb19-13"><a href="#cb19-13" tabindex="-1"></a><span class="co"># Simulate data</span></span>
-<span id="cb19-14"><a href="#cb19-14" tabindex="-1"></a>x <span class="ot">=</span> b0_x <span class="sc">+</span> sd_x <span class="sc">*</span> phylolm<span class="sc">::</span><span class="fu">rTrait</span>(<span class="at">n =</span> <span class="dv">1</span>, <span class="at">phy=</span>tree)</span>
-<span id="cb19-15"><a href="#cb19-15" tabindex="-1"></a>ybar <span class="ot">=</span> b0_y <span class="sc">+</span> b_xy<span class="sc">*</span>x</span>
-<span id="cb19-16"><a href="#cb19-16" tabindex="-1"></a>y_normal <span class="ot">=</span> ybar <span class="sc">+</span> sd_y <span class="sc">*</span> phylolm<span class="sc">::</span><span class="fu">rTrait</span>(<span class="at">n =</span> <span class="dv">1</span>, <span class="at">phy=</span>tree)</span>
-<span id="cb19-17"><a href="#cb19-17" tabindex="-1"></a>y_binom <span class="ot">=</span> <span class="fu">rbinom</span>( <span class="at">n=</span>Ntree, <span class="at">size=</span><span class="dv">1</span>, <span class="at">prob=</span><span class="fu">plogis</span>(y_normal) )</span>
-<span id="cb19-18"><a href="#cb19-18" tabindex="-1"></a></span>
-<span id="cb19-19"><a href="#cb19-19" tabindex="-1"></a><span class="co"># Construct, re-order, and reduce data</span></span>
-<span id="cb19-20"><a href="#cb19-20" tabindex="-1"></a>Data <span class="ot">=</span> <span class="fu">data.frame</span>(<span class="at">x=</span>x,<span class="at">y=</span>y_binom)</span>
-<span id="cb19-21"><a href="#cb19-21" tabindex="-1"></a></span>
-<span id="cb19-22"><a href="#cb19-22" tabindex="-1"></a><span class="co">#</span></span>
-<span id="cb19-23"><a href="#cb19-23" tabindex="-1"></a>pglmm <span class="ot">=</span> phyr<span class="sc">::</span><span class="fu">pglmm_compare</span>(</span>
-<span id="cb19-24"><a href="#cb19-24" tabindex="-1"></a>  y <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> x,</span>
-<span id="cb19-25"><a href="#cb19-25" tabindex="-1"></a>  <span class="at">family =</span> <span class="st">&quot;binomial&quot;</span>,</span>
-<span id="cb19-26"><a href="#cb19-26" tabindex="-1"></a>  <span class="at">data =</span> Data,</span>
-<span id="cb19-27"><a href="#cb19-27" tabindex="-1"></a>  <span class="at">phy =</span> tree )</span>
-<span id="cb19-28"><a href="#cb19-28" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">summary</span>(pglmm), <span class="at">digits=</span><span class="dv">3</span>)</span>
-<span id="cb19-29"><a href="#cb19-29" tabindex="-1"></a><span class="co">#&gt; Generalized linear mixed model for binomial data fit by restricted maximum likelihood</span></span>
-<span id="cb19-30"><a href="#cb19-30" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb19-31"><a href="#cb19-31" tabindex="-1"></a><span class="co">#&gt; Call:y ~ 1 + x</span></span>
-<span id="cb19-32"><a href="#cb19-32" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb19-33"><a href="#cb19-33" tabindex="-1"></a><span class="co">#&gt; logLik    AIC    BIC </span></span>
-<span id="cb19-34"><a href="#cb19-34" tabindex="-1"></a><span class="co">#&gt; -63.74 135.47 141.32 </span></span>
-<span id="cb19-35"><a href="#cb19-35" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb19-36"><a href="#cb19-36" tabindex="-1"></a><span class="co">#&gt; Phylogenetic random effects variance (s2):</span></span>
-<span id="cb19-37"><a href="#cb19-37" tabindex="-1"></a><span class="co">#&gt;    Variance Std.Dev</span></span>
-<span id="cb19-38"><a href="#cb19-38" tabindex="-1"></a><span class="co">#&gt; s2   0.1076   0.328</span></span>
-<span id="cb19-39"><a href="#cb19-39" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb19-40"><a href="#cb19-40" tabindex="-1"></a><span class="co">#&gt; Fixed effects:</span></span>
-<span id="cb19-41"><a href="#cb19-41" tabindex="-1"></a><span class="co">#&gt;               Value Std.Error Zscore Pvalue</span></span>
-<span id="cb19-42"><a href="#cb19-42" tabindex="-1"></a><span class="co">#&gt; (Intercept) 0.23179   0.60507 0.3831 0.7017</span></span>
-<span id="cb19-43"><a href="#cb19-43" tabindex="-1"></a><span class="co">#&gt; x           0.44548   0.45708 0.9746 0.3297</span></span></code></pre></div>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" tabindex="-1"></a></span>
-<span id="cb20-2"><a href="#cb20-2" tabindex="-1"></a><span class="co">#</span></span>
-<span id="cb20-3"><a href="#cb20-3" tabindex="-1"></a>pgsem <span class="ot">=</span> <span class="fu">phylosem</span>( <span class="at">sem =</span> <span class="st">&quot;x -&gt; y, p&quot;</span>,</span>
-<span id="cb20-4"><a href="#cb20-4" tabindex="-1"></a>          <span class="at">data =</span> Data,</span>
-<span id="cb20-5"><a href="#cb20-5" tabindex="-1"></a>          <span class="at">family =</span> <span class="fu">c</span>(<span class="st">&quot;fixed&quot;</span>,<span class="st">&quot;binomial&quot;</span>),</span>
-<span id="cb20-6"><a href="#cb20-6" tabindex="-1"></a>          <span class="at">tree =</span> tree,</span>
-<span id="cb20-7"><a href="#cb20-7" tabindex="-1"></a>          <span class="at">quiet =</span> <span class="cn">TRUE</span> )</span>
-<span id="cb20-8"><a href="#cb20-8" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">summary</span>(pgsem)<span class="sc">$</span>coefficients, <span class="at">digits=</span><span class="dv">3</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" tabindex="-1"></a><span class="co"># Settings</span></span>
+<span id="cb18-2"><a href="#cb18-2" tabindex="-1"></a>Ntree <span class="ot">=</span> <span class="dv">100</span></span>
+<span id="cb18-3"><a href="#cb18-3" tabindex="-1"></a>sd_x <span class="ot">=</span> <span class="fl">0.3</span></span>
+<span id="cb18-4"><a href="#cb18-4" tabindex="-1"></a>sd_y <span class="ot">=</span> <span class="fl">0.3</span></span>
+<span id="cb18-5"><a href="#cb18-5" tabindex="-1"></a>b0_x <span class="ot">=</span> <span class="dv">1</span></span>
+<span id="cb18-6"><a href="#cb18-6" tabindex="-1"></a>b0_y <span class="ot">=</span> <span class="dv">0</span></span>
+<span id="cb18-7"><a href="#cb18-7" tabindex="-1"></a>b_xy <span class="ot">=</span> <span class="dv">1</span></span>
+<span id="cb18-8"><a href="#cb18-8" tabindex="-1"></a></span>
+<span id="cb18-9"><a href="#cb18-9" tabindex="-1"></a><span class="co"># Simulate tree</span></span>
+<span id="cb18-10"><a href="#cb18-10" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb18-11"><a href="#cb18-11" tabindex="-1"></a>tree <span class="ot">=</span> ape<span class="sc">::</span><span class="fu">rtree</span>(<span class="at">n=</span>Ntree)</span>
+<span id="cb18-12"><a href="#cb18-12" tabindex="-1"></a></span>
+<span id="cb18-13"><a href="#cb18-13" tabindex="-1"></a><span class="co"># Simulate data</span></span>
+<span id="cb18-14"><a href="#cb18-14" tabindex="-1"></a>x <span class="ot">=</span> b0_x <span class="sc">+</span> sd_x <span class="sc">*</span> phylolm<span class="sc">::</span><span class="fu">rTrait</span>(<span class="at">n =</span> <span class="dv">1</span>, <span class="at">phy=</span>tree)</span>
+<span id="cb18-15"><a href="#cb18-15" tabindex="-1"></a>ybar <span class="ot">=</span> b0_y <span class="sc">+</span> b_xy<span class="sc">*</span>x</span>
+<span id="cb18-16"><a href="#cb18-16" tabindex="-1"></a>y_normal <span class="ot">=</span> ybar <span class="sc">+</span> sd_y <span class="sc">*</span> phylolm<span class="sc">::</span><span class="fu">rTrait</span>(<span class="at">n =</span> <span class="dv">1</span>, <span class="at">phy=</span>tree)</span>
+<span id="cb18-17"><a href="#cb18-17" tabindex="-1"></a>y_binom <span class="ot">=</span> <span class="fu">rbinom</span>( <span class="at">n=</span>Ntree, <span class="at">size=</span><span class="dv">1</span>, <span class="at">prob=</span><span class="fu">plogis</span>(y_normal) )</span>
+<span id="cb18-18"><a href="#cb18-18" tabindex="-1"></a></span>
+<span id="cb18-19"><a href="#cb18-19" tabindex="-1"></a><span class="co"># Construct, re-order, and reduce data</span></span>
+<span id="cb18-20"><a href="#cb18-20" tabindex="-1"></a>Data <span class="ot">=</span> <span class="fu">data.frame</span>(<span class="at">x=</span>x,<span class="at">y=</span>y_binom)</span>
+<span id="cb18-21"><a href="#cb18-21" tabindex="-1"></a></span>
+<span id="cb18-22"><a href="#cb18-22" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb18-23"><a href="#cb18-23" tabindex="-1"></a>pglmm <span class="ot">=</span> phyr<span class="sc">::</span><span class="fu">pglmm_compare</span>(</span>
+<span id="cb18-24"><a href="#cb18-24" tabindex="-1"></a>  y <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> x,</span>
+<span id="cb18-25"><a href="#cb18-25" tabindex="-1"></a>  <span class="at">family =</span> <span class="st">&quot;binomial&quot;</span>,</span>
+<span id="cb18-26"><a href="#cb18-26" tabindex="-1"></a>  <span class="at">data =</span> Data,</span>
+<span id="cb18-27"><a href="#cb18-27" tabindex="-1"></a>  <span class="at">phy =</span> tree )</span>
+<span id="cb18-28"><a href="#cb18-28" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">summary</span>(pglmm), <span class="at">digits=</span><span class="dv">3</span>)</span>
+<span id="cb18-29"><a href="#cb18-29" tabindex="-1"></a><span class="co">#&gt; Generalized linear mixed model for binomial data fit by restricted maximum likelihood</span></span>
+<span id="cb18-30"><a href="#cb18-30" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb18-31"><a href="#cb18-31" tabindex="-1"></a><span class="co">#&gt; Call:y ~ 1 + x</span></span>
+<span id="cb18-32"><a href="#cb18-32" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb18-33"><a href="#cb18-33" tabindex="-1"></a><span class="co">#&gt; logLik    AIC    BIC </span></span>
+<span id="cb18-34"><a href="#cb18-34" tabindex="-1"></a><span class="co">#&gt; -63.74 135.47 141.32 </span></span>
+<span id="cb18-35"><a href="#cb18-35" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb18-36"><a href="#cb18-36" tabindex="-1"></a><span class="co">#&gt; Phylogenetic random effects variance (s2):</span></span>
+<span id="cb18-37"><a href="#cb18-37" tabindex="-1"></a><span class="co">#&gt;    Variance Std.Dev</span></span>
+<span id="cb18-38"><a href="#cb18-38" tabindex="-1"></a><span class="co">#&gt; s2   0.1076   0.328</span></span>
+<span id="cb18-39"><a href="#cb18-39" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb18-40"><a href="#cb18-40" tabindex="-1"></a><span class="co">#&gt; Fixed effects:</span></span>
+<span id="cb18-41"><a href="#cb18-41" tabindex="-1"></a><span class="co">#&gt;               Value Std.Error Zscore Pvalue</span></span>
+<span id="cb18-42"><a href="#cb18-42" tabindex="-1"></a><span class="co">#&gt; (Intercept) 0.23179   0.60507 0.3831 0.7017</span></span>
+<span id="cb18-43"><a href="#cb18-43" tabindex="-1"></a><span class="co">#&gt; x           0.44548   0.45708 0.9746 0.3297</span></span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" tabindex="-1"></a></span>
+<span id="cb19-2"><a href="#cb19-2" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb19-3"><a href="#cb19-3" tabindex="-1"></a>pgsem <span class="ot">=</span> <span class="fu">phylosem</span>( <span class="at">sem =</span> <span class="st">&quot;x -&gt; y, p&quot;</span>,</span>
+<span id="cb19-4"><a href="#cb19-4" tabindex="-1"></a>          <span class="at">data =</span> Data,</span>
+<span id="cb19-5"><a href="#cb19-5" tabindex="-1"></a>          <span class="at">family =</span> <span class="fu">c</span>(<span class="st">&quot;fixed&quot;</span>,<span class="st">&quot;binomial&quot;</span>),</span>
+<span id="cb19-6"><a href="#cb19-6" tabindex="-1"></a>          <span class="at">tree =</span> tree,</span>
+<span id="cb19-7"><a href="#cb19-7" tabindex="-1"></a>          <span class="at">quiet =</span> <span class="cn">TRUE</span> )</span>
+<span id="cb19-8"><a href="#cb19-8" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">summary</span>(pgsem)<span class="sc">$</span>coefficients, <span class="at">digits=</span><span class="dv">3</span>)</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -1189,42 +1200,42 @@ linear models.</p>
 again confirms that runtimes are within an order of magnitude and
 results are identical for standardized or unstandardized
 coefficients.</p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" tabindex="-1"></a><span class="fu">library</span>(phylopath)</span>
-<span id="cb21-2"><a href="#cb21-2" tabindex="-1"></a><span class="co">#&gt; Warning: package &#39;phylopath&#39; was built under R version 4.3.1</span></span>
-<span id="cb21-3"><a href="#cb21-3" tabindex="-1"></a><span class="fu">library</span>(phylosem)</span>
-<span id="cb21-4"><a href="#cb21-4" tabindex="-1"></a></span>
-<span id="cb21-5"><a href="#cb21-5" tabindex="-1"></a><span class="co"># make copy of data that&#39;s rescaled</span></span>
-<span id="cb21-6"><a href="#cb21-6" tabindex="-1"></a>rhino_scaled <span class="ot">=</span> rhino</span>
-<span id="cb21-7"><a href="#cb21-7" tabindex="-1"></a>  rhino_scaled[,<span class="fu">c</span>(<span class="st">&quot;BM&quot;</span>,<span class="st">&quot;NL&quot;</span>,<span class="st">&quot;LS&quot;</span>,<span class="st">&quot;DD&quot;</span>,<span class="st">&quot;RS&quot;</span>)] <span class="ot">=</span> <span class="fu">scale</span>(rhino_scaled[,<span class="fu">c</span>(<span class="st">&quot;BM&quot;</span>,<span class="st">&quot;NL&quot;</span>,<span class="st">&quot;LS&quot;</span>,<span class="st">&quot;DD&quot;</span>,<span class="st">&quot;RS&quot;</span>)])</span>
-<span id="cb21-8"><a href="#cb21-8" tabindex="-1"></a></span>
-<span id="cb21-9"><a href="#cb21-9" tabindex="-1"></a><span class="co"># Fit and plot using phylopath</span></span>
-<span id="cb21-10"><a href="#cb21-10" tabindex="-1"></a>dag <span class="ot">&lt;-</span> <span class="fu">DAG</span>(RS <span class="sc">~</span> DD, LS <span class="sc">~</span> BM, NL <span class="sc">~</span> BM, DD <span class="sc">~</span> NL)</span>
-<span id="cb21-11"><a href="#cb21-11" tabindex="-1"></a>start_time <span class="ot">=</span> <span class="fu">Sys.time</span>()</span>
-<span id="cb21-12"><a href="#cb21-12" tabindex="-1"></a>result <span class="ot">&lt;-</span> <span class="fu">est_DAG</span>( <span class="at">DAG =</span> dag,</span>
-<span id="cb21-13"><a href="#cb21-13" tabindex="-1"></a>                    <span class="at">data =</span> rhino,</span>
-<span id="cb21-14"><a href="#cb21-14" tabindex="-1"></a>                    <span class="at">tree =</span> rhino_tree,</span>
-<span id="cb21-15"><a href="#cb21-15" tabindex="-1"></a>                    <span class="at">model =</span> <span class="st">&quot;BM&quot;</span>,</span>
-<span id="cb21-16"><a href="#cb21-16" tabindex="-1"></a>                    <span class="at">measurement_error =</span> <span class="cn">FALSE</span> )</span>
-<span id="cb21-17"><a href="#cb21-17" tabindex="-1"></a><span class="fu">Sys.time</span>() <span class="sc">-</span> start_time</span>
-<span id="cb21-18"><a href="#cb21-18" tabindex="-1"></a><span class="co">#&gt; Time difference of 0.007991076 secs</span></span>
-<span id="cb21-19"><a href="#cb21-19" tabindex="-1"></a><span class="fu">plot</span>(result)</span></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" tabindex="-1"></a><span class="fu">library</span>(phylopath)</span>
+<span id="cb20-2"><a href="#cb20-2" tabindex="-1"></a><span class="co">#&gt; Warning: package &#39;phylopath&#39; was built under R version 4.3.1</span></span>
+<span id="cb20-3"><a href="#cb20-3" tabindex="-1"></a><span class="fu">library</span>(phylosem)</span>
+<span id="cb20-4"><a href="#cb20-4" tabindex="-1"></a></span>
+<span id="cb20-5"><a href="#cb20-5" tabindex="-1"></a><span class="co"># make copy of data that&#39;s rescaled</span></span>
+<span id="cb20-6"><a href="#cb20-6" tabindex="-1"></a>rhino_scaled <span class="ot">=</span> rhino</span>
+<span id="cb20-7"><a href="#cb20-7" tabindex="-1"></a>  rhino_scaled[,<span class="fu">c</span>(<span class="st">&quot;BM&quot;</span>,<span class="st">&quot;NL&quot;</span>,<span class="st">&quot;LS&quot;</span>,<span class="st">&quot;DD&quot;</span>,<span class="st">&quot;RS&quot;</span>)] <span class="ot">=</span> <span class="fu">scale</span>(rhino_scaled[,<span class="fu">c</span>(<span class="st">&quot;BM&quot;</span>,<span class="st">&quot;NL&quot;</span>,<span class="st">&quot;LS&quot;</span>,<span class="st">&quot;DD&quot;</span>,<span class="st">&quot;RS&quot;</span>)])</span>
+<span id="cb20-8"><a href="#cb20-8" tabindex="-1"></a></span>
+<span id="cb20-9"><a href="#cb20-9" tabindex="-1"></a><span class="co"># Fit and plot using phylopath</span></span>
+<span id="cb20-10"><a href="#cb20-10" tabindex="-1"></a>dag <span class="ot">&lt;-</span> <span class="fu">DAG</span>(RS <span class="sc">~</span> DD, LS <span class="sc">~</span> BM, NL <span class="sc">~</span> BM, DD <span class="sc">~</span> NL)</span>
+<span id="cb20-11"><a href="#cb20-11" tabindex="-1"></a>start_time <span class="ot">=</span> <span class="fu">Sys.time</span>()</span>
+<span id="cb20-12"><a href="#cb20-12" tabindex="-1"></a>result <span class="ot">&lt;-</span> <span class="fu">est_DAG</span>( <span class="at">DAG =</span> dag,</span>
+<span id="cb20-13"><a href="#cb20-13" tabindex="-1"></a>                    <span class="at">data =</span> rhino,</span>
+<span id="cb20-14"><a href="#cb20-14" tabindex="-1"></a>                    <span class="at">tree =</span> rhino_tree,</span>
+<span id="cb20-15"><a href="#cb20-15" tabindex="-1"></a>                    <span class="at">model =</span> <span class="st">&quot;BM&quot;</span>,</span>
+<span id="cb20-16"><a href="#cb20-16" tabindex="-1"></a>                    <span class="at">measurement_error =</span> <span class="cn">FALSE</span> )</span>
+<span id="cb20-17"><a href="#cb20-17" tabindex="-1"></a><span class="fu">Sys.time</span>() <span class="sc">-</span> start_time</span>
+<span id="cb20-18"><a href="#cb20-18" tabindex="-1"></a><span class="co">#&gt; Time difference of 0.007588863 secs</span></span>
+<span id="cb20-19"><a href="#cb20-19" tabindex="-1"></a><span class="fu">plot</span>(result)</span></code></pre></div>
 <p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAkAAAAJACAMAAABSRCkEAAAA1VBMVEUAAAAAADoAAGYAAIAAOjoAOmYAOpAAZpAAZrY6AAA6ADo6AGY6OgA6Ojo6OmY6OpA6ZmY6ZpA6ZrY6kJA6kNtmAABmADpmAGZmOgBmOjpmZjpmkJBmkLZmtttmtv+QOgCQOjqQZgCQZjqQkDqQkLaQkNuQtpCQttuQ27aQ2/+yIiK2ZgC2Zjq2kDq2kGa2kJC225C229u22/+2/7a2/9u2///bkDrbkGbbkJDbtmbbtpDb25Db27bb2//b/9vb////tmb/25D/27b/29v//7b//9v////JzpzIAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAQ3ElEQVR4nO3dDXfa1gGH8Ws78UzTJutm2qRrTNZ1a236krUzW7OkQAb6/h9pupLA5sUY7v8K3Zfnd3JiG58E5eqxdCVBZApAYLpeAMSNgCAhIEgICBICgoSAICEgSAgIEgKChIAgISBICAgSAoKEgCAhIEgICBICgoSAICEgSAgIEgKChIAgISBICAgSAoKEgCAhIEgICBICgoSAICEgSAgIEgKChIAgISBICAgSAoKEgCAhIEgICBICgoSAICEgSAgIEgKChIAgISBICAgSAoKEgCAhIEgICBICgoSAIEk7oGnPVE6e/2K/nDz547fj5lvzn796dtvhoqUij4BKV+WXk+ZjUX9+SkC61AM6r7Y4//uhqmVinvQumm8Nn/QIyIM8AirmA7vpmZinL5tqZv0/9wnIg0wCKobm0gZ0/mOzD5ucfE9APmQS0GILdP7fZh82PP2VgHzII6D5D8Z+Ugb0+6DKZta/mBGQD6kHtDgIe2qP48uAxqNqH1b+TkBe5BLQyeuiDmhiLuwe7fSWgLxIPaBmF/Zbr5kDjatupuVMiIC8yCOgup36t2GZkt2PEZAXuQRU5dJUdGH3YATkR34BlZ+9tcfyBORFLgHd7cLmg5Ov7ISIgLzIJKByEn3ZVFROgKoLYwTkReoBLa/GNycSx9WD9gMBeZFJQM+/s1uiOqD5wG6NCMiPtANC6wgIEgKChIAgIaCzs66XIGoJB7RfGWdnFKRIN6A9yzg7IyFFsgEd1A8FOUs1oL2joCBNogEdkAQFSdIM6LAgKEiQYkAH53DGVshZggE5pEBBztILyCkECnKVXECOFVCQo9QCcm+AgpwkFpBUAAU5SCsgcf1T0OFSCkhf++zGDpZQQD5WPQUdKp2A/Kx4CjpQMgH5Wusczx8mlYD8rXIKOkgiAXld4RR0gDQC8ry62QjtL4mAvK9rCtpbCgG1saYpaE8JBNTOemYjtJ/4A2prJVPQXqIPqMVVTEF7iD2gVlcwG6HHxR1Q22uXgB4Vf0DtPwMF7RB1QMdYtWyEdos4oCOtVyZCO0Ub0PFWKgHtEndAR3wqCtou1oCOukLZiz0szoCOvjZJ6CHxBnT8ZySgLaIMqIs1SUHbRRhQR+uRvdhW8QXU3UqkoC3iDKjDpyahVdEF1On6I6ANkQXU9ep7sKBZ3xh7P+jsxBVQ1/0UDyb0n9uJOf3nuJNF6lRMAYWx+3hoIzQ6ue5icboWW0BdL0Px0FR6Yu/DmqGIAgqkn+0FTXuXnS1Pp6IJKIjdV2OzoFk/xwm0FUtAIfVTbEyE5oPzDOfPlUgCCqyftYLmg3zv3xtFQMHlY+06pzjJZ4cWTUBdL8OmB47nq1uN53NIH0NAYfazXtDQToOGxpR7s2FGe7QIAgq1n9WjsdnPfx8XE2MrGmXUT/gBBTn/WdjYi9npdF6npEMPKOh+ts2DRqY6JZ3NxdXAAwq8n2LzYKycQ9uAsrm4GnRA4edTrG+EZv2L6bNqCpTJnizkgKLoZ62gf3/ebHVyubgaekBdL8M+tp0QyubiasABxdJP3hdXgw0okv1Xbb2gjC6uhhpQVP0UGV9cDTSg9X6mn4R+SPPAlbHkBRnQ5pqY9oL/mc60oBAD2rIeJk9fhj+ryLKgAAPathZGFzEc1+RYUHgBbVsF8zfXUZxZyXA3FlxAa+M/NMY04cRwbje/gkILaG30R+XMZ9prdl4xXF3KrqDAAlob+/nAbnRGi23QkIKCE1RAGyM/H9h0Jp9FEM5SZgWFFNCWca9eHTq6HIZ/DH9PVgWFE9DWUZ8PjH2ZevMSm1jkVFAwAT005CP7wtDZFxHtw4qsdmOhBLR7vCdR7cKKnAoKJKD1wbanf5qzPnYvFtMkupZNQWEEtD7U9vTP4uB9/mES/gnETbkUFEJAmwM9rI7eIzjzvEMmBQUQ0JZhHlbnnqszz5Pwr4A9JIuCug9o2yBP6klP2dGsH9/8ZymHgjoPaOsIN68pDv91iI/IoKCuA3pgfOtX/8R2+mdT+gV1G9DDozvt2evwcZ2A3ib5qXSnAe0aWvu/E0Q8/VkioPakPbILiRfUYUApD+t9ae/FOgso4TFdl3RBXQWU7ohukXJBHQWU7Hhul3BB3QSU6GA+7CzZhLoIKM2RfAQBeZPmQD4q0YKOH1CSw7iPNPdiRw8ovSHcGwHpEhzBA6RY0HEDSm/8DpPgXuyoAaU2eIdLr6AjBpTYyLlJrqDjBZTWuDlL7ZTi0QJKadAkBOQipSGTJVXQcQJKaMB8SKmgowSUznB5cq+g2MemxYCWAxP5ELVhORGKflvUXkArP2OtPUuszlZ1vTjuWgto5UesrSeJWCoFtR1Q3KPTJgLaKYnBaVcaBbUUUAIj0z4CelgKQ9O2NGZB7QSUxNC07IyAHpTI2LRrfZAiHSUC6kwaBbURUBoj07o0homAOrMxTFGOUwsBJTEux5DEQPkPKIFBOZoECmo3IO9/eXKiL8h7QDEPRicIaEXEQ9EdAroT6zh0LNp+2tiF+f4b80BAEEXZDwFBQ0CQEBAkBAQJAUFyaECzvrlcfnp6u/gdnqwN5/ynT40xz7/rbHke5RDQ4h46BNSC1eGc9kztabBj7BCQuVh8SkDerQznfGDOfyk/vnu5GPPwHB7QyafN3ZQJqAUrwzkx1Z0/i5DvHHt4QKdve/W/kYBasDKco+WGZ2hCvXm1Q0C3zb+LgFqwtgUKf2xdAip3zVcFAbViZTjtEcvXHzpcmj24BFQeHNylQ0BerQ7nx5f2EOz5twFH5BRQuUu+IKBWrJ8HelclZD4fd7ZEj3ALqDoqIKAWbBnO9/ZkYrCD7BZQdYBJQC3YPpwf+0kdhdmP5XElAbXg/nDeO/uzPCMUHNeAyn/c9wTk3/3hbI52rfQCKv9JT3oE5N3aicTFF8Ngr2U4B1T+mwwBebdxHuh1ueX5+I1J6VJG8w+c9pqAzMLV7j+KPawOZ30eqHQS7Ni6B9RsYAnIq7XhnL97VX72JODT0bwiERICgoSAICEgSAgIEi2gOP8/AHhEQJAQECQEBAkBQUJAkBAQJAQECQFBQkCQEBAkBASJHBAF5U28Gk9AuSMgSAgIEgKChIAgISBICAgSAoKEgCAhIEgICBICgoSAINEDoqCsqe+NJ6DMERAkBAQJAUFCQJAQECQEBAkBQUJAkBAQJAQECQFBQkCQEBAkBAQJAUFCQJAQECQEBImHgCioe92tBPl+YcuAZv3zsfqXwdFZZz/IPgP6Sy/Yu5un7qxx/Gf2GdBVMR9w8+9OnN2z1x+YPrutf6nP7Dcga2jMqbxYOMzZqr3+jId6ijYCQgfONtx9b/bl34ydW8z61U/2pPoBnz77tfzy7bO3L8bF/M118z0HBJSEzYDuErJHN5Myj+FlMTkfz768LUYXy13Yv95cF9MX4/J75YMu/AWEDu3cAtnJabmRKcuZfXFd/rIPLudAozKdS/ug/b4DAkrCrjlQlczwyk555nZ707M7tGVA0xe/V3swY9wOoTkPlIRdM2gb0N0WyD5S7smWAc3f/OPF2HHrY3EeKAm7Dr9m/QubTDMHsp/dD6gYmcui+Z7LM3MeKAm7Dt5nX3x1/yhs2ByF3c4H5VFY+dkn9fccf/g5D5SEXRPRZr/VEg7jk0dACBiH8ZAQECRtBDRhEp0PtkCQEBAkBASJz4BGpsbhfEY8BjRs5s722gty0caJRI7Cju7mpqtnJqAk3FidPLPPXVjzegB2Ycd30zj+M/ucRE+YRHfl5p5D/pz+1h7e2pyEm1V7/zn9rT385wpJuNlw973pi79We4XmBWXlh6evqpdGm6uZ/tYeAkrCZkB3CU17l4uXtNq37thXr55Ub87w8tYeAkrCzi3Qs+oVrM1bd+zr5+2bMwr7jkMPb+0hoCTsmgMtAqrfujOt91fNS4/1t/YQUBJ2zaAXAdVbl2YLZM/aeXlrDwElYdfhVxPQ4q079RxoWr8fQ39rDwElYdfB+yKg5q075Yc/lLuwkTFPX17pb+0hoCQcfPrQ2zMTUGbsez99voGYgCAhIEgICBICgoSAICEgSAgIEgKChIAgISBIxIB4SXTu9ID8LAciRUCQEBAkBAQJAUHiHtCu/10f2dADoqKsOQe06wZDyAcBQcIuDBICgoSAIPETkMcFQlyEE4kEBE8B+VscxIaAICEgSJSLqfQDAoKGgCCRXg9EPyAgSPSAfC0JokRAkGiviSag7MkBeVoOREq+XxjyRkCQEBAkBAQJAUFCQJAQECSHBVTd1c767OsP2x9AZhwDMubk9dYHkJlDA2puDP3+m+pO0psPIDOOARXFqLkJ+doDyIxzQPNBfTP7tQeQGeeAyi3OxZYHkBn3gKa98/HmA8iMEtDp7eYDyAwBQUJAkLgHNDFrc6DqAWSGozBInAOa9dfOA9UPIDPOAf1Q7bA2HkBm3AKav39lTq63PYDMuF+Nv9r6ADLj/Hqg8fYHkBlekQgJAUFCQJAQECQEBIkY0I2fpUC0CAgSAoKEgCAhIEgICBICgoSAICEgSAgIEgKChIAgISBI1KvxFJQ5AoKEgCAhIEgICBICgoSAICEgSAgIEgKChIAgISBICAgSAoJEfm88BeWNgCAhIEgICBICgoSAICEgSAgIEgKChIAgISBICAgSAoKEgCAhIEgICBICgoSAICEgSHwGNDSmuofzZHkrcCRPv1/YsqDh+biYmCsCyoq/gGb9q+r3CwLKie+AivnggoAy4nkXVlS3kiegfHgMqBieXNsP8wEB5cNnQMgQAUHidRfGeaD8cB4IEs4DQcJ5IEg4DwQJ54Eg4TAeEgKCpI2AmERnhC0QJAQECQFB4jOgkaldyX8nouHzRGIzd7ZXM5AL75cyCo7CskJAkPi/FsYuLCs+J9ETJtH54TAeEgKCxPt/rjBqZkLIAwFBQkCQEBAk/AdTkBAQJAQECQFBQkCQEBAkBAQJAUFCQJAQECQEBAkBQUJAkBAQJAQECQFBogZEP5kjIEgICBICgoSAICEgSNwDuql5XBZESA6IjPIm7MIICL4C8rc8iAwBQeIlIH+Lg9goh/EEBAKCxkdA3hYG8SEgSKRLGfQDAoKEgCDRA/K1JIiS9nIOAsoeAUEiB+RpORApAoJEfEkr/eROv1sPskZAkBAQJAQECQFBQkCQEBAkBAQJAUFyYECzvmk8+VNza8v5T5+WXz7/zv+yIQLOARlzemsfmfaaL5/etrF8CNzBAZ02nbzrmYvyw3xgzn+xX76svkRunAMqNz3204lp7tI8659c+100xMA9oPrT0XLDMzSXPhcMcXAPaGLqLdApc5+cuQY0/62eA5Wz6pOvP/hfLkRCOAqrJz8fX9rPn39LRHlyPw/0enEe6F2VkPl87H/pEDynXdj8R7N6yPXenkxkMpQjxznQyJir1e987HMUliPXSfSw3uDcO/uzPCOEnLgGVE6GmhPRiy0RAWXJ+TxQsxMbLac+Q65l5Mg5IHsRbFyfB7LHYx+/MVzKyJFyLayaNdfngUonV7v+IBLlHtBiHj1/98qeFuJ0dJ54RSIkBAQJAUFCQJAQECQEBAkBQUJAkBAQJAQECQFBQkCQEBAkBAQJAUFCQJAQECQEBAkBQUJAkBAQJAQECQFBQkCQEBAkBAQJAUFCQJAQECQEBAkBQUJAkBAQJAQECQFBQkCQEBAkBAQJAUFCQJAQECQEBAkBQUJAkBAQJAQECQFBQkCQEBAkBAQJAUFCQJAQECQEBAkBQUJAkPwfPcRHvMGiFgYAAAAASUVORK5CYII=" /><!-- --></p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" tabindex="-1"></a></span>
-<span id="cb22-2"><a href="#cb22-2" tabindex="-1"></a><span class="co"># Fit and plot using phylosem</span></span>
-<span id="cb22-3"><a href="#cb22-3" tabindex="-1"></a>model <span class="ot">=</span> <span class="st">&quot;</span></span>
-<span id="cb22-4"><a href="#cb22-4" tabindex="-1"></a><span class="st">  DD -&gt; RS, p1</span></span>
-<span id="cb22-5"><a href="#cb22-5" tabindex="-1"></a><span class="st">  BM -&gt; LS, p2</span></span>
-<span id="cb22-6"><a href="#cb22-6" tabindex="-1"></a><span class="st">  BM -&gt; NL, p3</span></span>
-<span id="cb22-7"><a href="#cb22-7" tabindex="-1"></a><span class="st">  NL -&gt; DD, p4</span></span>
-<span id="cb22-8"><a href="#cb22-8" tabindex="-1"></a><span class="st">&quot;</span></span>
-<span id="cb22-9"><a href="#cb22-9" tabindex="-1"></a>start_time <span class="ot">=</span> <span class="fu">Sys.time</span>()</span>
-<span id="cb22-10"><a href="#cb22-10" tabindex="-1"></a>psem <span class="ot">=</span> <span class="fu">phylosem</span>( <span class="at">sem =</span> model,</span>
-<span id="cb22-11"><a href="#cb22-11" tabindex="-1"></a>          <span class="at">data =</span> rhino_scaled[,<span class="fu">c</span>(<span class="st">&quot;BM&quot;</span>,<span class="st">&quot;NL&quot;</span>,<span class="st">&quot;DD&quot;</span>,<span class="st">&quot;RS&quot;</span>,<span class="st">&quot;LS&quot;</span>)],</span>
-<span id="cb22-12"><a href="#cb22-12" tabindex="-1"></a>          <span class="at">tree =</span> rhino_tree,</span>
-<span id="cb22-13"><a href="#cb22-13" tabindex="-1"></a>          <span class="at">quiet =</span> <span class="cn">TRUE</span> )</span>
-<span id="cb22-14"><a href="#cb22-14" tabindex="-1"></a><span class="fu">Sys.time</span>() <span class="sc">-</span> start_time</span>
-<span id="cb22-15"><a href="#cb22-15" tabindex="-1"></a><span class="co">#&gt; Time difference of 0.2087419 secs</span></span>
-<span id="cb22-16"><a href="#cb22-16" tabindex="-1"></a><span class="fu">plot</span>( <span class="fu">as_fitted_DAG</span>(psem) )</span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" tabindex="-1"></a></span>
+<span id="cb21-2"><a href="#cb21-2" tabindex="-1"></a><span class="co"># Fit and plot using phylosem</span></span>
+<span id="cb21-3"><a href="#cb21-3" tabindex="-1"></a>model <span class="ot">=</span> <span class="st">&quot;</span></span>
+<span id="cb21-4"><a href="#cb21-4" tabindex="-1"></a><span class="st">  DD -&gt; RS, p1</span></span>
+<span id="cb21-5"><a href="#cb21-5" tabindex="-1"></a><span class="st">  BM -&gt; LS, p2</span></span>
+<span id="cb21-6"><a href="#cb21-6" tabindex="-1"></a><span class="st">  BM -&gt; NL, p3</span></span>
+<span id="cb21-7"><a href="#cb21-7" tabindex="-1"></a><span class="st">  NL -&gt; DD, p4</span></span>
+<span id="cb21-8"><a href="#cb21-8" tabindex="-1"></a><span class="st">&quot;</span></span>
+<span id="cb21-9"><a href="#cb21-9" tabindex="-1"></a>start_time <span class="ot">=</span> <span class="fu">Sys.time</span>()</span>
+<span id="cb21-10"><a href="#cb21-10" tabindex="-1"></a>psem <span class="ot">=</span> <span class="fu">phylosem</span>( <span class="at">sem =</span> model,</span>
+<span id="cb21-11"><a href="#cb21-11" tabindex="-1"></a>          <span class="at">data =</span> rhino_scaled[,<span class="fu">c</span>(<span class="st">&quot;BM&quot;</span>,<span class="st">&quot;NL&quot;</span>,<span class="st">&quot;DD&quot;</span>,<span class="st">&quot;RS&quot;</span>,<span class="st">&quot;LS&quot;</span>)],</span>
+<span id="cb21-12"><a href="#cb21-12" tabindex="-1"></a>          <span class="at">tree =</span> rhino_tree,</span>
+<span id="cb21-13"><a href="#cb21-13" tabindex="-1"></a>          <span class="at">quiet =</span> <span class="cn">TRUE</span> )</span>
+<span id="cb21-14"><a href="#cb21-14" tabindex="-1"></a><span class="fu">Sys.time</span>() <span class="sc">-</span> start_time</span>
+<span id="cb21-15"><a href="#cb21-15" tabindex="-1"></a><span class="co">#&gt; Time difference of 0.4106579 secs</span></span>
+<span id="cb21-16"><a href="#cb21-16" tabindex="-1"></a><span class="fu">plot</span>( <span class="fu">as_fitted_DAG</span>(psem) )</span></code></pre></div>
 <p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAkAAAAJACAMAAABSRCkEAAAA1VBMVEUAAAAAADoAAGYAAIAAOjoAOmYAOpAAZpAAZrY6AAA6ADo6AGY6OgA6Ojo6OmY6OpA6ZmY6ZpA6ZrY6kJA6kNtmAABmADpmAGZmOgBmOjpmZjpmkJBmkLZmtttmtv+QOgCQOjqQZgCQZjqQkDqQkLaQkNuQtpCQttuQ27aQ2/+yIiK2ZgC2Zjq2kDq2kGa2kJC225C229u22/+2/7a2/9u2///bkDrbkGbbkJDbtmbbtpDb25Db27bb2//b/9vb////tmb/25D/27b/29v//7b//9v////JzpzIAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAQ3ElEQVR4nO3dDXfa1gGH8Ws78UzTJutm2qRrTNZ1a236krUzW7OkQAb6/h9pupLA5sUY7v8K3Zfnd3JiG58E5eqxdCVBZApAYLpeAMSNgCAhIEgICBICgoSAICEgSAgIEgKChIAgISBICAgSAoKEgCAhIEgICBICgoSAICEgSAgIEgKChIAgISBICAgSAoKEgCAhIEgICBICgoSAICEgSAgIEgKChIAgISBICAgSAoKEgCAhIEgICBICgoSAICEgSAgIEgKChIAgISBICAgSAoKEgCAhIEgICBICgoSAIEk7oGnPVE6e/2K/nDz547fj5lvzn796dtvhoqUij4BKV+WXk+ZjUX9+SkC61AM6r7Y4//uhqmVinvQumm8Nn/QIyIM8AirmA7vpmZinL5tqZv0/9wnIg0wCKobm0gZ0/mOzD5ucfE9APmQS0GILdP7fZh82PP2VgHzII6D5D8Z+Ugb0+6DKZta/mBGQD6kHtDgIe2qP48uAxqNqH1b+TkBe5BLQyeuiDmhiLuwe7fSWgLxIPaBmF/Zbr5kDjatupuVMiIC8yCOgup36t2GZkt2PEZAXuQRU5dJUdGH3YATkR34BlZ+9tcfyBORFLgHd7cLmg5Ov7ISIgLzIJKByEn3ZVFROgKoLYwTkReoBLa/GNycSx9WD9gMBeZFJQM+/s1uiOqD5wG6NCMiPtANC6wgIEgKChIAgIaCzs66XIGoJB7RfGWdnFKRIN6A9yzg7IyFFsgEd1A8FOUs1oL2joCBNogEdkAQFSdIM6LAgKEiQYkAH53DGVshZggE5pEBBztILyCkECnKVXECOFVCQo9QCcm+AgpwkFpBUAAU5SCsgcf1T0OFSCkhf++zGDpZQQD5WPQUdKp2A/Kx4CjpQMgH5Wusczx8mlYD8rXIKOkgiAXld4RR0gDQC8ry62QjtL4mAvK9rCtpbCgG1saYpaE8JBNTOemYjtJ/4A2prJVPQXqIPqMVVTEF7iD2gVlcwG6HHxR1Q22uXgB4Vf0DtPwMF7RB1QMdYtWyEdos4oCOtVyZCO0Ub0PFWKgHtEndAR3wqCtou1oCOukLZiz0szoCOvjZJ6CHxBnT8ZySgLaIMqIs1SUHbRRhQR+uRvdhW8QXU3UqkoC3iDKjDpyahVdEF1On6I6ANkQXU9ep7sKBZ3xh7P+jsxBVQ1/0UDyb0n9uJOf3nuJNF6lRMAYWx+3hoIzQ6ue5icboWW0BdL0Px0FR6Yu/DmqGIAgqkn+0FTXuXnS1Pp6IJKIjdV2OzoFk/xwm0FUtAIfVTbEyE5oPzDOfPlUgCCqyftYLmg3zv3xtFQMHlY+06pzjJZ4cWTUBdL8OmB47nq1uN53NIH0NAYfazXtDQToOGxpR7s2FGe7QIAgq1n9WjsdnPfx8XE2MrGmXUT/gBBTn/WdjYi9npdF6npEMPKOh+ts2DRqY6JZ3NxdXAAwq8n2LzYKycQ9uAsrm4GnRA4edTrG+EZv2L6bNqCpTJnizkgKLoZ62gf3/ebHVyubgaekBdL8M+tp0QyubiasABxdJP3hdXgw0okv1Xbb2gjC6uhhpQVP0UGV9cDTSg9X6mn4R+SPPAlbHkBRnQ5pqY9oL/mc60oBAD2rIeJk9fhj+ryLKgAAPathZGFzEc1+RYUHgBbVsF8zfXUZxZyXA3FlxAa+M/NMY04cRwbje/gkILaG30R+XMZ9prdl4xXF3KrqDAAlob+/nAbnRGi23QkIKCE1RAGyM/H9h0Jp9FEM5SZgWFFNCWca9eHTq6HIZ/DH9PVgWFE9DWUZ8PjH2ZevMSm1jkVFAwAT005CP7wtDZFxHtw4qsdmOhBLR7vCdR7cKKnAoKJKD1wbanf5qzPnYvFtMkupZNQWEEtD7U9vTP4uB9/mES/gnETbkUFEJAmwM9rI7eIzjzvEMmBQUQ0JZhHlbnnqszz5Pwr4A9JIuCug9o2yBP6klP2dGsH9/8ZymHgjoPaOsIN68pDv91iI/IoKCuA3pgfOtX/8R2+mdT+gV1G9DDozvt2evwcZ2A3ib5qXSnAe0aWvu/E0Q8/VkioPakPbILiRfUYUApD+t9ae/FOgso4TFdl3RBXQWU7ohukXJBHQWU7Hhul3BB3QSU6GA+7CzZhLoIKM2RfAQBeZPmQD4q0YKOH1CSw7iPNPdiRw8ovSHcGwHpEhzBA6RY0HEDSm/8DpPgXuyoAaU2eIdLr6AjBpTYyLlJrqDjBZTWuDlL7ZTi0QJKadAkBOQipSGTJVXQcQJKaMB8SKmgowSUznB5cq+g2MemxYCWAxP5ELVhORGKflvUXkArP2OtPUuszlZ1vTjuWgto5UesrSeJWCoFtR1Q3KPTJgLaKYnBaVcaBbUUUAIj0z4CelgKQ9O2NGZB7QSUxNC07IyAHpTI2LRrfZAiHSUC6kwaBbURUBoj07o0homAOrMxTFGOUwsBJTEux5DEQPkPKIFBOZoECmo3IO9/eXKiL8h7QDEPRicIaEXEQ9EdAroT6zh0LNp+2tiF+f4b80BAEEXZDwFBQ0CQEBAkBAQJAUFyaECzvrlcfnp6u/gdnqwN5/ynT40xz7/rbHke5RDQ4h46BNSC1eGc9kztabBj7BCQuVh8SkDerQznfGDOfyk/vnu5GPPwHB7QyafN3ZQJqAUrwzkx1Z0/i5DvHHt4QKdve/W/kYBasDKco+WGZ2hCvXm1Q0C3zb+LgFqwtgUKf2xdAip3zVcFAbViZTjtEcvXHzpcmj24BFQeHNylQ0BerQ7nx5f2EOz5twFH5BRQuUu+IKBWrJ8HelclZD4fd7ZEj3ALqDoqIKAWbBnO9/ZkYrCD7BZQdYBJQC3YPpwf+0kdhdmP5XElAbXg/nDeO/uzPCMUHNeAyn/c9wTk3/3hbI52rfQCKv9JT3oE5N3aicTFF8Ngr2U4B1T+mwwBebdxHuh1ueX5+I1J6VJG8w+c9pqAzMLV7j+KPawOZ30eqHQS7Ni6B9RsYAnIq7XhnL97VX72JODT0bwiERICgoSAICEgSAgIEi2gOP8/AHhEQJAQECQEBAkBQUJAkBAQJAQECQFBQkCQEBAkBASJHBAF5U28Gk9AuSMgSAgIEgKChIAgISBICAgSAoKEgCAhIEgICBICgoSAINEDoqCsqe+NJ6DMERAkBAQJAUFCQJAQECQEBAkBQUJAkBAQJAQECQFBQkCQEBAkBAQJAUFCQJAQECQEBImHgCioe92tBPl+YcuAZv3zsfqXwdFZZz/IPgP6Sy/Yu5un7qxx/Gf2GdBVMR9w8+9OnN2z1x+YPrutf6nP7Dcga2jMqbxYOMzZqr3+jId6ijYCQgfONtx9b/bl34ydW8z61U/2pPoBnz77tfzy7bO3L8bF/M118z0HBJSEzYDuErJHN5Myj+FlMTkfz768LUYXy13Yv95cF9MX4/J75YMu/AWEDu3cAtnJabmRKcuZfXFd/rIPLudAozKdS/ug/b4DAkrCrjlQlczwyk555nZ707M7tGVA0xe/V3swY9wOoTkPlIRdM2gb0N0WyD5S7smWAc3f/OPF2HHrY3EeKAm7Dr9m/QubTDMHsp/dD6gYmcui+Z7LM3MeKAm7Dt5nX3x1/yhs2ByF3c4H5VFY+dkn9fccf/g5D5SEXRPRZr/VEg7jk0dACBiH8ZAQECRtBDRhEp0PtkCQEBAkBASJz4BGpsbhfEY8BjRs5s722gty0caJRI7Cju7mpqtnJqAk3FidPLPPXVjzegB2Ycd30zj+M/ucRE+YRHfl5p5D/pz+1h7e2pyEm1V7/zn9rT385wpJuNlw973pi79We4XmBWXlh6evqpdGm6uZ/tYeAkrCZkB3CU17l4uXtNq37thXr55Ub87w8tYeAkrCzi3Qs+oVrM1bd+zr5+2bMwr7jkMPb+0hoCTsmgMtAqrfujOt91fNS4/1t/YQUBJ2zaAXAdVbl2YLZM/aeXlrDwElYdfhVxPQ4q079RxoWr8fQ39rDwElYdfB+yKg5q075Yc/lLuwkTFPX17pb+0hoCQcfPrQ2zMTUGbsez99voGYgCAhIEgICBICgoSAICEgSAgIEgKChIAgISBIxIB4SXTu9ID8LAciRUCQEBAkBAQJAUHiHtCu/10f2dADoqKsOQe06wZDyAcBQcIuDBICgoSAIPETkMcFQlyEE4kEBE8B+VscxIaAICEgSJSLqfQDAoKGgCCRXg9EPyAgSPSAfC0JokRAkGiviSag7MkBeVoOREq+XxjyRkCQEBAkBAQJAUFCQJAQECSHBVTd1c767OsP2x9AZhwDMubk9dYHkJlDA2puDP3+m+pO0psPIDOOARXFqLkJ+doDyIxzQPNBfTP7tQeQGeeAyi3OxZYHkBn3gKa98/HmA8iMEtDp7eYDyAwBQUJAkLgHNDFrc6DqAWSGozBInAOa9dfOA9UPIDPOAf1Q7bA2HkBm3AKav39lTq63PYDMuF+Nv9r6ADLj/Hqg8fYHkBlekQgJAUFCQJAQECQEBIkY0I2fpUC0CAgSAoKEgCAhIEgICBICgoSAICEgSAgIEgKChIAgISBI1KvxFJQ5AoKEgCAhIEgICBICgoSAICEgSAgIEgKChIAgISBICAgSAoJEfm88BeWNgCAhIEgICBICgoSAICEgSAgIEgKChIAgISBICAgSAoKEgCAhIEgICBICgoSAICEgSHwGNDSmuofzZHkrcCRPv1/YsqDh+biYmCsCyoq/gGb9q+r3CwLKie+AivnggoAy4nkXVlS3kiegfHgMqBieXNsP8wEB5cNnQMgQAUHidRfGeaD8cB4IEs4DQcJ5IEg4DwQJ54Eg4TAeEgKCpI2AmERnhC0QJAQECQFB4jOgkaldyX8nouHzRGIzd7ZXM5AL75cyCo7CskJAkPi/FsYuLCs+J9ETJtH54TAeEgKCxPt/rjBqZkLIAwFBQkCQEBAk/AdTkBAQJAQECQFBQkCQEBAkBAQJAUFCQJAQECQEBAkBQUJAkBAQJAQECQFBogZEP5kjIEgICBICgoSAICEgSNwDuql5XBZESA6IjPIm7MIICL4C8rc8iAwBQeIlIH+Lg9goh/EEBAKCxkdA3hYG8SEgSKRLGfQDAoKEgCDRA/K1JIiS9nIOAsoeAUEiB+RpORApAoJEfEkr/eROv1sPskZAkBAQJAQECQFBQkCQEBAkBAQJAUFyYECzvmk8+VNza8v5T5+WXz7/zv+yIQLOARlzemsfmfaaL5/etrF8CNzBAZ02nbzrmYvyw3xgzn+xX76svkRunAMqNz3204lp7tI8659c+100xMA9oPrT0XLDMzSXPhcMcXAPaGLqLdApc5+cuQY0/62eA5Wz6pOvP/hfLkRCOAqrJz8fX9rPn39LRHlyPw/0enEe6F2VkPl87H/pEDynXdj8R7N6yPXenkxkMpQjxznQyJir1e987HMUliPXSfSw3uDcO/uzPCOEnLgGVE6GmhPRiy0RAWXJ+TxQsxMbLac+Q65l5Mg5IHsRbFyfB7LHYx+/MVzKyJFyLayaNdfngUonV7v+IBLlHtBiHj1/98qeFuJ0dJ54RSIkBAQJAUFCQJAQECQEBAkBQUJAkBAQJAQECQFBQkCQEBAkBAQJAUFCQJAQECQEBAkBQUJAkBAQJAQECQFBQkCQEBAkBAQJAUFCQJAQECQEBAkBQUJAkBAQJAQECQFBQkCQEBAkBAQJAUFCQJAQECQEBAkBQUJAkBAQJAQECQFBQkCQEBAkBAQJAUFCQJAQECQEBAkBQUJAkPwfPcRHvMGiFgYAAAAASUVORK5CYII=" /><!-- --></p>
 </div>
 <div id="comparison-with-sem" class="section level2">
@@ -1233,66 +1244,66 @@ coefficients.</p>
 <code>sem</code>. This confirms that runtimes are within an order of
 magnitude when specifying a star-phylogeny in <code>phylosem</code> to
 match the assumed structure in <code>sem</code></p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" tabindex="-1"></a><span class="fu">library</span>(sem)</span>
-<span id="cb23-2"><a href="#cb23-2" tabindex="-1"></a><span class="co">#&gt; Warning: package &#39;sem&#39; was built under R version 4.3.1</span></span>
-<span id="cb23-3"><a href="#cb23-3" tabindex="-1"></a><span class="fu">library</span>(TreeTools)</span>
-<span id="cb23-4"><a href="#cb23-4" tabindex="-1"></a><span class="co">#&gt; Warning: package &#39;TreeTools&#39; was built under R version 4.3.1</span></span>
-<span id="cb23-5"><a href="#cb23-5" tabindex="-1"></a><span class="co">#&gt; Warning: package &#39;ape&#39; was built under R version 4.3.1</span></span>
-<span id="cb23-6"><a href="#cb23-6" tabindex="-1"></a></span>
-<span id="cb23-7"><a href="#cb23-7" tabindex="-1"></a><span class="co"># Simulation parameters</span></span>
-<span id="cb23-8"><a href="#cb23-8" tabindex="-1"></a>n_obs <span class="ot">=</span> <span class="dv">50</span></span>
-<span id="cb23-9"><a href="#cb23-9" tabindex="-1"></a><span class="co"># Intercepts</span></span>
-<span id="cb23-10"><a href="#cb23-10" tabindex="-1"></a>a1 <span class="ot">=</span> <span class="dv">1</span></span>
-<span id="cb23-11"><a href="#cb23-11" tabindex="-1"></a>a2 <span class="ot">=</span> <span class="dv">2</span></span>
-<span id="cb23-12"><a href="#cb23-12" tabindex="-1"></a>a3 <span class="ot">=</span> <span class="dv">3</span></span>
-<span id="cb23-13"><a href="#cb23-13" tabindex="-1"></a>a4 <span class="ot">=</span> <span class="dv">4</span></span>
-<span id="cb23-14"><a href="#cb23-14" tabindex="-1"></a><span class="co"># Slopes</span></span>
-<span id="cb23-15"><a href="#cb23-15" tabindex="-1"></a>b12 <span class="ot">=</span> <span class="fl">0.3</span></span>
-<span id="cb23-16"><a href="#cb23-16" tabindex="-1"></a>b23 <span class="ot">=</span> <span class="dv">0</span></span>
-<span id="cb23-17"><a href="#cb23-17" tabindex="-1"></a>b34 <span class="ot">=</span> <span class="fl">0.3</span></span>
-<span id="cb23-18"><a href="#cb23-18" tabindex="-1"></a><span class="co"># Standard deviations</span></span>
-<span id="cb23-19"><a href="#cb23-19" tabindex="-1"></a>s1 <span class="ot">=</span> <span class="fl">0.1</span></span>
-<span id="cb23-20"><a href="#cb23-20" tabindex="-1"></a>s2 <span class="ot">=</span> <span class="fl">0.2</span></span>
-<span id="cb23-21"><a href="#cb23-21" tabindex="-1"></a>s3 <span class="ot">=</span> <span class="fl">0.3</span></span>
-<span id="cb23-22"><a href="#cb23-22" tabindex="-1"></a>s4 <span class="ot">=</span> <span class="fl">0.4</span></span>
-<span id="cb23-23"><a href="#cb23-23" tabindex="-1"></a></span>
-<span id="cb23-24"><a href="#cb23-24" tabindex="-1"></a><span class="co"># Simulate data</span></span>
-<span id="cb23-25"><a href="#cb23-25" tabindex="-1"></a>E1 <span class="ot">=</span> <span class="fu">rnorm</span>(n_obs, <span class="at">sd=</span>s1)</span>
-<span id="cb23-26"><a href="#cb23-26" tabindex="-1"></a>E2 <span class="ot">=</span> <span class="fu">rnorm</span>(n_obs, <span class="at">sd=</span>s2)</span>
-<span id="cb23-27"><a href="#cb23-27" tabindex="-1"></a>E3 <span class="ot">=</span> <span class="fu">rnorm</span>(n_obs, <span class="at">sd=</span>s3)</span>
-<span id="cb23-28"><a href="#cb23-28" tabindex="-1"></a>E4 <span class="ot">=</span> <span class="fu">rnorm</span>(n_obs, <span class="at">sd=</span>s4)</span>
-<span id="cb23-29"><a href="#cb23-29" tabindex="-1"></a>Y1 <span class="ot">=</span> a1 <span class="sc">+</span> E1</span>
-<span id="cb23-30"><a href="#cb23-30" tabindex="-1"></a>Y2 <span class="ot">=</span> a2 <span class="sc">+</span> b12<span class="sc">*</span>Y1 <span class="sc">+</span> E2</span>
-<span id="cb23-31"><a href="#cb23-31" tabindex="-1"></a>Y3 <span class="ot">=</span> a3 <span class="sc">+</span> b23<span class="sc">*</span>Y2 <span class="sc">+</span> E3</span>
-<span id="cb23-32"><a href="#cb23-32" tabindex="-1"></a>Y4 <span class="ot">=</span> a4 <span class="sc">+</span> b34<span class="sc">*</span>Y3 <span class="sc">+</span> E4</span>
-<span id="cb23-33"><a href="#cb23-33" tabindex="-1"></a>Data <span class="ot">=</span> <span class="fu">data.frame</span>(<span class="at">Y1=</span>Y1, <span class="at">Y2=</span>Y2, <span class="at">Y3=</span>Y3, <span class="at">Y4=</span>Y4)</span>
-<span id="cb23-34"><a href="#cb23-34" tabindex="-1"></a></span>
-<span id="cb23-35"><a href="#cb23-35" tabindex="-1"></a><span class="co"># Specify path diagram (in this case, using correct structure)</span></span>
-<span id="cb23-36"><a href="#cb23-36" tabindex="-1"></a>equations <span class="ot">=</span> <span class="st">&quot;</span></span>
-<span id="cb23-37"><a href="#cb23-37" tabindex="-1"></a><span class="st">  Y2 = b12 * Y1</span></span>
-<span id="cb23-38"><a href="#cb23-38" tabindex="-1"></a><span class="st">  Y4 = b34 * Y3</span></span>
-<span id="cb23-39"><a href="#cb23-39" tabindex="-1"></a><span class="st">&quot;</span></span>
-<span id="cb23-40"><a href="#cb23-40" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">specifyEquations</span>(<span class="at">text=</span>equations, <span class="at">exog.variances=</span><span class="cn">TRUE</span>, <span class="at">endog.variances=</span><span class="cn">TRUE</span>)</span>
-<span id="cb23-41"><a href="#cb23-41" tabindex="-1"></a></span>
-<span id="cb23-42"><a href="#cb23-42" tabindex="-1"></a><span class="co"># Fit using package:sem</span></span>
-<span id="cb23-43"><a href="#cb23-43" tabindex="-1"></a>start_time <span class="ot">=</span> <span class="fu">Sys.time</span>()</span>
-<span id="cb23-44"><a href="#cb23-44" tabindex="-1"></a>Sem <span class="ot">&lt;-</span> <span class="fu">sem</span>(model, <span class="at">data=</span>Data)</span>
-<span id="cb23-45"><a href="#cb23-45" tabindex="-1"></a><span class="fu">Sys.time</span>() <span class="sc">-</span> start_time</span>
-<span id="cb23-46"><a href="#cb23-46" tabindex="-1"></a><span class="co">#&gt; Time difference of 0.01619506 secs</span></span>
-<span id="cb23-47"><a href="#cb23-47" tabindex="-1"></a></span>
-<span id="cb23-48"><a href="#cb23-48" tabindex="-1"></a><span class="co"># Specify star phylogeny</span></span>
-<span id="cb23-49"><a href="#cb23-49" tabindex="-1"></a>tree_null <span class="ot">=</span> TreeTools<span class="sc">::</span><span class="fu">StarTree</span>(n_obs)</span>
-<span id="cb23-50"><a href="#cb23-50" tabindex="-1"></a>  tree_null<span class="sc">$</span>edge.length <span class="ot">=</span> <span class="fu">rep</span>(<span class="dv">1</span>,<span class="fu">nrow</span>(tree_null<span class="sc">$</span>edge))</span>
-<span id="cb23-51"><a href="#cb23-51" tabindex="-1"></a>  <span class="fu">rownames</span>(Data) <span class="ot">=</span> tree_null<span class="sc">$</span>tip.label</span>
-<span id="cb23-52"><a href="#cb23-52" tabindex="-1"></a></span>
-<span id="cb23-53"><a href="#cb23-53" tabindex="-1"></a><span class="co"># Fit using phylosem</span></span>
-<span id="cb23-54"><a href="#cb23-54" tabindex="-1"></a>start_time <span class="ot">=</span> <span class="fu">Sys.time</span>()</span>
-<span id="cb23-55"><a href="#cb23-55" tabindex="-1"></a>psem <span class="ot">=</span> <span class="fu">phylosem</span>( <span class="at">data =</span> Data,</span>
-<span id="cb23-56"><a href="#cb23-56" tabindex="-1"></a>          <span class="at">sem =</span> equations,</span>
-<span id="cb23-57"><a href="#cb23-57" tabindex="-1"></a>          <span class="at">tree =</span> tree_null,</span>
-<span id="cb23-58"><a href="#cb23-58" tabindex="-1"></a>          <span class="at">quiet =</span> <span class="cn">TRUE</span> )</span>
-<span id="cb23-59"><a href="#cb23-59" tabindex="-1"></a><span class="fu">Sys.time</span>() <span class="sc">-</span> start_time</span>
-<span id="cb23-60"><a href="#cb23-60" tabindex="-1"></a><span class="co">#&gt; Time difference of 0.03799701 secs</span></span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" tabindex="-1"></a><span class="fu">library</span>(sem)</span>
+<span id="cb22-2"><a href="#cb22-2" tabindex="-1"></a><span class="co">#&gt; Warning: package &#39;sem&#39; was built under R version 4.3.1</span></span>
+<span id="cb22-3"><a href="#cb22-3" tabindex="-1"></a><span class="fu">library</span>(TreeTools)</span>
+<span id="cb22-4"><a href="#cb22-4" tabindex="-1"></a><span class="co">#&gt; Warning: package &#39;TreeTools&#39; was built under R version 4.3.1</span></span>
+<span id="cb22-5"><a href="#cb22-5" tabindex="-1"></a><span class="co">#&gt; Warning: package &#39;ape&#39; was built under R version 4.3.1</span></span>
+<span id="cb22-6"><a href="#cb22-6" tabindex="-1"></a></span>
+<span id="cb22-7"><a href="#cb22-7" tabindex="-1"></a><span class="co"># Simulation parameters</span></span>
+<span id="cb22-8"><a href="#cb22-8" tabindex="-1"></a>n_obs <span class="ot">=</span> <span class="dv">50</span></span>
+<span id="cb22-9"><a href="#cb22-9" tabindex="-1"></a><span class="co"># Intercepts</span></span>
+<span id="cb22-10"><a href="#cb22-10" tabindex="-1"></a>a1 <span class="ot">=</span> <span class="dv">1</span></span>
+<span id="cb22-11"><a href="#cb22-11" tabindex="-1"></a>a2 <span class="ot">=</span> <span class="dv">2</span></span>
+<span id="cb22-12"><a href="#cb22-12" tabindex="-1"></a>a3 <span class="ot">=</span> <span class="dv">3</span></span>
+<span id="cb22-13"><a href="#cb22-13" tabindex="-1"></a>a4 <span class="ot">=</span> <span class="dv">4</span></span>
+<span id="cb22-14"><a href="#cb22-14" tabindex="-1"></a><span class="co"># Slopes</span></span>
+<span id="cb22-15"><a href="#cb22-15" tabindex="-1"></a>b12 <span class="ot">=</span> <span class="fl">0.3</span></span>
+<span id="cb22-16"><a href="#cb22-16" tabindex="-1"></a>b23 <span class="ot">=</span> <span class="dv">0</span></span>
+<span id="cb22-17"><a href="#cb22-17" tabindex="-1"></a>b34 <span class="ot">=</span> <span class="fl">0.3</span></span>
+<span id="cb22-18"><a href="#cb22-18" tabindex="-1"></a><span class="co"># Standard deviations</span></span>
+<span id="cb22-19"><a href="#cb22-19" tabindex="-1"></a>s1 <span class="ot">=</span> <span class="fl">0.1</span></span>
+<span id="cb22-20"><a href="#cb22-20" tabindex="-1"></a>s2 <span class="ot">=</span> <span class="fl">0.2</span></span>
+<span id="cb22-21"><a href="#cb22-21" tabindex="-1"></a>s3 <span class="ot">=</span> <span class="fl">0.3</span></span>
+<span id="cb22-22"><a href="#cb22-22" tabindex="-1"></a>s4 <span class="ot">=</span> <span class="fl">0.4</span></span>
+<span id="cb22-23"><a href="#cb22-23" tabindex="-1"></a></span>
+<span id="cb22-24"><a href="#cb22-24" tabindex="-1"></a><span class="co"># Simulate data</span></span>
+<span id="cb22-25"><a href="#cb22-25" tabindex="-1"></a>E1 <span class="ot">=</span> <span class="fu">rnorm</span>(n_obs, <span class="at">sd=</span>s1)</span>
+<span id="cb22-26"><a href="#cb22-26" tabindex="-1"></a>E2 <span class="ot">=</span> <span class="fu">rnorm</span>(n_obs, <span class="at">sd=</span>s2)</span>
+<span id="cb22-27"><a href="#cb22-27" tabindex="-1"></a>E3 <span class="ot">=</span> <span class="fu">rnorm</span>(n_obs, <span class="at">sd=</span>s3)</span>
+<span id="cb22-28"><a href="#cb22-28" tabindex="-1"></a>E4 <span class="ot">=</span> <span class="fu">rnorm</span>(n_obs, <span class="at">sd=</span>s4)</span>
+<span id="cb22-29"><a href="#cb22-29" tabindex="-1"></a>Y1 <span class="ot">=</span> a1 <span class="sc">+</span> E1</span>
+<span id="cb22-30"><a href="#cb22-30" tabindex="-1"></a>Y2 <span class="ot">=</span> a2 <span class="sc">+</span> b12<span class="sc">*</span>Y1 <span class="sc">+</span> E2</span>
+<span id="cb22-31"><a href="#cb22-31" tabindex="-1"></a>Y3 <span class="ot">=</span> a3 <span class="sc">+</span> b23<span class="sc">*</span>Y2 <span class="sc">+</span> E3</span>
+<span id="cb22-32"><a href="#cb22-32" tabindex="-1"></a>Y4 <span class="ot">=</span> a4 <span class="sc">+</span> b34<span class="sc">*</span>Y3 <span class="sc">+</span> E4</span>
+<span id="cb22-33"><a href="#cb22-33" tabindex="-1"></a>Data <span class="ot">=</span> <span class="fu">data.frame</span>(<span class="at">Y1=</span>Y1, <span class="at">Y2=</span>Y2, <span class="at">Y3=</span>Y3, <span class="at">Y4=</span>Y4)</span>
+<span id="cb22-34"><a href="#cb22-34" tabindex="-1"></a></span>
+<span id="cb22-35"><a href="#cb22-35" tabindex="-1"></a><span class="co"># Specify path diagram (in this case, using correct structure)</span></span>
+<span id="cb22-36"><a href="#cb22-36" tabindex="-1"></a>equations <span class="ot">=</span> <span class="st">&quot;</span></span>
+<span id="cb22-37"><a href="#cb22-37" tabindex="-1"></a><span class="st">  Y2 = b12 * Y1</span></span>
+<span id="cb22-38"><a href="#cb22-38" tabindex="-1"></a><span class="st">  Y4 = b34 * Y3</span></span>
+<span id="cb22-39"><a href="#cb22-39" tabindex="-1"></a><span class="st">&quot;</span></span>
+<span id="cb22-40"><a href="#cb22-40" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">specifyEquations</span>(<span class="at">text=</span>equations, <span class="at">exog.variances=</span><span class="cn">TRUE</span>, <span class="at">endog.variances=</span><span class="cn">TRUE</span>)</span>
+<span id="cb22-41"><a href="#cb22-41" tabindex="-1"></a></span>
+<span id="cb22-42"><a href="#cb22-42" tabindex="-1"></a><span class="co"># Fit using package:sem</span></span>
+<span id="cb22-43"><a href="#cb22-43" tabindex="-1"></a>start_time <span class="ot">=</span> <span class="fu">Sys.time</span>()</span>
+<span id="cb22-44"><a href="#cb22-44" tabindex="-1"></a>Sem <span class="ot">&lt;-</span> <span class="fu">sem</span>(model, <span class="at">data=</span>Data)</span>
+<span id="cb22-45"><a href="#cb22-45" tabindex="-1"></a><span class="fu">Sys.time</span>() <span class="sc">-</span> start_time</span>
+<span id="cb22-46"><a href="#cb22-46" tabindex="-1"></a><span class="co">#&gt; Time difference of 0.01037693 secs</span></span>
+<span id="cb22-47"><a href="#cb22-47" tabindex="-1"></a></span>
+<span id="cb22-48"><a href="#cb22-48" tabindex="-1"></a><span class="co"># Specify star phylogeny</span></span>
+<span id="cb22-49"><a href="#cb22-49" tabindex="-1"></a>tree_null <span class="ot">=</span> TreeTools<span class="sc">::</span><span class="fu">StarTree</span>(n_obs)</span>
+<span id="cb22-50"><a href="#cb22-50" tabindex="-1"></a>  tree_null<span class="sc">$</span>edge.length <span class="ot">=</span> <span class="fu">rep</span>(<span class="dv">1</span>,<span class="fu">nrow</span>(tree_null<span class="sc">$</span>edge))</span>
+<span id="cb22-51"><a href="#cb22-51" tabindex="-1"></a>  <span class="fu">rownames</span>(Data) <span class="ot">=</span> tree_null<span class="sc">$</span>tip.label</span>
+<span id="cb22-52"><a href="#cb22-52" tabindex="-1"></a></span>
+<span id="cb22-53"><a href="#cb22-53" tabindex="-1"></a><span class="co"># Fit using phylosem</span></span>
+<span id="cb22-54"><a href="#cb22-54" tabindex="-1"></a>start_time <span class="ot">=</span> <span class="fu">Sys.time</span>()</span>
+<span id="cb22-55"><a href="#cb22-55" tabindex="-1"></a>psem <span class="ot">=</span> <span class="fu">phylosem</span>( <span class="at">data =</span> Data,</span>
+<span id="cb22-56"><a href="#cb22-56" tabindex="-1"></a>          <span class="at">sem =</span> equations,</span>
+<span id="cb22-57"><a href="#cb22-57" tabindex="-1"></a>          <span class="at">tree =</span> tree_null,</span>
+<span id="cb22-58"><a href="#cb22-58" tabindex="-1"></a>          <span class="at">quiet =</span> <span class="cn">TRUE</span> )</span>
+<span id="cb22-59"><a href="#cb22-59" tabindex="-1"></a><span class="fu">Sys.time</span>() <span class="sc">-</span> start_time</span>
+<span id="cb22-60"><a href="#cb22-60" tabindex="-1"></a><span class="co">#&gt; Time difference of 0.09121299 secs</span></span></code></pre></div>
 <p>We then compare estimated values for standardized coefficients</p>
 <table>
 <thead>
@@ -1419,25 +1430,25 @@ estimates using both packages, when specifying a full-rank covariance in
 <p>We note that <code>phylosem</code> also allows parsimonious
 representations of the trait covariance via the inputted SEM
 structure.</p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" tabindex="-1"></a><span class="fu">library</span>(Rphylopars)</span>
-<span id="cb24-2"><a href="#cb24-2" tabindex="-1"></a></span>
-<span id="cb24-3"><a href="#cb24-3" tabindex="-1"></a><span class="co"># Format data, within no values for species t1</span></span>
-<span id="cb24-4"><a href="#cb24-4" tabindex="-1"></a>Data <span class="ot">=</span> rhino[,<span class="fu">c</span>(<span class="st">&quot;BM&quot;</span>,<span class="st">&quot;NL&quot;</span>,<span class="st">&quot;DD&quot;</span>,<span class="st">&quot;RS&quot;</span>,<span class="st">&quot;LS&quot;</span>)]</span>
-<span id="cb24-5"><a href="#cb24-5" tabindex="-1"></a>  <span class="fu">rownames</span>(Data) <span class="ot">=</span> tree<span class="sc">$</span>tip.label</span>
-<span id="cb24-6"><a href="#cb24-6" tabindex="-1"></a>Data[<span class="st">&#39;t1&#39;</span>,] <span class="ot">=</span> <span class="cn">NA</span></span>
-<span id="cb24-7"><a href="#cb24-7" tabindex="-1"></a></span>
-<span id="cb24-8"><a href="#cb24-8" tabindex="-1"></a><span class="co"># fit using phylopars</span></span>
-<span id="cb24-9"><a href="#cb24-9" tabindex="-1"></a>start_time <span class="ot">=</span> <span class="fu">Sys.time</span>()</span>
-<span id="cb24-10"><a href="#cb24-10" tabindex="-1"></a>pars <span class="ot">&lt;-</span> <span class="fu">phylopars</span>( <span class="at">trait_data =</span> <span class="fu">cbind</span>(<span class="at">species=</span><span class="fu">rownames</span>(Data),Data),</span>
-<span id="cb24-11"><a href="#cb24-11" tabindex="-1"></a>                  <span class="at">tree =</span> tree,</span>
-<span id="cb24-12"><a href="#cb24-12" tabindex="-1"></a>                  <span class="at">pheno_error =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb24-13"><a href="#cb24-13" tabindex="-1"></a>                  <span class="at">phylo_correlated =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb24-14"><a href="#cb24-14" tabindex="-1"></a>                  <span class="at">pheno_correlated =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb24-15"><a href="#cb24-15" tabindex="-1"></a><span class="fu">Sys.time</span>() <span class="sc">-</span> start_time</span>
-<span id="cb24-16"><a href="#cb24-16" tabindex="-1"></a><span class="co">#&gt; Time difference of 0.09423995 secs</span></span>
-<span id="cb24-17"><a href="#cb24-17" tabindex="-1"></a></span>
-<span id="cb24-18"><a href="#cb24-18" tabindex="-1"></a><span class="co"># Display estimates for missing values</span></span>
-<span id="cb24-19"><a href="#cb24-19" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">cbind</span>( <span class="st">&quot;Estimate&quot;</span><span class="ot">=</span>pars<span class="sc">$</span>anc_recon[<span class="st">&quot;t1&quot;</span>,], <span class="st">&quot;Var&quot;</span><span class="ot">=</span>pars<span class="sc">$</span>anc_var[<span class="st">&quot;t1&quot;</span>,] ), <span class="at">digits=</span><span class="dv">3</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" tabindex="-1"></a><span class="fu">library</span>(Rphylopars)</span>
+<span id="cb23-2"><a href="#cb23-2" tabindex="-1"></a></span>
+<span id="cb23-3"><a href="#cb23-3" tabindex="-1"></a><span class="co"># Format data, within no values for species t1</span></span>
+<span id="cb23-4"><a href="#cb23-4" tabindex="-1"></a>Data <span class="ot">=</span> rhino[,<span class="fu">c</span>(<span class="st">&quot;BM&quot;</span>,<span class="st">&quot;NL&quot;</span>,<span class="st">&quot;DD&quot;</span>,<span class="st">&quot;RS&quot;</span>,<span class="st">&quot;LS&quot;</span>)]</span>
+<span id="cb23-5"><a href="#cb23-5" tabindex="-1"></a>  <span class="fu">rownames</span>(Data) <span class="ot">=</span> tree<span class="sc">$</span>tip.label</span>
+<span id="cb23-6"><a href="#cb23-6" tabindex="-1"></a>Data[<span class="st">&#39;t1&#39;</span>,] <span class="ot">=</span> <span class="cn">NA</span></span>
+<span id="cb23-7"><a href="#cb23-7" tabindex="-1"></a></span>
+<span id="cb23-8"><a href="#cb23-8" tabindex="-1"></a><span class="co"># fit using phylopars</span></span>
+<span id="cb23-9"><a href="#cb23-9" tabindex="-1"></a>start_time <span class="ot">=</span> <span class="fu">Sys.time</span>()</span>
+<span id="cb23-10"><a href="#cb23-10" tabindex="-1"></a>pars <span class="ot">&lt;-</span> <span class="fu">phylopars</span>( <span class="at">trait_data =</span> <span class="fu">cbind</span>(<span class="at">species=</span><span class="fu">rownames</span>(Data),Data),</span>
+<span id="cb23-11"><a href="#cb23-11" tabindex="-1"></a>                  <span class="at">tree =</span> tree,</span>
+<span id="cb23-12"><a href="#cb23-12" tabindex="-1"></a>                  <span class="at">pheno_error =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb23-13"><a href="#cb23-13" tabindex="-1"></a>                  <span class="at">phylo_correlated =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb23-14"><a href="#cb23-14" tabindex="-1"></a>                  <span class="at">pheno_correlated =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb23-15"><a href="#cb23-15" tabindex="-1"></a><span class="fu">Sys.time</span>() <span class="sc">-</span> start_time</span>
+<span id="cb23-16"><a href="#cb23-16" tabindex="-1"></a><span class="co">#&gt; Time difference of 0.08031702 secs</span></span>
+<span id="cb23-17"><a href="#cb23-17" tabindex="-1"></a></span>
+<span id="cb23-18"><a href="#cb23-18" tabindex="-1"></a><span class="co"># Display estimates for missing values</span></span>
+<span id="cb23-19"><a href="#cb23-19" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">cbind</span>( <span class="st">&quot;Estimate&quot;</span><span class="ot">=</span>pars<span class="sc">$</span>anc_recon[<span class="st">&quot;t1&quot;</span>,], <span class="st">&quot;Var&quot;</span><span class="ot">=</span>pars<span class="sc">$</span>anc_var[<span class="st">&quot;t1&quot;</span>,] ), <span class="at">digits=</span><span class="dv">3</span>)</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -1474,22 +1485,22 @@ structure.</p>
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" tabindex="-1"></a></span>
-<span id="cb25-2"><a href="#cb25-2" tabindex="-1"></a><span class="co"># fit using phylosem</span></span>
-<span id="cb25-3"><a href="#cb25-3" tabindex="-1"></a>start_time <span class="ot">=</span> <span class="fu">Sys.time</span>()</span>
-<span id="cb25-4"><a href="#cb25-4" tabindex="-1"></a>psem <span class="ot">=</span> <span class="fu">phylosem</span>( <span class="at">data =</span> Data,</span>
-<span id="cb25-5"><a href="#cb25-5" tabindex="-1"></a>                 <span class="at">tree =</span> tree,</span>
-<span id="cb25-6"><a href="#cb25-6" tabindex="-1"></a>                 <span class="at">sem =</span> <span class="st">&quot;&quot;</span>,</span>
-<span id="cb25-7"><a href="#cb25-7" tabindex="-1"></a>                 <span class="at">covs =</span> <span class="st">&quot;BM, NL, DD, RS, LS&quot;</span>,</span>
-<span id="cb25-8"><a href="#cb25-8" tabindex="-1"></a>                 <span class="at">quiet =</span> <span class="cn">TRUE</span> )</span>
-<span id="cb25-9"><a href="#cb25-9" tabindex="-1"></a><span class="fu">Sys.time</span>() <span class="sc">-</span> start_time</span>
-<span id="cb25-10"><a href="#cb25-10" tabindex="-1"></a><span class="co">#&gt; Time difference of 0.3222899 secs</span></span>
-<span id="cb25-11"><a href="#cb25-11" tabindex="-1"></a></span>
-<span id="cb25-12"><a href="#cb25-12" tabindex="-1"></a><span class="co"># Display estimates for missing values</span></span>
-<span id="cb25-13"><a href="#cb25-13" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">cbind</span>(</span>
-<span id="cb25-14"><a href="#cb25-14" tabindex="-1"></a>  <span class="st">&quot;Estimate&quot;</span><span class="ot">=</span><span class="fu">as.list</span>(psem<span class="sc">$</span>opt<span class="sc">$</span>SD,<span class="st">&quot;Estimate&quot;</span>)<span class="sc">$</span>x_vj[ <span class="fu">match</span>(<span class="st">&quot;t1&quot;</span>,tree<span class="sc">$</span>tip.label), ],</span>
-<span id="cb25-15"><a href="#cb25-15" tabindex="-1"></a>  <span class="st">&quot;Var&quot;</span><span class="ot">=</span><span class="fu">as.list</span>(psem<span class="sc">$</span>opt<span class="sc">$</span>SD,<span class="st">&quot;Std. Error&quot;</span>)<span class="sc">$</span>x_vj[ <span class="fu">match</span>(<span class="st">&quot;t1&quot;</span>,tree<span class="sc">$</span>tip.label), ]<span class="sc">^</span><span class="dv">2</span></span>
-<span id="cb25-16"><a href="#cb25-16" tabindex="-1"></a>), <span class="at">digits=</span><span class="dv">3</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" tabindex="-1"></a></span>
+<span id="cb24-2"><a href="#cb24-2" tabindex="-1"></a><span class="co"># fit using phylosem</span></span>
+<span id="cb24-3"><a href="#cb24-3" tabindex="-1"></a>start_time <span class="ot">=</span> <span class="fu">Sys.time</span>()</span>
+<span id="cb24-4"><a href="#cb24-4" tabindex="-1"></a>psem <span class="ot">=</span> <span class="fu">phylosem</span>( <span class="at">data =</span> Data,</span>
+<span id="cb24-5"><a href="#cb24-5" tabindex="-1"></a>                 <span class="at">tree =</span> tree,</span>
+<span id="cb24-6"><a href="#cb24-6" tabindex="-1"></a>                 <span class="at">sem =</span> <span class="st">&quot;&quot;</span>,</span>
+<span id="cb24-7"><a href="#cb24-7" tabindex="-1"></a>                 <span class="at">covs =</span> <span class="st">&quot;BM, NL, DD, RS, LS&quot;</span>,</span>
+<span id="cb24-8"><a href="#cb24-8" tabindex="-1"></a>                 <span class="at">quiet =</span> <span class="cn">TRUE</span> )</span>
+<span id="cb24-9"><a href="#cb24-9" tabindex="-1"></a><span class="fu">Sys.time</span>() <span class="sc">-</span> start_time</span>
+<span id="cb24-10"><a href="#cb24-10" tabindex="-1"></a><span class="co">#&gt; Time difference of 0.635994 secs</span></span>
+<span id="cb24-11"><a href="#cb24-11" tabindex="-1"></a></span>
+<span id="cb24-12"><a href="#cb24-12" tabindex="-1"></a><span class="co"># Display estimates for missing values</span></span>
+<span id="cb24-13"><a href="#cb24-13" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">cbind</span>(</span>
+<span id="cb24-14"><a href="#cb24-14" tabindex="-1"></a>  <span class="st">&quot;Estimate&quot;</span><span class="ot">=</span><span class="fu">as.list</span>(psem<span class="sc">$</span>opt<span class="sc">$</span>SD,<span class="st">&quot;Estimate&quot;</span>)<span class="sc">$</span>x_vj[ <span class="fu">match</span>(<span class="st">&quot;t1&quot;</span>,tree<span class="sc">$</span>tip.label), ],</span>
+<span id="cb24-15"><a href="#cb24-15" tabindex="-1"></a>  <span class="st">&quot;Var&quot;</span><span class="ot">=</span><span class="fu">as.list</span>(psem<span class="sc">$</span>opt<span class="sc">$</span>SD,<span class="st">&quot;Std. Error&quot;</span>)<span class="sc">$</span>x_vj[ <span class="fu">match</span>(<span class="st">&quot;t1&quot;</span>,tree<span class="sc">$</span>tip.label), ]<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb24-16"><a href="#cb24-16" tabindex="-1"></a>), <span class="at">digits=</span><span class="dv">3</span>)</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">

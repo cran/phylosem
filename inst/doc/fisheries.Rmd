@@ -15,6 +15,8 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
 )
+# To isntall
+#    devtools::install_local( R'(C:\Users\James.Thorson\Desktop\Git\phylosem)', force=TRUE )
 # To test build:
 #   setwd( R'(C:\Users\James.Thorson\Desktop\Git\phylosem)' ); devtools::build_rmd("vignettes/fisheries.Rmd")
 # To build PDF: 
@@ -129,15 +131,14 @@ effects(my_sem)
 ```
 
 We also show how to plot output using phylosignal, although it is currently unavailable on CRAN and therefore commented out:
-```{r, eval=FALSE, echo=TRUE, message=FALSE, fig.width=6, fig.height=8}
+```{r, eval=requireNamespace("phylosignal",quietly=TRUE), echo=TRUE, message=FALSE, fig.width=6, fig.height=8}
 # Load for plotting,
-# requireNamespace("phylosignal",quietly=TRUE)
 # https://r-pkgs.org/vignettes.html#sec-vignettes-eval-option
-#library(phylosignal)
+library(phylosignal)
 
 # Plot using phylobase
-#my_phylo4d = as_phylo4d( psem_best )
-#barplot(my_phylo4d)
+my_phylo4d = as_phylo4d( psem_best )
+barplot(my_phylo4d)
 ```
 
 ## Sensitivity to using taxonomic tree

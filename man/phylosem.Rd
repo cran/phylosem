@@ -136,8 +136,12 @@ my_fitted_DAG = as_fitted_DAG(psem)
 coef_plot( my_fitted_DAG )
 plot( my_fitted_DAG )
 
-# Convert to phylo4d
-my_phylo4d = as_phylo4d(psem)
+# Convert to phylo4d to extract estimated traits and Standard errors
+# for all ancestors and tips in the tree.
+# In this rhino example, note that species are labeled s1-s100
+# and ancestral nodes are not named.
+(traits_est = as_phylo4d(psem))
+(traits_SE = as_phylo4d(psem, what="Std. Error"))
 
 # Convert to sem and plot
 library(sem)
@@ -162,6 +166,7 @@ if( require(semPlot) ){
 Thorson, J. T., & van der Bijl, W. (In press). phylosem: A fast and simple
 R package for phylogenetic inference and trait imputation using phylogenetic
 structural equation models. Journal of Evolutionary Biology.
+\doi{10.1111/jeb.14234}
 
 *Statistical methods for phylogenetic structural equation models*
 

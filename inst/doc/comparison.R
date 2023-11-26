@@ -9,7 +9,7 @@ knitr::opts_chunk$set(
 # library(rmarkdown); setwd( R'(C:\Users\James.Thorson\Desktop\Git\phylosem\vignettes)' )
 # render( "comparison.Rmd", pdf_document()) # to build PDF, and perhaps tinytex::latexmk() to install dependencies
 
-## ----setup, echo=TRUE---------------------------------------------------------
+## ----setup, echo=TRUE, warning=FALSE, message=FALSE---------------------------
 library(phylosem)
 
 ## ----package_warning, echo=TRUE, eval=!have_packages--------------------------

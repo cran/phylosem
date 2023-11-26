@@ -2,7 +2,7 @@
 % Please edit documentation in R/phylosem.R
 \name{summary.phylosem}
 \alias{summary.phylosem}
-\title{Summarize phylosem}
+\title{summarize phylosem}
 \usage{
 \method{summary}{phylosem}(object, ...)
 }
@@ -16,5 +16,5 @@ Data-frame containing all estimated intercepts, path coefficients, and variance-
         as well as their standard errors
 }
 \description{
-summarize phylosem
+Summarize phylosem output from phylosem, including calculating intercepts at the tree root
 }

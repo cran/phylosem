@@ -1,20 +1,6 @@
-#' Fit phylogenetic structural equation model
+#' @title Fit phylogenetic structural equation model
 #'
-#' Fits a phylogenetic structural equation model
-#'
-#' Note that parameters \code{logitlambda}, \code{lnkappa}, and \code{lnalpha} if estimated are each estimated as having a single value
-#'      that applies to all modeled variables.
-#'      This differs from default behavior in \pkg{phylolm}, where these parameters only apply to the "response" and not "predictor" variables.
-#'      This also differs from default behavior in \pkg{phylopath}, where a different value is estimated
-#'      in each call to \pkg{phylolm} during the d-separation estimate of path coefficients. However, it is
-#'      consistent with default behavior in \pkg{Rphylopars}, and estimates should be comparable in that case.
-#'      These additional parameters are estimated with unbounded support, which differs somewhat from default
-#'      bounded estimates in \pkg{phylolm}, although parameters should match if overriding \pkg{phylolm} defaults
-#'      to use unbounded support.  Finally, \code{phylosem} allows these three parameters to be estimated in any
-#'      combination, which is expanded functionality relative to the single-option functionality in \pkg{phylolm}.
-#'
-#' Also note that \pkg{phylopath} by default uses standardized coefficients.  To achieve matching parameter estimates between
-#'      \pkg{phylosem} and \pkg{phylopath}, standardize each variable to have a standard deviation of 1.0 prior to fitting with \pkg{phylosem}.
+#' @description Fits a phylogenetic structural equation model
 #'
 #' @inheritParams sem::specifyModel
 #' @inheritParams fit_tmb
@@ -46,13 +32,27 @@
 #'        instead to return the model inputs and compiled TMB object without running;
 #' @param ... Additional parameters passed to \code{\link{fit_tmb}}
 #'
+#' @details
+#' Note that parameters \code{logitlambda}, \code{lnkappa}, and \code{lnalpha} if estimated are each estimated as having a single value
+#'      that applies to all modeled variables.
+#'      This differs from default behavior in \pkg{phylolm}, where these parameters only apply to the "response" and not "predictor" variables.
+#'      This also differs from default behavior in \pkg{phylopath}, where a different value is estimated
+#'      in each call to \pkg{phylolm} during the d-separation estimate of path coefficients. However, it is
+#'      consistent with default behavior in \pkg{Rphylopars}, and estimates should be comparable in that case.
+#'      These additional parameters are estimated with unbounded support, which differs somewhat from default
+#'      bounded estimates in \pkg{phylolm}, although parameters should match if overriding \pkg{phylolm} defaults
+#'      to use unbounded support.  Finally, \code{phylosem} allows these three parameters to be estimated in any
+#'      combination, which is expanded functionality relative to the single-option functionality in \pkg{phylolm}.
+#'
+#' Also note that \pkg{phylopath} by default uses standardized coefficients.  To achieve matching parameter estimates between
+#'      \pkg{phylosem} and \pkg{phylopath}, standardize each variable to have a standard deviation of 1.0 prior to fitting with \pkg{phylosem}.
+#'
 #' @importFrom stats AIC na.omit nlminb optimHess plogis pnorm rnorm
 #' @importFrom sem sem pathDiagram specifyModel specifyEquations
 #' @importFrom phylopath average_DAGs coef_plot
 #' @importFrom phylobase phylo4d
 #' @importFrom ape Ntip node.depth.edgelength rtree
 #' @importFrom TMB compile dynlib MakeADFun sdreport
-#'
 #'
 #' @return
 #' An object (list) of class `phylosem`. Elements include:
@@ -68,13 +68,13 @@
 #' }
 #'
 #' @references
-#'
 #' **Introducing the package, its features, and comparison with other software
 #' (to cite when using phylosem):**
 #'
 #' Thorson, J. T., & van der Bijl, W. (In press). phylosem: A fast and simple
 #' R package for phylogenetic inference and trait imputation using phylogenetic
 #' structural equation models. Journal of Evolutionary Biology.
+#' \doi{10.1111/jeb.14234}
 #'
 #' *Statistical methods for phylogenetic structural equation models*
 #'
@@ -143,8 +143,12 @@
 #' coef_plot( my_fitted_DAG )
 #' plot( my_fitted_DAG )
 #'
-#' # Convert to phylo4d
-#' my_phylo4d = as_phylo4d(psem)
+#' # Convert to phylo4d to extract estimated traits and Standard errors
+#' # for all ancestors and tips in the tree.
+#' # In this rhino example, note that species are labeled s1-s100
+#' # and ancestral nodes are not named.
+#' (traits_est = as_phylo4d(psem))
+#' (traits_SE = as_phylo4d(psem, what="Std. Error"))
 #'
 #' # Convert to sem and plot
 #' library(sem)
@@ -372,9 +376,9 @@ function( sem,
   return( results )
 }
 
-#' Print parameter estimates and standard errors.
+#' @title Print parameter estimates and standard errors.
 #'
-#' @title Print parameter estimates
+#' @description Print parameter estimates
 #' @param x Output from \code{\link{phylosem}}
 #' @param ... Not used
 #' @return prints (and invisibly returns) output from \code{\link{fit_tmb}}
@@ -421,9 +425,9 @@ coef.phylosem = function( object, standardized=FALSE, ... ){
   return( data.frame(Path=object$SEM_model[,1], Parameter=object$SEM_model[,2], Estimate=SEM_params ) )
 }
 
-#' Extract Variance-Covariance Matrix
+#' @title Extract Variance-Covariance Matrix
 #'
-#' extract the covariance of fixed effects, or both fixed and random effects.
+#' @description extract the covariance of fixed effects, or both fixed and random effects.
 #'
 #' @param object output from \code{phylosem}
 #' @param which whether to extract the covariance among fixed effects, random effects, or both
@@ -460,7 +464,7 @@ function( object,
   return( V )
 }
 
-# Extract the (marginal) log-likelihood of a phylosem model
+# @title Extract the (marginal) log-likelihood of a phylosem model
 #
 # @return object of class \code{logLik} with attributes
 #   \item{val}{log-likelihood}
@@ -476,9 +480,9 @@ logLik.phylosem <- function(object, ...) {
   return(out)
 }
 
-#' summarize phylosem
+#' @title summarize phylosem
 #'
-#' @title Summarize phylosem
+#' @description Summarize phylosem output from phylosem, including calculating intercepts at the tree root
 #'
 #' @param object Output from \code{\link{phylosem}}
 #' @param ... Not used
@@ -546,77 +550,9 @@ summary.phylosem = function( object, ... ){
   return(out)
 }
 
-
-#' Convert phylosem to phylopath output
+#' @title predict values for new tip
 #'
-#' @title Convert output from package phylosem to phylopath
-#'
-#' @param object Output from \code{\link{phylosem}}
-#'
-#' @return Convert output to format supplied by \code{\link[phylopath]{est_DAG}}
-#'
-#' @export
-as_fitted_DAG <-
-function( object ){
-
-  # extract and name identical to output from est_DAG
-  out = list(
-    coef = t(object$report$Rho_jj),
-    se = t(as.list(object$opt$SD, what="Std. Error", report=TRUE)$Rho_jj)
-  )
-  dimnames(out$coef) = dimnames(out$se) = list( colnames(object$data), colnames(object$data) )
-
-  # pass out
-  class(out) = "fitted_DAG"
-  return(out)
-}
-
-#' Convert phylosem to sem output
-#'
-#' @title Convert output from package phylosem to sem
-#'
-#' @param object Output from \code{\link{phylosem}}
-#'
-#' @return Convert output to format supplied by \code{\link[sem]{sem}}
-#'
-#' @export
-as_sem <-
-function( object ){
-
-  Sprime = object$report$V_jj
-    rownames(Sprime) = colnames(Sprime) = colnames(object$data)
-  out = sem( object$SEM_model,
-             S = Sprime,
-             N = nrow(object$data) )
-
-  # pass out
-  return(out)
-}
-
-#' Convert phylosem to phylo4d
-#'
-#' @title Convert output from package phylosem to phylo4d object
-#'
-#' @param object Output from \code{\link{phylosem}}
-#'
-#' @return Convert output to format supplied by \code{\link[phylobase]{phylo4d}}
-#'
-#' @export
-as_phylo4d <-
-function( object ){
-
-  #
-  traits = object$report$x_vj
-  colnames(traits) = colnames(object$data)
-  out = phylo4d( x=object$tree, all.data=traits )
-
-  # pass out
-  return(out)
-}
-
-#' predict values for new tip
-#'
-#' @title Predict phylosem
+#' @description Predict phylosem
 #'
 #' @inheritParams phytools::bind.tip
 #'

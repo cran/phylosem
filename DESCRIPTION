@@ -1,8 +1,8 @@
 Package: phylosem
 Type: Package
 Title: Phylogenetic Structural Equation Model
-Version: 1.1.0
-Date: 2023-10-03
+Version: 1.1.1
+Date: 2023-11-26
 Authors@R: 
     c(person(given = "James",
              family = "Thorson",
@@ -16,9 +16,9 @@ Authors@R:
              comment = c(ORCID = "0000-0002-7366-1868"))
     )
 Imports: sem, ape, phylobase, phylopath
-Depends: TMB, R (>= 4.0.0),
+Depends: TMB (>= 1.9.7), R (>= 4.0.0),
 Suggests: semPlot, TreeTools, Rphylopars, phylolm, fishtree, phyr,
-        knitr, rmarkdown, ggplot2, testthat
+        knitr, rmarkdown, ggplot2, testthat, phylosignal
 Enhances: phytools, DiagrammeR
 LinkingTo: RcppEigen, TMB
 Description: Applies phylogenetic comparative methods (PCM) and phylogenetic trait imputation using 
@@ -33,9 +33,9 @@ Encoding: UTF-8
 RoxygenNote: 7.2.3
 VignetteBuilder: knitr
 NeedsCompilation: yes
-Packaged: 2023-10-06 20:09:18 UTC; James.Thorson
+Packaged: 2023-11-26 15:15:20 UTC; James.Thorson
 Author: James Thorson [aut, cre] (<https://orcid.org/0000-0001-7415-1010>),
   Wouter van der Bijl [ctb] (<https://orcid.org/0000-0002-7366-1868>)
 Maintainer: James Thorson <James.Thorson@noaa.gov>
 Repository: CRAN
-Date/Publication: 2023-10-06 20:30:02 UTC
+Date/Publication: 2023-11-26 15:50:03 UTC

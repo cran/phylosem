@@ -153,7 +153,7 @@ Type objective_function<Type>::operator() ()
   matrix<Type> eps_vj( n_v, n_j );
   eps_vj.setZero();
 
-  // Assemble Evolutionarycovariance
+  // Assemble Evolutionary covariance
   matrix<Type> V_jj( n_j, n_j );
   matrix<Type> L_jj(n_j, n_j);
   matrix<Type> Rho_jj(n_j, n_j);
@@ -200,7 +200,7 @@ Type objective_function<Type>::operator() ()
     var_v(vroot) = NAN;
   }
   // Distribution of OU evolution -- Edges
-  for(int e=0; e<n_e; e++){
+  for(int e=0; e<n_e; e++){ // PARALLEL_REGION
     vchild = edge_ez(e,1);
     vparent = edge_ez(e,0);
     if( estimate_ou==1 ){
@@ -232,7 +232,7 @@ Type objective_function<Type>::operator() ()
 
   // Distribution for data
   for(int i=0; i<n_i; i++){
-  for(int j=0; j<n_j; j++){
+  for(int j=0; j<n_j; j++){ // PARALLEL_REGION
     if( !R_IsNA(asDouble(y_ij(i,j))) ){
       // familycode = 0 :  don't include likelihood
       if( familycode_j(j)==0 ){

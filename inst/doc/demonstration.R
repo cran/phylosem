@@ -10,7 +10,7 @@ knitr::opts_chunk$set(
 # Render example
 #  library(rmarkdown); setwd( R'(C:\Users\James.Thorson\Desktop\Git\phylosem\vignettes)' ); render( "demonstration.Rmd", pdf_document())
 
-## ----setup, echo=TRUE---------------------------------------------------------
+## ----setup, echo=TRUE, warning=FALSE, message=FALSE---------------------------
 library(phylosem)
 
 ## ----package_warning, echo=TRUE, eval=!have_packages--------------------------

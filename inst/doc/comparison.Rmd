@@ -22,7 +22,7 @@ knitr::opts_chunk$set(
 # render( "comparison.Rmd", pdf_document()) # to build PDF, and perhaps tinytex::latexmk() to install dependencies
 ```
 
-```{r setup, echo=TRUE}
+```{r setup, echo=TRUE, warning=FALSE, message=FALSE}
 library(phylosem)
 ```
 

@@ -2,7 +2,7 @@
 % Please edit documentation in R/phylosem.R
 \name{print.phylosem}
 \alias{print.phylosem}
-\title{Print parameter estimates}
+\title{Print parameter estimates and standard errors.}
 \usage{
 \method{print}{phylosem}(x, ...)
 }
@@ -15,5 +15,5 @@
 prints (and invisibly returns) output from \code{\link{fit_tmb}}
 }
 \description{
-Print parameter estimates and standard errors.
+Print parameter estimates
 }
