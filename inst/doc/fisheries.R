@@ -1,4 +1,5 @@
 ## ----include = FALSE----------------------------------------------------------
+have_packages = all(sapply( c("phylopath","ape","fishtree","phylosignal"), FUN=requireNamespace))
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
@@ -9,6 +10,9 @@ knitr::opts_chunk$set(
 #   setwd( R'(C:\Users\James.Thorson\Desktop\Git\phylosem)' ); devtools::build_rmd("vignettes/fisheries.Rmd")
 # To build PDF: 
 #   library(rmarkdown); setwd( R'(C:\Users\James.Thorson\Desktop\Git\phylosem\vignettes)' ); render( "fisheries.Rmd", pdf_document()) 
+
+## ----package_warning, include=!have_packages----------------------------------
+message("Must install phylopath, ape, fishtree, phylosignal")
 
 ## ----echo=TRUE, results='hide', message=FALSE, fig.width=6, fig.height=6------
 # Load packages

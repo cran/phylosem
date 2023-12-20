@@ -1,5 +1,5 @@
 citHeader("For methodological details regarding phylogenetic structural equation models, please see Thorson et al. (2023).
-When using the R-package phylosem, and for a comparison of it and other phylogenetic comparative methods software, please see Thorson and van der Bijl (In press).")
+When using the R-package phylosem, and for a comparison of it and other phylogenetic comparative methods software, please see Thorson and van der Bijl (2023).")
 
 bibentry(bibtype = "Article",
            textVersion = "Thorson, J. T., Maureaud, A. A., Frelat, R., Mérigot, B., Bigman, J. S., Friedman, S. T., Palomares, M. L. D., Pinsky, M. L., Price, S. A., & Wainwright, P. (2023). Identifying direct and indirect associations among traits by merging phylogenetic comparative methods and structural equation models. Methods in Ecology and Evolution, 14(5), 1259–1275. https://doi.org/10.1111/2041-210X.14076",
@@ -31,13 +31,18 @@ bibentry(bibtype = "Article",
                              family = "Price"),
                       person(given = "P.",
                              family = "Wainwright")),
-           mheader = "For methodological details regarding phylogenetic structural equation models, please see Thorson et al. (2023).\nWhen using the R-package phylosem, and for a comparison of it and other phylogenetic comparative methods software, please see Thorson and van der Bijl (In review).")
+           mheader = "For methodological details regarding phylogenetic structural equation models, please see Thorson et al. (2023).\nWhen using the R-package phylosem, and for a comparison of it and other phylogenetic comparative methods software, please see Thorson and van der Bijl (2023).")
 
 bibentry(bibtype = "Article",
-           textVersion = "Thorson, J. T., & van der Bijl, W. (In press). phylosem: A fast and simple R package for phylogenetic inference and trait imputation using phylogenetic structural equation models. Journal of Evolutionary Biology.",
+           textVersion = "Thorson, J. T., & van der Bijl, W. (2023). phylosem: A fast and simple R package for phylogenetic inference and trait imputation using phylogenetic structural equation models. Journal of Evolutionary Biology.",
            title = "phylosem: A fast and simple R package for phylogenetic inference and trait imputation using phylogenetic structural equation models",
            journal = "Journal of Evolutionary Biology",
-           year = "In press",
+           volume = "36",
+           number = "10",
+           pages = "1357-1364",
+           year = "2023",
+           doi = "10.1111/jeb.14234",
+           url = "https://doi.org/10.1111/jeb.14234",
            author = c(person(given = c("James", "T."),
                              family = "Thorson"),
                       person(given = c("&", "Wouter"),

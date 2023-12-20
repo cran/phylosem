@@ -6,14 +6,13 @@ knitr::opts_chunk$set(
   eval = have_packages  # https://r-pkgs.org/vignettes.html#sec-vignettes-eval-option
 )
 # devtools::build_rmd("vignettes/comparison.Rmd") # to test build
-# library(rmarkdown); setwd( R'(C:\Users\James.Thorson\Desktop\Git\phylosem\vignettes)' )
-# render( "comparison.Rmd", pdf_document()) # to build PDF, and perhaps tinytex::latexmk() to install dependencies
+# setwd( R'(C:\Users\James.Thorson\Desktop\Git\phylosem\vignettes)' ); rmarkdown::render( "comparison.Rmd", rmarkdown::pdf_document()) # to build PDF, and perhaps tinytex::latexmk() to install dependencies
 
 ## ----setup, echo=TRUE, warning=FALSE, message=FALSE---------------------------
 library(phylosem)
 
-## ----package_warning, echo=TRUE, eval=!have_packages--------------------------
-#  message("Must install ggplot2, phylopath, phylolm, ape")
+## ----package_warning, include=!have_packages----------------------------------
+message("Must install ggplot2, phylopath, phylolm, Rphylopars, TreeTools")
 
 ## ----eval=have_packages, echo=TRUE, message=FALSE, fig.width=6, fig.height=6----
 # Settings
@@ -177,12 +176,23 @@ knitr::kable(summary(pgsem)$coefficients, digits=3)
 #    geom_pointrange(position = position_dodge(width = 0.6)) +
 #    theme_classic() +
 #    theme(panel.grid.major.x = element_line(), panel.grid.minor.x = element_line())
+
+## ----include = FALSE, eval=FALSE----------------------------------------------
 #  saveRDS( figure, file=file.path(R'(C:\Users\James.Thorson\Desktop\Git\phylosem\vignettes)',"brms.RDS") )
+#  saveRDS( pdat, file=file.path(R'(C:\Users\James.Thorson\Desktop\Git\phylosem\vignettes)',"pdat.RDS") )
 
 ## ----eval=have_packages, message=FALSE, fig.width=6, fig.height=6, out.width = "75%", echo=FALSE----
 library(ggplot2)
-figure = readRDS( file.path(system.file("brms",package="phylosem"),"brms.RDS") )
-figure
+#figure = readRDS( file.path(system.file("brms",package="phylosem"),"brms.RDS") )
+#figure
+pdat = readRDS( file.path(system.file("brms",package="phylosem"),"pdat.RDS") )
+ggplot(pdat, aes(
+  x = Estimate, xmin = Estimate - StdErr,
+  xmax = Estimate + StdErr, y = Param, color = Method
+)) +
+  geom_pointrange(position = position_dodge(width = 0.6)) +
+  theme_classic() +
+  theme(panel.grid.major.x = element_line(), panel.grid.minor.x = element_line())
 
 ## ----eval=have_packages, echo=TRUE, message=FALSE, fig.width=6, fig.height=6----
 # Settings

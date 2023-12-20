@@ -1,5 +1,5 @@
 ---
-title: "Appendix C:  Demonstration of selected features"
+title: "Demonstration of selected features"
 author: "James T. Thorson"
 output: rmarkdown::html_vignette
 #output: rmarkdown::pdf_document
@@ -27,7 +27,7 @@ knitr::opts_chunk$set(
 library(phylosem)
 ```
 
-```{r package_warning, echo=TRUE, eval=!have_packages}
+```{r package_warning, include=!have_packages}
 message("Must install ggplot2, phylopath, phylolm, ape")
 ```
 

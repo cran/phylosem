@@ -1,8 +1,8 @@
 Package: phylosem
 Type: Package
 Title: Phylogenetic Structural Equation Model
-Version: 1.1.1
-Date: 2023-11-26
+Version: 1.1.2
+Date: 2023-12-19
 Authors@R: 
     c(person(given = "James",
              family = "Thorson",
@@ -16,9 +16,9 @@ Authors@R:
              comment = c(ORCID = "0000-0002-7366-1868"))
     )
 Imports: sem, ape, phylobase, phylopath
-Depends: TMB (>= 1.9.7), R (>= 4.0.0),
+Depends: TMB, R (>= 4.0.0)
 Suggests: semPlot, TreeTools, Rphylopars, phylolm, fishtree, phyr,
-        knitr, rmarkdown, ggplot2, testthat, phylosignal
+        knitr, rmarkdown, ggplot2, testthat, phylosignal, adephylo
 Enhances: phytools, DiagrammeR
 LinkingTo: RcppEigen, TMB
 Description: Applies phylogenetic comparative methods (PCM) and phylogenetic trait imputation using 
@@ -27,15 +27,16 @@ Description: Applies phylogenetic comparative methods (PCM) and phylogenetic tra
     allow users to easily read all of the documentation and source code.  PCM using SEM 
     includes phylogenetic linear models and structural equation models as nested submodels, 
     but also allows imputation of missing values.  Features and comparison with other packages
-    are described in Thorson and van der Bijl (In press). 
+    are described in Thorson and van der Bijl (2023) <doi:10.1111/jeb.14234>. 
 License: GPL-3
 Encoding: UTF-8
 RoxygenNote: 7.2.3
 VignetteBuilder: knitr
+URL: https://james-thorson-noaa.github.io/phylosem/
 NeedsCompilation: yes
-Packaged: 2023-11-26 15:15:20 UTC; James.Thorson
+Packaged: 2023-12-20 01:43:34 UTC; James.Thorson
 Author: James Thorson [aut, cre] (<https://orcid.org/0000-0001-7415-1010>),
   Wouter van der Bijl [ctb] (<https://orcid.org/0000-0002-7366-1868>)
 Maintainer: James Thorson <James.Thorson@noaa.gov>
 Repository: CRAN
-Date/Publication: 2023-11-26 15:50:03 UTC
+Date/Publication: 2023-12-20 12:10:02 UTC

@@ -13,8 +13,8 @@ knitr::opts_chunk$set(
 ## ----setup, echo=TRUE, warning=FALSE, message=FALSE---------------------------
 library(phylosem)
 
-## ----package_warning, echo=TRUE, eval=!have_packages--------------------------
-#  message("Must install ggplot2, phylopath, phylolm, ape")
+## ----package_warning, include=!have_packages----------------------------------
+message("Must install ggplot2, phylopath, phylolm, ape")
 
 ## ----eval=have_packages, echo=TRUE, message=FALSE, fig.width=6, fig.height=6----
 

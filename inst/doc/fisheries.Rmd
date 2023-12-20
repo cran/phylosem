@@ -4,13 +4,14 @@ author: "James T. Thorson"
 output: rmarkdown::html_vignette
 #output: rmarkdown::pdf_document
 vignette: >
-  %\VignetteIndexEntry{PCM in fisheries}
+  %\VignetteIndexEntry{Phylogenetic comparative methods in fisheries science}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
-  %\VignetteDepends{phylopath,ape,fishtree}
+  %\VignetteDepends{phylopath,ape,fishtree,phylosignal}
 ---
 
 ```{r, include = FALSE}
+have_packages = all(sapply( c("phylopath","ape","fishtree","phylosignal"), FUN=requireNamespace))
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
@@ -24,6 +25,10 @@ knitr::opts_chunk$set(
 ```
 
 Phylogenetic comparative methods (PCM) are rarely in fisheries science, perhaps due to a lack of familiarity with methods and software among fisheries scientists.  This underuse is surprising, given that fisheries science and management strongly depends on foundational results from comparative methods regarding fish productivity and life-history parameters, e.g., for defining proxies for biological reference points and informing hard-to-estimate demographic rates such as stock-recruit and natural mortality parameters.
+
+```{r package_warning, include=!have_packages}
+message("Must install phylopath, ape, fishtree, phylosignal")
+```
 
 ## Preparing the Then et al. mortality database
 

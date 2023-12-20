@@ -1,5 +1,5 @@
 ---
-title: "Appendix A:  Comparison with other packages"
+title: "Comparison with other packages"
 author: "James T. Thorson and Wouter van der Bijl"
 output: rmarkdown::html_vignette
 #output: rmarkdown::pdf_document
@@ -18,16 +18,15 @@ knitr::opts_chunk$set(
   eval = have_packages  # https://r-pkgs.org/vignettes.html#sec-vignettes-eval-option
 )
 # devtools::build_rmd("vignettes/comparison.Rmd") # to test build
-# library(rmarkdown); setwd( R'(C:\Users\James.Thorson\Desktop\Git\phylosem\vignettes)' )
-# render( "comparison.Rmd", pdf_document()) # to build PDF, and perhaps tinytex::latexmk() to install dependencies
+# setwd( R'(C:\Users\James.Thorson\Desktop\Git\phylosem\vignettes)' ); rmarkdown::render( "comparison.Rmd", rmarkdown::pdf_document()) # to build PDF, and perhaps tinytex::latexmk() to install dependencies
 ```
 
 ```{r setup, echo=TRUE, warning=FALSE, message=FALSE}
 library(phylosem)
 ```
 
-```{r package_warning, echo=TRUE, eval=!have_packages}
-message("Must install ggplot2, phylopath, phylolm, ape")
+```{r package_warning, include=!have_packages}
+message("Must install ggplot2, phylopath, phylolm, Rphylopars, TreeTools")
 ```
 
 `phylosem` is an R package for fitting phylogenetic structural equation models (PSEMs).   The package generalizes features in existing R packages:
@@ -232,13 +231,25 @@ figure = ggplot(pdat, aes(
   geom_pointrange(position = position_dodge(width = 0.6)) +
   theme_classic() +
   theme(panel.grid.major.x = element_line(), panel.grid.minor.x = element_line())
+```
+
+```{r, include = FALSE, eval=FALSE}
 saveRDS( figure, file=file.path(R'(C:\Users\James.Thorson\Desktop\Git\phylosem\vignettes)',"brms.RDS") )
+saveRDS( pdat, file=file.path(R'(C:\Users\James.Thorson\Desktop\Git\phylosem\vignettes)',"pdat.RDS") )
 ```
 
 ```{r, eval=have_packages, message=FALSE, fig.width=6, fig.height=6, out.width = "75%", echo=FALSE}
 library(ggplot2)
-figure = readRDS( file.path(system.file("brms",package="phylosem"),"brms.RDS") )
-figure
+#figure = readRDS( file.path(system.file("brms",package="phylosem"),"brms.RDS") )
+#figure
+pdat = readRDS( file.path(system.file("brms",package="phylosem"),"pdat.RDS") )
+ggplot(pdat, aes(
+  x = Estimate, xmin = Estimate - StdErr,
+  xmax = Estimate + StdErr, y = Param, color = Method
+)) +
+  geom_pointrange(position = position_dodge(width = 0.6)) +
+  theme_classic() +
+  theme(panel.grid.major.x = element_line(), panel.grid.minor.x = element_line())
 ```
 
 In this instance (and in others we have explored), results from `phylolm::phyloglm` are generally different while those from `phylosem`, `phyr::pglmm_compare`, and `brms` are close but not quite identical.

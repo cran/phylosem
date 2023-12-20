@@ -1,3 +1,7 @@
+# phylosem 1.1.2
+* Adding new functions to provide warning if Matrix version doesn't match
+  what's expected by TMB
+
 # phylosem 1.1.1
 * Re-adding `phylosignal` as SUGGESTS
 * Re-adding `phylosignal` to Fisheries vignette

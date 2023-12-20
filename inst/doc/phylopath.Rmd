@@ -1,12 +1,12 @@
 ---
-title: "Appendix B:  Detailed comparison with `phylopath`"
+title: "Detailed comparison with `phylopath`"
 author: "Wouter van der Bijl"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Detailed comparison with `phylopath`}
   %\VignetteEncoding{UTF-8}
   %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteDepends{phylopath}
+  %\VignetteDepends{phylopath,adephylo}
 editor_options:
   chunk_output_type: console
 ---
@@ -18,6 +18,10 @@ knitr::opts_chunk$set(
   comment = "#>",
   eval = have_packages  # https://r-pkgs.org/vignettes.html#sec-vignettes-eval-option
 )
+# Test build:
+#  devtools::build_rmd("vignettes/phylopath.Rmd")
+# Render example
+#  library(rmarkdown); setwd( R'(C:\Users\James.Thorson\Desktop\Git\phylosem\vignettes)' ); render( "phylopath.Rmd", pdf_document())
 ```
 
 [_phylopath_](https://doi.org/10.7717/peerj.4718) is a package that implements phylogentic path analysis, using the d-separation methodology described by [Von Hardenberg & Gonzalez-Voyer](https://doi.org/10.1111/j.1558-5646.2012.01790.x). The models that can be fit are essentially a subset of the models that can be fit using _phylosem_. This is a comparison between the two packages, based on the introduction vignette of _phylopath_, showing where the packages are similar and where they differ. This should also be useful for _phylopath_ users, that want to do the same kinds of analysis in _phylosem_.
@@ -28,8 +32,8 @@ To clearly show from which package each function originates, I'll use the `packa
 
 Let's start by loading the Rhinogrades example data and phylogeny. 
 
-```{r package_warning, echo=TRUE, eval=!have_packages}
-message("Must install ggplot2, phylopath, phylolm, ape")
+```{r package_warning, include=isFALSE(have_packages)}
+print("Must install ggplot2, phylopath, phylolm, ape")
 ```
 
 ```{r setup}

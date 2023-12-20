@@ -5,9 +5,13 @@ knitr::opts_chunk$set(
   comment = "#>",
   eval = have_packages  # https://r-pkgs.org/vignettes.html#sec-vignettes-eval-option
 )
+# Test build:
+#  devtools::build_rmd("vignettes/phylopath.Rmd")
+# Render example
+#  library(rmarkdown); setwd( R'(C:\Users\James.Thorson\Desktop\Git\phylosem\vignettes)' ); render( "phylopath.Rmd", pdf_document())
 
-## ----package_warning, echo=TRUE, eval=!have_packages--------------------------
-#  message("Must install ggplot2, phylopath, phylolm, ape")
+## ----package_warning, include=isFALSE(have_packages)--------------------------
+print("Must install ggplot2, phylopath, phylolm, ape")
 
 ## ----setup--------------------------------------------------------------------
 data(rhino, rhino_tree, package = 'phylopath')
