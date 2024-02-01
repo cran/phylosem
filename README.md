@@ -19,8 +19,9 @@ Please see package vignettes for more details regarding syntax and features.
 
 [![](https://cranlogs.r-pkg.org/badges/phylosem)](https://cran.r-project.org/package=phylosem)
 [![](https://cranlogs.r-pkg.org/badges/grand-total/phylosem)](https://cran.r-project.org/package=phylosem)
-
 [![DOI](https://zenodo.org/badge/534386257.svg)](https://zenodo.org/badge/latestdoi/534386257)
+[![Codecov test coverage](https://codecov.io/gh/James-Thorson-NOAA/phylosem/branch/remove-fit_tmb/graph/badge.svg)](https://app.codecov.io/gh/James-Thorson-NOAA/phylosem/tree/remove-fit_tmb)
+[![Documentation](https://img.shields.io/badge/documentation-phylosem-orange.svg?colorB=E91E63)](https://james-thorson-noaa.github.io/phylosem/)
 
 
 

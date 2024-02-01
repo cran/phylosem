@@ -18,8 +18,10 @@ knitr::opts_chunk$set(
   comment = "#>",
   eval = have_packages  # https://r-pkgs.org/vignettes.html#sec-vignettes-eval-option
 )
+# To isntall
+#   devtools::install_local( R'(C:\Users\James.Thorson\Desktop\Git\phylosem)', force=TRUE )
 # Test build:
-#  devtools::build_rmd("vignettes/phylopath.Rmd")
+#  setwd( R'(C:\Users\James.Thorson\Desktop\Git\phylosem\vignettes)' ); devtools::build_rmd( R'(vignettes\phylopath.Rmd)' )
 # Render example
 #  library(rmarkdown); setwd( R'(C:\Users\James.Thorson\Desktop\Git\phylosem\vignettes)' ); render( "phylopath.Rmd", pdf_document())
 ```

@@ -13,7 +13,7 @@ function( object ){
   # extract and name identical to output from est_DAG
   out = list(
     coef = t(object$report$Rho_jj),
-    se = t(as.list(object$opt$SD, what="Std. Error", report=TRUE)$Rho_jj)
+    se = t(as.list(object$sdrep, what="Std. Error", report=TRUE)$Rho_jj)
   )
   dimnames(out$coef) = dimnames(out$se) = list( colnames(object$data), colnames(object$data) )
 
@@ -64,7 +64,7 @@ function( object,
 
   #
   what = match.arg(what)
-  traits = as.list( object$opt$SD, what=what )$x_vj
+  traits = as.list( object$sdrep, what=what )$x_vj
   colnames(traits) = colnames(object$data)
   out = phylo4d( x=object$tree, all.data=traits )
 

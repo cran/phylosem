@@ -14,11 +14,8 @@ phylosem(
   estimate_lambda = FALSE,
   estimate_kappa = FALSE,
   data_labels = rownames(data),
-  quiet = FALSE,
-  newtonsteps = 1,
   tmb_inputs = NULL,
-  run_model = TRUE,
-  ...
+  control = phylosem_control()
 )
 }
 \arguments{
@@ -61,28 +58,11 @@ lengths (a.k.a. the Pagel-kappa term) using additional parameter \code{lnkappa}}
 \item{data_labels}{For each row of \code{data}, listing the corresponding name from
 \code{tree$tip.label}.  Default pulls \code{data_labels} from \code{rownames(data)}}
 
-\item{quiet}{if \code{FALSE}, the default, then the number of input lines is reported and
-    a message is printed suggesting that \code{specifyEquations} or \code{cfa} be used.}
-
-\item{newtonsteps}{Integer specifying the number of extra newton steps to take
-after optimization (alternative to \code{loopnum}).
-Each newtonstep requires calculating the Hessian matrix and is therefore slow.
-But for well-behaved models, each Newton step will typically
-decrease the maximum gradient of the loglikelihood with respect to each fixed effect,
-and therefore this option can be used to achieve an arbitrarily low final gradient
-given sufficient time for well-behaved models.  However, this option will also
-perform strangely or have unexpected consequences for poorly-behaved models, e.g.,
-when fixed effects are at upper or lower bounds. There is no need to increase the value
-of newtonsteps if the model appears to be converged (i.e., has low final_gradient and none of
-the standard errors are NA values)}
-
 \item{tmb_inputs}{optional tagged list that overrides the default constructor
 for TMB inputs (use at your own risk)}
 
-\item{run_model}{Boolean indicating whether to estimate parameters (the default), or
-instead to return the model inputs and compiled TMB object without running;}
-
-\item{...}{Additional parameters passed to \code{\link{fit_tmb}}}
+\item{control}{Output from \code{\link{phylosem_control}}, used to define user
+settings, and see documentation for that function for details.}
 }
 \value{
 An object (list) of class `phylosem`. Elements include:
@@ -92,7 +72,8 @@ An object (list) of class `phylosem`. Elements include:
 \item{obj}{TMB object from \code{\link[TMB]{MakeADFun}}}
 \item{tree}{Copy of argument \code{tree}}
 \item{tmb_inputs}{The list of inputs passed to \code{\link[TMB]{MakeADFun}}}
-\item{opt}{The output from \code{\link{fit_tmb}}}
+\item{opt}{The output from \code{\link[stats]{nlminb}}}
+\item{sdrep}{The output from \code{\link[TMB]{sdreport}}}
 \item{report}{The output from \code{obj$report()}}
 \item{parhat}{The output from \code{obj$env$parList()} containing maximum likelihood estimates and empirical Bayes predictions}
 }

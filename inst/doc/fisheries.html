@@ -354,7 +354,7 @@ as stock-recruit and natural mortality parameters.</p>
 <div id="preparing-the-then-et-al.-mortality-database" class="section level2">
 <h2>Preparing the Then et al. mortality database</h2>
 <p>To demonstrate the potential role for PCM in fisheries science, we
-re-analyze a foundational dataset compiled by <a href="https://www.vims.edu/research/departments/fisheries/programs/mort_db/index.php">Then
+re-analyze a foundational dataset compiled by <a href="https://www.vims.edu/research/departments/fisheries/programs/mort_db/">Then
 et al.</a>. We specifically download the file “Mlifehist_ver1.0.csv” and
 then include a copy as a data object in package <em>phylosem</em> to
 simplify the following demonstration. This demonstration then provides
@@ -440,11 +440,11 @@ coefficients.</p>
 <span id="cb2-17"><a href="#cb2-17" tabindex="-1"></a>                   <span class="at">estimate_ou =</span> Grid[i,<span class="st">&#39;OU&#39;</span>],</span>
 <span id="cb2-18"><a href="#cb2-18" tabindex="-1"></a>                   <span class="at">estimate_lambda =</span> Grid[i,<span class="st">&#39;lambda&#39;</span>],</span>
 <span id="cb2-19"><a href="#cb2-19" tabindex="-1"></a>                   <span class="at">estimate_kappa =</span> Grid[i,<span class="st">&#39;kappa&#39;</span>],</span>
-<span id="cb2-20"><a href="#cb2-20" tabindex="-1"></a>                   <span class="at">quiet =</span> <span class="cn">TRUE</span> )</span>
+<span id="cb2-20"><a href="#cb2-20" tabindex="-1"></a>                   <span class="at">control =</span> <span class="fu">phylosem_control</span>(<span class="at">quiet =</span> <span class="cn">TRUE</span>) )</span>
 <span id="cb2-21"><a href="#cb2-21" tabindex="-1"></a>}</span>
 <span id="cb2-22"><a href="#cb2-22" tabindex="-1"></a></span>
 <span id="cb2-23"><a href="#cb2-23" tabindex="-1"></a><span class="co"># Extract AIC for each model and rank-order by parsimony</span></span>
-<span id="cb2-24"><a href="#cb2-24" tabindex="-1"></a>Grid<span class="sc">$</span>AIC <span class="ot">=</span> <span class="fu">sapply</span>( psem_grid, \(m) m<span class="sc">$</span>opt<span class="sc">$</span>AIC )</span>
+<span id="cb2-24"><a href="#cb2-24" tabindex="-1"></a>Grid<span class="sc">$</span>AIC <span class="ot">=</span> <span class="fu">sapply</span>( psem_grid, \(m) <span class="fu">AIC</span>(m) )</span>
 <span id="cb2-25"><a href="#cb2-25" tabindex="-1"></a>Grid <span class="ot">=</span> Grid[<span class="fu">order</span>(Grid<span class="sc">$</span>AIC,<span class="at">decreasing=</span><span class="cn">FALSE</span>),]</span>
 <span id="cb2-26"><a href="#cb2-26" tabindex="-1"></a></span>
 <span id="cb2-27"><a href="#cb2-27" tabindex="-1"></a><span class="co"># Select model with lowest AIC</span></span>
@@ -699,7 +699,7 @@ coefficients are very similar to estimates when using phyogeny.</p>
 <span id="cb6-31"><a href="#cb6-31" tabindex="-1"></a>                 <span class="at">tree =</span> tree,</span>
 <span id="cb6-32"><a href="#cb6-32" tabindex="-1"></a>                 <span class="at">sem =</span> sem_structure,</span>
 <span id="cb6-33"><a href="#cb6-33" tabindex="-1"></a>                 <span class="at">estimate_ou =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb6-34"><a href="#cb6-34" tabindex="-1"></a>                 <span class="at">quiet =</span> <span class="cn">TRUE</span> )</span>
+<span id="cb6-34"><a href="#cb6-34" tabindex="-1"></a>                 <span class="at">control =</span> <span class="fu">phylosem_control</span>(<span class="at">quiet =</span> <span class="cn">TRUE</span>) )</span>
 <span id="cb6-35"><a href="#cb6-35" tabindex="-1"></a></span>
 <span id="cb6-36"><a href="#cb6-36" tabindex="-1"></a><span class="co"># Plot path diagram</span></span>
 <span id="cb6-37"><a href="#cb6-37" tabindex="-1"></a>my_fitted_DAG <span class="ot">=</span> <span class="fu">as_fitted_DAG</span>(psem_taxon)</span>

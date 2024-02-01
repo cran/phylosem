@@ -34,7 +34,7 @@ bibentry(bibtype = "Article",
            mheader = "For methodological details regarding phylogenetic structural equation models, please see Thorson et al. (2023).\nWhen using the R-package phylosem, and for a comparison of it and other phylogenetic comparative methods software, please see Thorson and van der Bijl (2023).")
 
 bibentry(bibtype = "Article",
-           textVersion = "Thorson, J. T., & van der Bijl, W. (2023). phylosem: A fast and simple R package for phylogenetic inference and trait imputation using phylogenetic structural equation models. Journal of Evolutionary Biology.",
+           textVersion = "Thorson, J. T., & van der Bijl, W. (2023). phylosem: A fast and simple R package for phylogenetic inference and trait imputation using phylogenetic structural equation models. Journal of Evolutionary Biology. 36(10): 1357-1364. https://doi.org/10.1111/jeb.14234",
            title = "phylosem: A fast and simple R package for phylogenetic inference and trait imputation using phylogenetic structural equation models",
            journal = "Journal of Evolutionary Biology",
            volume = "36",

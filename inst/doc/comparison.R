@@ -45,7 +45,7 @@ start_time = Sys.time()
 psem_bm = phylosem( sem = "x -> y, p",
           data = Data,
           tree = tree,
-          quiet = TRUE )
+          control = phylosem_control(quiet = TRUE) )
 Sys.time() - start_time
 knitr::kable(summary(psem_bm)$coefficients, digits=3)
 
@@ -59,7 +59,7 @@ psem_ou = phylosem( sem = "x -> y, p",
           data = Data,
           tree = tree,
           estimate_ou = TRUE,
-          quiet = TRUE )
+          control = phylosem_control(quiet = TRUE) )
 Sys.time() - start_time
 
 knitr::kable(summary(psem_ou)$coefficients, digits=3)
@@ -77,7 +77,7 @@ psem_lambda = phylosem( sem = "x -> y, p",
           data = Data,
           tree = tree,
           estimate_lambda = TRUE,
-          quiet = TRUE )
+          control = phylosem_control(quiet = TRUE) )
 Sys.time() - start_time
 
 knitr::kable(summary(psem_lambda)$coefficients, digits=3)
@@ -95,7 +95,7 @@ psem_kappa = phylosem( sem = "x -> y, p",
           data = Data,
           tree = tree,
           estimate_kappa = TRUE,
-          quiet = TRUE )
+          control = phylosem_control(quiet = TRUE) )
 Sys.time() - start_time
 
 knitr::kable(summary(psem_kappa)$coefficients, digits=3)
@@ -142,7 +142,7 @@ pgsem = phylosem( sem = "x -> y, p",
           data = Data,
           family = c("fixed","poisson"),
           tree = tree,
-          quiet = TRUE )
+          control = phylosem_control(quiet = TRUE) )
 knitr::kable(summary(pgsem)$coefficients, digits=3)
 
 ## ----echo=TRUE, message=FALSE, fig.width=6, fig.height=6, out.width = "75%", eval=FALSE----
@@ -229,7 +229,7 @@ pgsem = phylosem( sem = "x -> y, p",
           data = Data,
           family = c("fixed","binomial"),
           tree = tree,
-          quiet = TRUE )
+          control = phylosem_control(quiet = TRUE) )
 knitr::kable(summary(pgsem)$coefficients, digits=3)
 
 ## ----eval=have_packages, echo=TRUE, message=FALSE, fig.width=6, fig.height=6----
@@ -262,7 +262,7 @@ start_time = Sys.time()
 psem = phylosem( sem = model,
           data = rhino_scaled[,c("BM","NL","DD","RS","LS")],
           tree = rhino_tree,
-          quiet = TRUE )
+          control = phylosem_control(quiet = TRUE) )
 Sys.time() - start_time
 plot( as_fitted_DAG(psem) )
 
@@ -320,7 +320,7 @@ start_time = Sys.time()
 psem = phylosem( data = Data,
           sem = equations,
           tree = tree_null,
-          quiet = TRUE )
+          control = phylosem_control(quiet = TRUE) )
 Sys.time() - start_time
 
 ## ----eval=have_packages, echo=FALSE, results='asis'---------------------------
@@ -357,12 +357,12 @@ psem = phylosem( data = Data,
                  tree = tree,
                  sem = "",
                  covs = "BM, NL, DD, RS, LS",
-                 quiet = TRUE )
+                 control = phylosem_control(quiet = TRUE) )
 Sys.time() - start_time
 
 # Display estimates for missing values
 knitr::kable(cbind(
-  "Estimate"=as.list(psem$opt$SD,"Estimate")$x_vj[ match("t1",tree$tip.label), ],
-  "Var"=as.list(psem$opt$SD,"Std. Error")$x_vj[ match("t1",tree$tip.label), ]^2
+  "Estimate"=as.list(psem$sdrep,"Estimate")$x_vj[ match("t1",tree$tip.label), ],
+  "Var"=as.list(psem$sdrep,"Std. Error")$x_vj[ match("t1",tree$tip.label), ]^2
 ), digits=3)
 

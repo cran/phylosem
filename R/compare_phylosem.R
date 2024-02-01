@@ -22,6 +22,7 @@ function( sem_set,
           estimate_ou = FALSE,
           estimate_lambda = FALSE,
           estimate_kappa = FALSE,
+          control = phylosem_control(),
           ... ){
 
   # Initialize object of results
@@ -31,6 +32,7 @@ function( sem_set,
   # Loop through models
   for( modelI in seq_along(sem_set) ){
     fit = tryCatch( phylosem( sem = sem_set[[modelI]],
+    #fit = phylosem( sem = sem_set[[modelI]],
                               tree = tree,
                               data = data,
                               family = family,
@@ -38,9 +40,10 @@ function( sem_set,
                               estimate_ou = estimate_ou,
                               estimate_lambda = estimate_lambda,
                               estimate_kappa = estimate_kappa,
+                              control = control,
                               ... ),
                     error = function(e) e )
-    if( "phylosem" %in% class(fit) ){
+    if( isTRUE(is(fit, "phylosem")) ){
       out[[modelI]] = fit
     }
   }

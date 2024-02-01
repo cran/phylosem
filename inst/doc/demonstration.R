@@ -6,7 +6,7 @@ knitr::opts_chunk$set(
   eval = have_packages  # https://r-pkgs.org/vignettes.html#sec-vignettes-eval-option
 )
 # Test build:
-#  devtools::build_rmd("vignettes/comparison.Rmd")
+#  devtools::build_rmd("vignettes/demonstration.Rmd")
 # Render example
 #  library(rmarkdown); setwd( R'(C:\Users\James.Thorson\Desktop\Git\phylosem\vignettes)' ); render( "demonstration.Rmd", pdf_document())
 
@@ -34,21 +34,22 @@ psem = phylosem( sem = model,
           estimate_lambda = TRUE,
           estimate_kappa = TRUE,
           tree = rhino_tree,
-          getJointPrecision = TRUE,
-          quiet = TRUE )
+          control = phylosem_control(
+            getJointPrecision = TRUE,
+            quiet = TRUE) )
 
 #
-V = psem$opt$SD$cov.fixed
+V = psem$sdrep$cov.fixed
 Rsub = cov2cor(V)[c('lnalpha','logitlambda','lnkappa'),c('lnalpha','logitlambda','lnkappa')]
 
-knitr::kable(c("minimum_eigenvalue"=min(eigen(psem$opt$SD$jointPrecision)$values),
-             "maximum_eigenvalue"=max(eigen(psem$opt$SD$jointPrecision)$values)), digits=3)
+knitr::kable(c("minimum_eigenvalue"=min(eigen(psem$sdrep$jointPrecision)$values),
+             "maximum_eigenvalue"=max(eigen(psem$sdrep$jointPrecision)$values)), digits=3)
 knitr::kable(Rsub, digits=3)
 
 ## ----eval=have_packages, echo=TRUE, message=FALSE, fig.width=6, fig.height=4----
 library(ggplot2)
 # Compile estimates and SEs
-pdat = data.frame( "Estimate" = psem$opt$SD$par.fixed[c('lnalpha','logitlambda','lnkappa')],
+pdat = data.frame( "Estimate" = psem$sdrep$par.fixed[c('lnalpha','logitlambda','lnkappa')],
               "StdErr" = sqrt(diag(V)[c('lnalpha','logitlambda','lnkappa')]) )
 pdat = cbind( pdat, "Param" = rownames(pdat))
 
@@ -105,9 +106,10 @@ for( cI in seq_along(Ntree_config) ){
   psem_bm = phylosem( sem = "x -> y, p",
             data = Data,
             tree = tree,
-            quiet = TRUE,
-            newtonsteps = 0,
-            getsd = FALSE )
+            control = phylosem_control(
+              quiet = TRUE,
+              newton_loops = 0,
+              getsd = FALSE) )
   Time_rcz[rI,cI,"phylosem"] = Sys.time() - start_time
 }}
 

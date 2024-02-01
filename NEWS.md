@@ -1,3 +1,8 @@
+# phylosem 1.1.3
+* Removing fit_tmb to simplify code and remove unnecessary warnings
+* Adding codecov and extra tests
+* Fixing R-CMD-check to force build Matrix/TMB from source
+
 # phylosem 1.1.2
 * Adding new functions to provide warning if Matrix version doesn't match
   what's expected by TMB

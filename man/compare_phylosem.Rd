@@ -13,6 +13,7 @@ compare_phylosem(
   estimate_ou = FALSE,
   estimate_lambda = FALSE,
   estimate_kappa = FALSE,
+  control = phylosem_control(),
   ...
 )
 }
@@ -52,6 +53,9 @@ phylogenetic tips (a.k.a. the Pagel-lambda term) using additional parameter \cod
 
 \item{estimate_kappa}{Boolean indicating whether to estimate a nonlinear scaling of branch
 lengths (a.k.a. the Pagel-kappa term) using additional parameter \code{lnkappa}}
+
+\item{control}{Output from \code{\link{phylosem_control}}, used to define user
+settings, and see documentation for that function for details.}
 
 \item{...}{Additional arguments passed to \code{\link{phylosem}}}
 }

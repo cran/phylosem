@@ -12,7 +12,7 @@
 \item{...}{Not used}
 }
 \value{
-prints (and invisibly returns) output from \code{\link{fit_tmb}}
+prints (and invisibly returns) output from \code{\link[stats]{nlminb}}
 }
 \description{
 Print parameter estimates

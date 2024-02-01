@@ -76,11 +76,11 @@ for( i in 1:nrow(Grid)){
                    estimate_ou = Grid[i,'OU'],
                    estimate_lambda = Grid[i,'lambda'],
                    estimate_kappa = Grid[i,'kappa'],
-                   quiet = TRUE )
+                   control = phylosem_control(quiet = TRUE) )
 }
 
 # Extract AIC for each model and rank-order by parsimony
-Grid$AIC = sapply( psem_grid, \(m) m$opt$AIC )
+Grid$AIC = sapply( psem_grid, \(m) AIC(m) )
 Grid = Grid[order(Grid$AIC,decreasing=FALSE),]
 
 # Select model with lowest AIC
@@ -142,7 +142,7 @@ psem_taxon = phylosem( data=Data,
                  tree = tree,
                  sem = sem_structure,
                  estimate_ou = TRUE,
-                 quiet = TRUE )
+                 control = phylosem_control(quiet = TRUE) )
 
 # Plot path diagram
 my_fitted_DAG = as_fitted_DAG(psem_taxon)

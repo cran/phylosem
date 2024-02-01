@@ -32,7 +32,7 @@ message("Must install phylopath, ape, fishtree, phylosignal")
 
 ## Preparing the Then et al. mortality database
 
-To demonstrate the potential role for PCM in fisheries science, we re-analyze a foundational dataset compiled by [Then et al.](https://www.vims.edu/research/departments/fisheries/programs/mort_db/index.php).  We specifically download the file "Mlifehist_ver1.0.csv" and then include a copy as a data object in package _phylosem_ to simplify the following demonstration.  This demonstration then provides basic syntax and output from PCM, showing the relationship between natural mortality rate, longevity, and growth parameters. 
+To demonstrate the potential role for PCM in fisheries science, we re-analyze a foundational dataset compiled by [Then et al.](https://www.vims.edu/research/departments/fisheries/programs/mort_db/).  We specifically download the file "Mlifehist_ver1.0.csv" and then include a copy as a data object in package _phylosem_ to simplify the following demonstration.  This demonstration then provides basic syntax and output from PCM, showing the relationship between natural mortality rate, longevity, and growth parameters.
 
 To do so, we first load a phylogeny for fishes using package _fishtree_, which includes several versions of a phylogeny for fishes develoepd by [Rabosky et al.](https://doi.org/10.1038/s41586-018-0273-1). We then associate all trait data with a tip label from that phylogeny, and provide convenient names for the modeled variables. 
 
@@ -105,11 +105,11 @@ for( i in 1:nrow(Grid)){
                    estimate_ou = Grid[i,'OU'],
                    estimate_lambda = Grid[i,'lambda'],
                    estimate_kappa = Grid[i,'kappa'],
-                   quiet = TRUE )
+                   control = phylosem_control(quiet = TRUE) )
 }
 
 # Extract AIC for each model and rank-order by parsimony
-Grid$AIC = sapply( psem_grid, \(m) m$opt$AIC )
+Grid$AIC = sapply( psem_grid, \(m) AIC(m) )
 Grid = Grid[order(Grid$AIC,decreasing=FALSE),]
 
 # Select model with lowest AIC
@@ -184,7 +184,7 @@ psem_taxon = phylosem( data=Data,
                  tree = tree,
                  sem = sem_structure,
                  estimate_ou = TRUE,
-                 quiet = TRUE )
+                 control = phylosem_control(quiet = TRUE) )
 
 # Plot path diagram
 my_fitted_DAG = as_fitted_DAG(psem_taxon)

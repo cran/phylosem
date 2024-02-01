@@ -3,7 +3,6 @@
 #' @description Fits a phylogenetic structural equation model
 #'
 #' @inheritParams sem::specifyModel
-#' @inheritParams fit_tmb
 #'
 #' @param sem structural equation model structure, passed to either \code{\link[sem]{specifyModel}}
 #'        or \code{\link[sem]{specifyEquations}} and then parsed to control
@@ -28,9 +27,8 @@
 #'        \code{tree$tip.label}.  Default pulls \code{data_labels} from \code{rownames(data)}
 #' @param tmb_inputs optional tagged list that overrides the default constructor
 #'        for TMB inputs (use at your own risk)
-#' @param run_model Boolean indicating whether to estimate parameters (the default), or
-#'        instead to return the model inputs and compiled TMB object without running;
-#' @param ... Additional parameters passed to \code{\link{fit_tmb}}
+#' @param control Output from \code{\link{phylosem_control}}, used to define user
+#'        settings, and see documentation for that function for details.
 #'
 #' @details
 #' Note that parameters \code{logitlambda}, \code{lnkappa}, and \code{lnalpha} if estimated are each estimated as having a single value
@@ -53,6 +51,7 @@
 #' @importFrom phylobase phylo4d
 #' @importFrom ape Ntip node.depth.edgelength rtree
 #' @importFrom TMB compile dynlib MakeADFun sdreport
+#' @importFrom methods is
 #'
 #' @return
 #' An object (list) of class `phylosem`. Elements include:
@@ -62,7 +61,8 @@
 #' \item{obj}{TMB object from \code{\link[TMB]{MakeADFun}}}
 #' \item{tree}{Copy of argument \code{tree}}
 #' \item{tmb_inputs}{The list of inputs passed to \code{\link[TMB]{MakeADFun}}}
-#' \item{opt}{The output from \code{\link{fit_tmb}}}
+#' \item{opt}{The output from \code{\link[stats]{nlminb}}}
+#' \item{sdrep}{The output from \code{\link[TMB]{sdreport}}}
 #' \item{report}{The output from \code{obj$report()}}
 #' \item{parhat}{The output from \code{obj$env$parList()} containing maximum likelihood estimates and empirical Bayes predictions}
 #' }
@@ -177,11 +177,8 @@ function( sem,
           estimate_lambda = FALSE,
           estimate_kappa = FALSE,
           data_labels = rownames(data),
-          quiet = FALSE,
-          newtonsteps = 1,
           tmb_inputs = NULL,
-          run_model = TRUE,
-          ... ){
+          control = phylosem_control() ){
 
   # Function that converts SEM model to a RAM, see `?sem` for more context
   build_ram = function( model, vars ){
@@ -227,7 +224,10 @@ function( sem,
   #if( measurement_error==TRUE & estimate_lambda==TRUE ){
   #  stop("measurement errors using `measurement_error=TRUE` are confounded with `estimate_lambda=TRUE`")
   #}
-  if( isFALSE("phylo" %in% class(tree)) ){
+  # General error checks
+  if( isFALSE(is(control, "phylosem_control")) ) stop("`control` must be made by `phylosem_control()`")
+
+  if( isFALSE(is(tree, "phylo")) ){
     stop("Check `tree` input")
   }
   if( !("edge.length" %in% names(tree)) ){
@@ -239,16 +239,16 @@ function( sem,
 
   #
   SEM_model = tryCatch(
-    specifyModel( text=sem, exog.variances=TRUE, endog.variances=TRUE, covs=covs, quiet=quiet ),
+    specifyModel( text=sem, exog.variances=TRUE, endog.variances=TRUE, covs=covs, quiet=control$quiet ),
     error = function(e) e
   )
-  if( isFALSE("semmod" %in% class(SEM_model)) ){
+  if( isFALSE(is(SEM_model,"semmod")) ){
     SEM_model = tryCatch(
       specifyEquations( text=sem, exog.variances=TRUE, endog.variances=TRUE, covs=covs ),
       error = function(e) e
     )
   }
-  if( isFALSE("semmod" %in% class(SEM_model)) ){
+  if( isFALSE(is(SEM_model,"semmod")) ){
     stop("Must supply either input for `sem::specifyModel` or `sem::specifyEquations`")
   }
   RAM = build_ram( SEM_model, colnames(data) )
@@ -350,7 +350,7 @@ function( sem,
                         map = tmb_inputs$map_list,
                         random = tmb_inputs$random,
                         DLL = "phylosem" )
-  if(quiet==FALSE) list_parameters(obj)
+  if(control$quiet==FALSE) list_parameters(obj)
   results = list( "data" = data,
                   "SEM_model" = SEM_model,
                   "obj" = obj,
@@ -359,21 +359,107 @@ function( sem,
                   "tmb_inputs" = tmb_inputs )
 
   # Export stuff
-  if( run_model==FALSE ){
+  if( control$run_model==FALSE ){
     return( results )
   }
 
   #
   obj$env$beSilent()       # if(!is.null(Random))
-  results$opt = fit_tmb( obj,
-                          quiet = quiet,
-                          control = list(eval.max=10000, iter.max=10000, trace=ifelse(quiet==TRUE,0,1) ),
-                          newtonsteps = newtonsteps,
-                          ... )
+  #results$opt = fit_tmb( obj,
+  #                        quiet = quiet,
+  #                        control = list(eval.max=10000, iter.max=10000, trace=ifelse(quiet==TRUE,0,1) ),
+  #                        newtonsteps = newtonsteps,
+  #                       ... )
+
+  # Optimize
+  results$opt = list( "par"=obj$par )
+  for( i in seq_len(max(0,control$nlminb_loops)) ){
+    if( isFALSE(control$quiet) ) message("Running nlminb_loop #", i)
+    results$opt = nlminb( start = results$opt$par,
+                  objective = obj$fn,
+                  gradient = obj$gr,
+                  control = list( eval.max = control$eval.max,
+                                  iter.max = control$iter.max,
+                                  trace = control$trace ) )
+  }
+
+  # Newtonsteps
+  for( i in seq_len(max(0,control$newton_loops)) ){
+    if( isFALSE(control$quiet) ) message("Running newton_loop #", i)
+    g = as.numeric( obj$gr(results$opt$par) )
+    h = optimHess(results$opt$par, fn=obj$fn, gr=obj$gr)
+    results$opt$par = results$opt$par - solve(h, g)
+    results$opt$objective = obj$fn(results$opt$par)
+  }
+
+  # Run sdreport
+  if( isTRUE(control$getsd) ){
+    if( isFALSE(control$quiet) ) message("Running sdreport")
+    Hess_fixed = optimHess( par=results$opt$par, fn=obj$fn, gr=obj$gr )
+    results$sdrep = sdreport( obj,
+                              hessian.fixed=Hess_fixed,
+                              getJointPrecision = control$getJointPrecision )
+  }else{
+    results$sdrep = NULL
+  }
+
   results$report = obj$report()
   results$parhat = obj$env$parList()
   class(results) = "phylosem"
   return( results )
+}
+
+#' @title Detailed control for phylosem structure
+#'
+#' @description Define a list of control parameters.  Note that
+#' the format of this input is likely to change more rapidly than that of
+#' \code{\link{phylosem}}
+#'
+#' @param nlminb_loops Integer number of times to call \code{\link[stats]{nlminb}}.
+#' @param newton_loops Integer number of Newton steps to do after running
+#'        \code{\link[stats]{nlminb}}.
+#' @param trace Parameter values are printed every `trace` iteration
+#'        for the outer optimizer. Passed to
+#'        `control` in \code{\link[stats]{nlminb}}.
+#' @param eval.max Maximum number of evaluations of the objective function
+#'        allowed. Passed to `control` in \code{\link[stats]{nlminb}}.
+#' @param iter.max Maximum number of iterations allowed. Passed to `control` in
+#'        \code{\link[stats]{nlminb}}.
+#' @param getsd Boolean indicating whether to call \code{\link[TMB]{sdreport}}
+#' @param run_model Boolean indicating whether to estimate parameters (the default), or
+#'        instead to return the model inputs and compiled TMB object without running;
+#' @param quiet Boolean indicating whether to run model printing messages to terminal or not;
+#' @param getJointPrecision whether to get the joint precision matrix.  Passed
+#'        to \code{\link[TMB]{sdreport}}.
+#'
+#' @return
+#' An S3 object of class "phylosem_control" that specifies detailed model settings,
+#' allowing user specification while also specifying default values
+#'
+#' @export
+phylosem_control <-
+function( nlminb_loops = 1,
+          newton_loops = 1,
+          trace = 0,
+          eval.max = 1000,
+          iter.max = 1000,
+          getsd = TRUE,
+          quiet = FALSE,
+          run_model = TRUE,
+          getJointPrecision = FALSE ){
+
+  # Return
+  structure( list(
+    nlminb_loops = nlminb_loops,
+    newton_loops = newton_loops,
+    trace = trace,
+    eval.max = eval.max,
+    iter.max = iter.max,
+    getsd = getsd,
+    quiet = quiet,
+    run_model = run_model,
+    getJointPrecision = getJointPrecision
+  ), class = "phylosem_control" )
 }
 
 #' @title Print parameter estimates and standard errors.
@@ -381,7 +467,7 @@ function( sem,
 #' @description Print parameter estimates
 #' @param x Output from \code{\link{phylosem}}
 #' @param ... Not used
-#' @return prints (and invisibly returns) output from \code{\link{fit_tmb}}
+#' @return prints (and invisibly returns) output from \code{\link[stats]{nlminb}}
 #' @method print phylosem
 #' @export
 print.phylosem <- function(x, ...)
@@ -390,7 +476,7 @@ print.phylosem <- function(x, ...)
   if( "opt" %in% names(x) ){
     print( x$opt )
   }else{
-    cat("`parameter_estimates` not available in `phylosem`\n")
+    cat("`opt` not available in `phylosem`\n")
   }
   invisible(x$opt)
 }
@@ -443,7 +529,7 @@ function( object,
   which = match.arg(which)
 
   if( which=="fixed" ){
-    V = object$opt$SD$cov.fixed
+    V = object$sdrep$cov.fixed
     if(is.null(V)){
       warning("Please re-run `phylosem` with `getsd=TRUE`, or confirm that the model is converged")
     }
@@ -452,7 +538,7 @@ function( object,
     V = solve(object$obj$env$spHess(random=TRUE))
   }
   if( which=="both" ){
-    H = object$opt$SD$jointPrecision
+    H = object$sdrep$jointPrecision
     if(is.null(H)){
       warning("Please re-run `phylosem` with `getsd=TRUE` and `getJointPrecision=TRUE`, or confirm that the model is converged")
       V = NULL
@@ -493,7 +579,7 @@ logLik.phylosem <- function(object, ...) {
 summary.phylosem = function( object, ... ){
 
   # Errors
-  if(is.null(object$opt$SD)) stop("Please re-run with `getsd=TRUE`")
+  if(is.null(object$sdrep)) stop("Please re-run with `getsd=TRUE`")
 
   # Easy of use
   RAM = object$obj$env$data$RAM
@@ -502,8 +588,8 @@ summary.phylosem = function( object, ... ){
   Intercepts = data.frame(
     Path = NA,
     VarName = paste0("Intercept_", colnames(object$data) ),
-    Estimate = as.list(object$opt$SD, "Estimate", report=TRUE)$intercept_j,
-    StdErr = as.list(object$opt$SD, "Std. Error", report=TRUE)$intercept_j
+    Estimate = as.list(object$sdrep, "Estimate", report=TRUE)$intercept_j,
+    StdErr = as.list(object$sdrep, "Std. Error", report=TRUE)$intercept_j
   )
   #rownames(Intercepts) = paste0("Intercept_", colnames(object$data) )
 
@@ -511,8 +597,8 @@ summary.phylosem = function( object, ... ){
   Slopes = data.frame(
     Path = object$SEM_model[which(RAM[,1]==1),1],
     VarName = object$SEM_model[which(RAM[,1]==1),2],
-    Estimate = c(NA,as.list(object$opt$SD, "Estimate")$beta_z)[RAM[which(RAM[,1]==1),4]+1],
-    StdErr = c(NA,as.list(object$opt$SD, "Std. Error")$beta_z)[RAM[which(RAM[,1]==1),4]+1]
+    Estimate = c(NA,as.list(object$sdrep, "Estimate")$beta_z)[RAM[which(RAM[,1]==1),4]+1],
+    StdErr = c(NA,as.list(object$sdrep, "Std. Error")$beta_z)[RAM[which(RAM[,1]==1),4]+1]
   )
   # Plug in if fixed
   #Slopes$Estimate = ifelse( is.na(object$SEM_model[which(RAM[,1]==1),3]), Slopes$Estimate, as.numeric(object$SEM_model[which(RAM[,1]==1),3]) )
@@ -525,8 +611,8 @@ summary.phylosem = function( object, ... ){
   Variances = data.frame(
     Path = object$SEM_model[which(RAM[,1]==2),1],
     VarName = object$SEM_model[which(RAM[,1]==2),2],
-    Estimate = c(NA,as.list(object$opt$SD, "Estimate")$beta_z)[RAM[which(RAM[,1]==2),4]+1],
-    StdErr = c(NA,as.list(object$opt$SD, "Std. Error")$beta_z)[RAM[which(RAM[,1]==2),4]+1]
+    Estimate = c(NA,as.list(object$sdrep, "Estimate")$beta_z)[RAM[which(RAM[,1]==2),4]+1],
+    StdErr = c(NA,as.list(object$sdrep, "Std. Error")$beta_z)[RAM[which(RAM[,1]==2),4]+1]
   )
   # Plug in if fixed
   #Variances$Estimate = ifelse( is.na(object$SEM_model[which(RAM[,1]==2),3]), Variances$Estimate, as.numeric(object$SEM_model[which(RAM[,1]==2),3]) )
