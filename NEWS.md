@@ -1,3 +1,7 @@
+# phylosem 1.1.4
+* removing `checkDepPackageVersion(dep_pkg="Matrix", this_pkg="TMB")` from `.onLoad()`
+  as requested by K. Kristensen
+
 # phylosem 1.1.3
 * Removing fit_tmb to simplify code and remove unnecessary warnings
 * Adding codecov and extra tests

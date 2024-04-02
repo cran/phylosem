@@ -4,9 +4,6 @@ context("Testing cross platform and R version compatibility")
 
 # Eastern Bering Sea pollcok
 test_that("phylosem example is working ", {
-  #
-  checkDepPackageVersion( warn=FALSE )
-
   #skip_on_ci()
   data(rhino, rhino_tree, package="phylopath")
 
